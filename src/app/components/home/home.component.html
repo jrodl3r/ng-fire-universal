@@ -1,0 +1,7 @@
+<p>home works!</p>
+<p><b>({{auth.isLoggedIn() ? 'Logged-IN' : 'Logged-OUT'}})</b></p>
+<ul>
+  <li *ngIf="!auth.isLoggedIn()"><a href="/signup">Sign Up</a></li>
+  <li *ngIf="!auth.isLoggedIn()"><a href="/login">Login</a></li>
+  <li *ngIf="auth.isLoggedIn()"><a href="/dashboard">Dashboard</a></li>
+</ul>
