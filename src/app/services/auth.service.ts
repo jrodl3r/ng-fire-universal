@@ -14,6 +14,7 @@ import { IUser } from '../models/user';
 })
 export class AuthService {
   user: Observable<IUser>;
+  isReady: Boolean = false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -32,6 +33,7 @@ export class AuthService {
       shareReplay(1), // Cache user
       startWith(JSON.parse(localStorage.getItem('user')))
     ) : afAuth.authState;
+    this.isReady = true;
   }
 
   // Get / Create user
@@ -64,24 +66,24 @@ export class AuthService {
   }
 
   // Email login
-  // public emailLogin(email: string, password: string) {
-  //   return this.afAuth.auth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then(() => this.router.navigate(['/dashboard']))
-  //     .catch(error => this.system.error(error));
-  // }
+  public emailLogin(email: string, password: string) {
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => this.router.navigate(['/dashboard']))
+      .catch(error => this.system.error(error));
+  }
 
-  // public emailSignUp(email: string, password: string) {
-  //   return this.afAuth.auth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then(credential => this.loadUser(credential.user))
-  //     .then(() => this.router.navigate(['/dashboard']))
-  //     .catch(error => this.system.error(error));
-  // }
+  public emailSignUp(email: string, password: string) {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(credential => this.loadUser(credential.user))
+      .then(() => this.router.navigate(['/dashboard']))
+      .catch(error => this.system.error(error));
+  }
 
   public isLoggedIn(): Boolean {
     if (this.system.isBrowser()) {
-      return localStorage.getItem('user') !== 'null';
+      return localStorage.getItem('user') !== 'null' && !!localStorage.getItem('user');
     }
     return this.afAuth.auth.currentUser !== null ? !!this.afAuth.auth.currentUser.uid : false;
   }

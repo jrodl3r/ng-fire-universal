@@ -1,10 +1,12 @@
 <h1>Login</h1>
-
-<div *ngIf="auth.user | async as user; else showLogin">
-  <h1>Hello {{ user.email }}!</h1>
-  <button (click)="auth.logout()">Logout</button>
+<hr>
+<div *ngIf="auth.isReady">
+  <div *ngIf="auth.user | async as user; else showLogin">
+    <h1>Hello {{ user.email }}!</h1>
+    <button class="btn-outline-dark" (click)="auth.logout()">Logout</button>
+  </div>
+  <ng-template #showLogin>
+    <p>Please login.</p>
+    <button class="btn-outline-warning" (click)="auth.googleLogin()">Login with Google</button>
+  </ng-template>
 </div>
-<ng-template #showLogin>
-  <p>Please login.</p>
-  <button (click)="auth.googleLogin()">Login with Google</button>
-</ng-template>

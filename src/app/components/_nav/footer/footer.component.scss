@@ -1,0 +1,10 @@
+@import '../../../styles/colors';
+
+footer {
+  flex-shrink: 0;
+  height: 42px;
+  line-height: 40px;
+  text-align: center;
+  background: $light-grey-color;
+  border-top: 1px solid $offset-grey-color;
+}

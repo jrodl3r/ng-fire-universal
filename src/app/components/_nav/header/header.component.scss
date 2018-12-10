@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+@import '../../../styles/colors';
+
+.navbar {
+  background: $special-dark-color;
+  box-shadow: none;
+}
+
+.nav-item {
+  margin-right: 12px;
+  margin-left: 12px;
+}

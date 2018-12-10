@@ -1,0 +1,33 @@
+<nav class="navbar">
+  <a
+    class="navbar-brand text-white"
+    routerLink="/">ngFireUniversal 🔥</a>
+  <ul class="navbar-nav ml-auto flex-row" *ngIf="auth.isReady">
+    <li class="nav-item">
+      <a
+        class="nav-link text-white"
+        routerLink="/start"
+        routerLinkActive="active">Get Started</a>
+    </li>
+    <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+      <a
+        class="nav-link text-white"
+        routerLink="/signup"
+        routerLinkActive="active">Sign Up</a>
+    </li>
+    <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+      <a
+        class="nav-link text-white"
+        routerLink="/login"
+        routerLinkActive="active">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="auth.isLoggedIn()">
+      <a
+        class="nav-link text-white"
+        routerLink="/dashboard"
+        routerLinkActive="active">Dashboard</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- <p><b>({{auth.isLoggedIn() ? 'Logged-IN' : 'Logged-OUT'}})</b></p> -->
