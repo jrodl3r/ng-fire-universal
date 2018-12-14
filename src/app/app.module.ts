@@ -14,10 +14,9 @@ import { HomeComponent } from './components/home/home.component';
 import { StartComponent } from './components/start/start.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ErrorComponent } from './components/error/error.component';
 
 import { environment } from '../environments/environment';
-import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { ErrorComponent } from './components/error/error.component';
     StartComponent,
     SignupComponent,
     LoginComponent,
-    DashboardComponent,
     ErrorComponent
   ],
   imports: [

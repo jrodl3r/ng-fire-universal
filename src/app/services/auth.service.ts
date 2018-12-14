@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -13,31 +13,25 @@ import { IUser } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-  user: Observable<IUser>;
-  isReady: Boolean = false;
+  user: Observable<IUser | null>;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
+    private zone: NgZone,
     private system: SystemService
   ) {
     this.user = system.isBrowser() ? afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.doc<IUser>(`users/${user.uid}`).valueChanges();
-        }
-        return of(null);
-      }),
+      switchMap(user => user ? this.afs.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null)),
       tap(user => localStorage.setItem('user', JSON.stringify(user))),
       shareReplay(1), // Cache user
       startWith(JSON.parse(localStorage.getItem('user')))
     ) : afAuth.authState;
-    this.isReady = true;
   }
 
-  // Get / Create user
-  private loadUser(user: IUser) {
+  // Save user credential
+  private createUser(user: IUser) {
     const userRef: AngularFirestoreDocument<IUser> = this.afs.doc<IUser>(`users/${user.uid}`);
     return userRef.ref.get()
       .then(userDoc => {
@@ -53,10 +47,10 @@ export class AuthService {
 
   // OAuth login
   private oAuthLogin(provider: any) {
-    return this.afAuth.auth
+    this.afAuth.auth
       .signInWithPopup(provider)
-      .then(credential => this.loadUser(credential.user))
-      .then(() => this.router.navigate(['/dashboard']))
+      .then(credential => this.createUser(credential.user))
+      .then(() => this.zone.run(async () => await this.router.navigate(['/dashboard'])))
       .catch(error => this.system.error(error));
   }
 
@@ -66,34 +60,35 @@ export class AuthService {
   }
 
   // Email login
-  public emailLogin(email: string, password: string) {
-    return this.afAuth.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => this.router.navigate(['/dashboard']))
-      .catch(error => this.system.error(error));
-  }
+  // public emailLogin(email: string, password: string) {
+  //   return this.afAuth.auth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then(() => this.router.navigate(['/dashboard']))
+  //     .catch(error => this.system.error(error));
+  // }
 
-  public emailSignUp(email: string, password: string) {
-    return this.afAuth.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(credential => this.loadUser(credential.user))
-      .then(() => this.router.navigate(['/dashboard']))
-      .catch(error => this.system.error(error));
+  // public emailSignUp(email: string, password: string) {
+  //   return this.afAuth.auth
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then(credential => this.createUser(credential.user))
+  //     .then(() => this.router.navigate(['/dashboard']))
+  //     .catch(error => this.system.error(error));
+  // }
+
+  public logout() {
+    this.afAuth.auth.signOut().then(() => {
+      if (this.system.isBrowser) {
+        localStorage.clear();
+      }
+      this.router.navigate(['/login']);
+    });
   }
 
   public isLoggedIn(): Boolean {
     if (this.system.isBrowser()) {
-      return localStorage.getItem('user') !== 'null' && !!localStorage.getItem('user');
+      return !!localStorage.getItem('user') && localStorage.getItem('user') !== 'null';
     }
-    return this.afAuth.auth.currentUser !== null ? !!this.afAuth.auth.currentUser.uid : false;
+    return this.afAuth.auth.currentUser !== null ? true : false;
   }
 
-  public logout() {
-    this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/login']);
-      if (this.system.isBrowser) {
-        localStorage.clear();
-      }
-    });
-  }
 }

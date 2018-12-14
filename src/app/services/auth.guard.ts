@@ -17,16 +17,20 @@ export class AuthGuard implements CanActivate {
     private system: SystemService
   ) { }
 
-  canActivate(): Observable<boolean> {
-    return this.afAuth.authState.pipe(
-      take(1),
-      map(state => !!state),
-      tap(loggedIn => {
-        if (!loggedIn) {
-          this.system.log('You must be logged in.');
-          this.router.navigate(['/login']);
-        }
-      })
-    );
+  canActivate(): Observable<boolean> | boolean {
+    if (this.system.isBrowser()) {
+      return this.afAuth.user.pipe(
+        take(1),
+        map(state => !!state),
+        tap(loggedIn => {
+          if (!loggedIn) {
+            this.system.log('You must be logged in.');
+            this.router.navigate(['/login']);
+          }
+        })
+      );
+    }
+    return true; // TODO: Fix this (hack)
   }
+
 }

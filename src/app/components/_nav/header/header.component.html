@@ -2,7 +2,9 @@
   <a
     class="navbar-brand text-white"
     routerLink="/">ngFireUniversal 🔥</a>
-  <ul class="navbar-nav ml-auto flex-row" *ngIf="auth.isReady">
+  <ul
+    *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isServer"
+    class="navbar-nav ml-auto flex-row">
     <li class="nav-item">
       <a
         class="nav-link text-white"
@@ -28,6 +30,9 @@
         routerLinkActive="active">Dashboard</a>
     </li>
   </ul>
+  <ng-template #isServer>
+    <ul> <!-- TODO: Setup static links -->
+      <li class="hidden">Static Link</li>
+    </ul>
+  </ng-template>
 </nav>
-
-<!-- <p><b>({{auth.isLoggedIn() ? 'Logged-IN' : 'Logged-OUT'}})</b></p> -->

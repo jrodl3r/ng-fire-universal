@@ -2,8 +2,8 @@
 
 # compiled output
 /dist
-/functions/dist/**/*
-/public/**/*
+/functions/dist
+/public
 /out-tsc
 /tmp
 /.firebase

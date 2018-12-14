@@ -1,8 +1,8 @@
 <h1>Login</h1>
 <hr>
-<div *ngIf="auth.isReady">
-  <div *ngIf="auth.user | async as user; else showLogin">
-    <h1>Hello {{ user.email }}!</h1>
+<div *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isLoading">
+  <div *ngIf="auth.isLoggedIn(); else showLogin">
+    <p>You are currently logged-in.</p>
     <button class="btn-outline-dark" (click)="auth.logout()">Logout</button>
   </div>
   <ng-template #showLogin>
@@ -10,3 +10,4 @@
     <button class="btn-outline-warning" (click)="auth.googleLogin()">Login with Google</button>
   </ng-template>
 </div>
+<ng-template #isLoading>LOADING ...</ng-template>

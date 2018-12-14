@@ -11,7 +11,6 @@
     "build:functions": "npm run --prefix functions build",
     "build:ssr": "ng run ng-fire-universal:server && npm run webpack:ssr",
     "copy:hosting": "cp -r ./dist/ng-fire-universal/* ./public && rm ./public/index.html",
-    "prerender:ssr": "PRERENDER=1 node dist/ng-fire-universal-webpack/server.js",
     "serve:ssr": "node dist/ng-fire-universal-webpack/server.js",
     "webpack:ssr": "webpack --config webpack.server.config.js",
     "firebase:review": "npm run build:prod && firebase serve",
