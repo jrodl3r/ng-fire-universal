@@ -9,7 +9,7 @@
     "build:prod": "ng build --prod && npm run copy:hosting && npm run build:ssr && npm run build:functions",
     "build:functions": "npm run --prefix functions build",
     "build:ssr": "ng run ng-fire-universal:server && npm run webpack:ssr",
-    "copy:hosting": "rmdir ./public && mkdir public && cp -r ./dist/ng-fire-universal/* ./public && rm ./public/index.html",
+    "copy:hosting": "rm -rf ./public && mkdir public && cp -r ./dist/ng-fire-universal/* ./public && rm ./public/index.html",
     "serve:ssr": "node dist/ng-fire-universal-webpack/server.js",
     "webpack:ssr": "webpack --config webpack.server.config.js",
     "firebase:review": "npm run build:prod && firebase serve",
