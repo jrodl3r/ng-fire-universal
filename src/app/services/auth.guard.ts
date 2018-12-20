@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
         })
       );
     }
-    return true; // TODO: Fix this (hack)
+    return true; // FIXME: This is a temp hack to avoid auth flicker (https://goo.gl/GYGz3J)
   }
 
 }

@@ -1,13 +1,65 @@
-<h1>Login</h1>
-<hr>
-<div *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isLoading">
-  <div *ngIf="auth.isLoggedIn(); else showLogin">
-    <p>You are currently logged-in.</p>
-    <button class="btn-outline-dark" (click)="auth.logout()">Logout</button>
+<div *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isServer">
+  <div *ngIf="!auth.isLoggedIn(); else isLoggedIn">
+    <h1>Login
+      <button
+        (click)="auth.googleLogin()"
+        class="btn btn-sm btn-outline-elegant btn-login-google waves-effect float-right">
+          <i class="fa fa-google mr-2"></i> Use Google
+      </button>
+    </h1>
+    <hr>
+    <div class="col-lg-8 mt-5 mb-4 mr-lg-auto ml-lg-auto">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <label for="email">Email</label>
+        <input required
+          type="email"
+          name="email"
+          class="form-control"
+          [class.mb-4]="!formErrors.email"
+          autocomplete="email"
+          formControlName="email">
+        <div *ngIf="formErrors.email" class="text-danger p-2 pb-3">{{ formErrors.email }}</div>
+        <label for="password">Password</label>
+        <input required
+          type="password"
+          name="password"
+          class="form-control"
+          [class.mb-4]="!formErrors.password"
+          autocomplete="current-password"
+          formControlName="password">
+        <div *ngIf="formErrors.password" class="text-danger p-2 pb-3">{{ formErrors.password }}</div>
+        <button
+          type="submit"
+          class="btn btn-elegant btn-submit-login waves-effect m-0 mt-3"
+          [disabled]="!loginForm.valid">Login</button>
+        <a
+          class="reset-password-link text-black-50 p-1"
+          *ngIf="!isPassReset && loginForm.controls['email'].valid"
+          (click)="resetPassword()">Reset Password for {{ loginForm.value.email }}?</a>
+        <p
+          class="reset-password-msg text-success p-1"
+          *ngIf="isPassReset">Your password has been reset. Please check your email to proceed.</p>
+      </form>
+    </div>
   </div>
-  <ng-template #showLogin>
-    <p>Please login.</p>
-    <button class="btn-outline-warning" (click)="auth.googleLogin()">Login with Google</button>
+  <ng-template #isLoggedIn>
+    <h1>Login</h1>
+    <hr>
+    <p class="text-success">You are currently logged-in &nbsp;<i class="fa fa-thumbs-up"></i></p>
   </ng-template>
 </div>
-<ng-template #isLoading>LOADING ...</ng-template>
+<ng-template #isServer> <!-- initial render (server-side) -->
+  <h1>Login</h1>
+  <hr>
+  <div class="col-lg-8 mt-5 mb-4 mr-lg-auto ml-lg-auto">
+    <form [formGroup]="loginForm">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control" disabled>
+      <div class="p-2 pb-3"></div>
+      <label for="password">Password</label>
+      <input type="password" name="password" class="form-control" disabled>
+      <div class="p-2 pb-3"></div>
+      <button type="submit" class="btn btn-elegant btn-submit-login waves-effect m-0 mt-3" disabled>Login</button>
+    </form>
+  </div>
+</ng-template>

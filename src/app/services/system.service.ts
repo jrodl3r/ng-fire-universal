@@ -11,19 +11,29 @@ export class SystemService {
     return typeof window !== 'undefined';
   }
 
-  error(error: Error) {
-    // system.logItem(error);
-    // toastr.error(error.message); // TODO: replace
-    console.error(error);
-  }
-
-  log(msg: String) {
-    // system.logItem(error);
-    // toastr.error(error.message); // TODO: replace
+  notify(msg: String) { // TODO: Setup toastr notifications
+    // if (this.isBrowser()) {
+    //   toastr.info(msg);
+    // }
     console.log(msg);
   }
 
-  // logItem(item) { // TODO: Setup Cloud Logging
-  //
-  // }
+  success(msg: String) {
+    // if (this.isBrowser()) {
+    //   toastr.success(msg);
+    // }
+    console.log(msg);
+  }
+
+  error(err: Error) {
+    // if (this.isBrowser()) {
+    //   toastr.error(err);
+    // }
+    console.error(err);
+  }
+
+  log(msg: String) {
+    console.log(msg);
+  }
+
 }

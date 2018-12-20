@@ -38,7 +38,8 @@ export class AuthService {
         if (!userDoc.exists) {
           const data: IUser = {
             uid: user.uid,
-            email: user.email
+            email: user.email,
+            created: new Date()
           };
           return userRef.set(data);
         }
@@ -60,20 +61,36 @@ export class AuthService {
   }
 
   // Email login
-  // public emailLogin(email: string, password: string) {
-  //   return this.afAuth.auth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then(() => this.router.navigate(['/dashboard']))
-  //     .catch(error => this.system.error(error));
-  // }
+  public emailLogin(email: string, password: string) {
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => this.router.navigate(['/dashboard']))
+      .catch(error => this.system.error(error));
+  }
 
-  // public emailSignUp(email: string, password: string) {
-  //   return this.afAuth.auth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then(credential => this.createUser(credential.user))
-  //     .then(() => this.router.navigate(['/dashboard']))
-  //     .catch(error => this.system.error(error));
-  // }
+  public emailSignUp(email: string, password: string) {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(credential => this.createUser(credential.user))
+      .then(() => this.router.navigate(['/dashboard']))
+      .catch(error => this.system.error(error));
+  }
+
+  // Send password reset email
+  public resetPassword(email: string) {
+    return this.afAuth.auth
+      .sendPasswordResetEmail(email)
+      .then(() => this.system.notify('Password reset email sent.'))
+      .catch(error => this.system.error(error));
+  }
+
+  // Change password
+  public updatePassword(password: string) {
+    return this.afAuth.auth.currentUser
+      .updatePassword(password)
+      .then(() => this.system.success('Password changed successfully.'))
+      .catch(error => this.system.error(error));
+  }
 
   public logout() {
     this.afAuth.auth.signOut().then(() => {

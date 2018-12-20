@@ -1,11 +1,14 @@
-<h1>Dashboard</h1>
-<hr>
-<div>
-  <p>
-    <span class="badge bg-secondary-dark shadow-none mr-2">TODO:</span> Setup Dashboard + Profile Modules
-  </p>
-  <br>
-  <button class="btn-outline-dark" (click)="auth.logout()">Logout</button>
-  <hr>
-  <router-outlet></router-outlet>
+<div *ngIf="(auth.user | async) as user">
+  <div *ngIf="system.isBrowser()">
+    <h1>Dashboard</h1>
+    <hr>
+    <p>{{ user.email }}</p>
+    <p>
+      <span class="badge bg-secondary-dark shadow-none mr-2">TODO:</span> Setup Dashboard + Profile Modules
+    </p>
+    <br>
+    <button class="btn-outline-dark" (click)="auth.logout()">Logout</button>
+    <hr>
+    <router-outlet></router-outlet>
+  </div>
 </div>
