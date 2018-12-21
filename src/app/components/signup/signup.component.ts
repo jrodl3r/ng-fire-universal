@@ -8,7 +8,6 @@ import { SystemService } from '../../services/system.service';
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
 
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -41,6 +40,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.auth.redirectAfterSignIn();
     this.buildForm();
   }
 
@@ -59,7 +59,8 @@ export class SignupComponent implements OnInit {
     });
 
     this.signupForm.valueChanges.subscribe((data) =>
-      this.forms.validate(data, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password']));
+      this.forms.validate(data, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password'])
+    );
     this.forms.validate({}, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password']);
   }
 

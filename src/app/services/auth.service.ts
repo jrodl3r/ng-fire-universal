@@ -31,7 +31,7 @@ export class AuthService {
     ) : afAuth.authState;
   }
 
-  // Save user credential
+  // Save new user
   private createUser(user: IUser) {
     const userRef: AngularFirestoreDocument<IUser> = this.afs.doc<IUser>(`users/${user.uid}`);
     return userRef.ref.get()
@@ -40,6 +40,7 @@ export class AuthService {
           const data: IUser = {
             uid: user.uid,
             email: user.email,
+            displayName: user.displayName || '',
             created: new Date()
           };
           return userRef.set(data);
@@ -47,39 +48,42 @@ export class AuthService {
       });
   }
 
+  // Google login
+  public googleLogin() {
+    const provider = new auth.GoogleAuthProvider();
+    this.oAuthLogin(provider);
+  }
+
   // OAuth login
   private oAuthLogin(provider: any) {
     if (this.system.isBrowser()) {
       sessionStorage.setItem('login-pending', '1');
-    }
-    this.afAuth.auth
-      .signInWithRedirect(provider)
-      .catch(error => {
-        if (this.system.isBrowser()) {
+      this.afAuth.auth
+        .signInWithRedirect(provider)
+        .catch(error => {
           sessionStorage.removeItem('login-pending');
-        }
-        this.system.error(error);
-      });
+          this.system.error(error);
+        });
+    }
   }
 
+  // Redirect after OAuth login
   public redirectAfterSignIn() {
     if (this.system.isBrowser() && sessionStorage.getItem('login-pending')) {
       this.isLoading = true;
       sessionStorage.removeItem('login-pending');
       this.afAuth.auth.getRedirectResult()
-        .then(res => {
-          if (res.user) {
+        .then(response => {
+          if (response.user) {
+            console.log(response.user);
+
+            this.createUser(response.user);
             this.zone.run(async () => await this.router.navigate(['/dashboard']))
               .then(() => this.isLoading = false);
           }
         })
         .catch(error => this.system.error(error));
     }
-  }
-
-  public googleLogin() {
-    const provider = new auth.GoogleAuthProvider();
-    this.oAuthLogin(provider);
   }
 
   // Email login
@@ -90,6 +94,7 @@ export class AuthService {
       .catch(error => this.system.error(error));
   }
 
+  // Email sign up
   public emailSignUp(email: string, password: string) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)

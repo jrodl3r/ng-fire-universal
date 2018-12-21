@@ -1,5 +1,6 @@
 export interface IUser {
-  uid: String;
-  email: String;
   created?: Date;
+  displayName?: String;
+  email: String;
+  uid: String;
 }
