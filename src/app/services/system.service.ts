@@ -11,6 +11,10 @@ export class SystemService {
     return typeof window !== 'undefined';
   }
 
+  public isOnline = () => {
+    return this.isBrowser() ? navigator.onLine : true;
+  }
+
   notify(msg: String) { // TODO: Setup toastr notifications
     // if (this.isBrowser()) {
     //   toastr.info(msg);

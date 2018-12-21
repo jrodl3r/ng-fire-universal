@@ -27,7 +27,10 @@ export class AuthService {
       switchMap(user => user ? this.afs.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null)),
       tap(user => sessionStorage.setItem('user', JSON.stringify(user))),
       shareReplay(1), // Cache user
-      startWith(JSON.parse(sessionStorage.getItem('user')))
+      startWith(() => {
+        const ssUser = sessionStorage.getItem('user');
+        return ssUser !== 'undefined' ? JSON.parse(ssUser) : null;
+      })
     ) : afAuth.authState;
   }
 

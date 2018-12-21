@@ -13,6 +13,6 @@ export class HeaderComponent {
   constructor(
     public auth: AuthService,
     public system: SystemService
-  ) { }
+  ) {}
 
 }

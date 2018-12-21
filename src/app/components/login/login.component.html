@@ -1,4 +1,4 @@
-<div *ngIf="(auth.user | async) !== undefined && !auth.isLoading && system.isBrowser()">
+<div *ngIf="(auth.user | async) !== undefined && !auth.isLoading && system.isBrowser() && system.isOnline()">
   <div *ngIf="!auth.isLoggedIn(); else isLoggedIn">
     <h1>Login
       <button
@@ -54,14 +54,21 @@
     <p class="text-center">Logging-In...</p>
   </div>
 </div>
-<!-- Initial render (server-side) -->
-<div *ngIf="!system.isBrowser()" class="d-none">
+<!-- Initial render (server-side) + Offline / PWA -->
+<div
+  *ngIf="!system.isBrowser() || !system.isOnline()"
+  class="flex-column"
+  [class.d-none]="system.isOnline()"
+  [class.d-block]="!system.isOnline()">
   <h1>Login</h1>
-  <label for="email">Email</label>
-  <input type="email" name="email" class="form-control" disabled>
-  <div class="p-2 pb-3"></div>
-  <label for="password">Password</label>
-  <input type="password" name="password" class="form-control" disabled>
-  <div class="p-2 pb-3"></div>
-  <button type="submit" class="btn btn-elegant btn-submit-login waves-effect m-0 mt-3" disabled>Login</button>
+  <hr>
+  <div class="col-lg-8 mt-5 mb-4 mr-lg-auto ml-lg-auto">
+    <label for="email">Email</label>
+    <input type="email" name="email" class="form-control" disabled>
+    <div class="p-2 pb-3"></div>
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" disabled>
+    <div class="p-2 pb-3"></div>
+    <button type="submit" class="btn btn-elegant btn-submit-login m-0 mt-3 mr-auto" disabled>Login</button>
+  </div>
 </div>
