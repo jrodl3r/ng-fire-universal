@@ -8,7 +8,7 @@
     "start": "ng serve --host 0.0.0.0",
     "start:ssr": "npm run build && npm run serve:ssr",
     "build": "ng build && npm run copy:hosting && npm run build:ssr && npm run build:functions",
-    "build:prod": "ng build --prod --no-sourcemap && npm run copy:hosting && npm run build:ssr && npm run build:functions",
+    "build:prod": "ng build --prod && npm run copy:hosting && npm run build:ssr && npm run build:functions",
     "build:functions": "npm run --prefix functions build",
     "build:ssr": "ng run ng-fire-universal:server && npm run webpack:ssr",
     "copy:hosting": "rm -r ./public && mkdir public && cp -r ./dist/ng-fire-universal/* ./public && rm ./public/index.html",

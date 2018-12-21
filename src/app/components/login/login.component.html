@@ -1,4 +1,4 @@
-<div *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isServer">
+<div *ngIf="(auth.user | async) !== undefined && !auth.isLoading && system.isBrowser()">
   <div *ngIf="!auth.isLoggedIn(); else isLoggedIn">
     <h1>Login
       <button
@@ -48,18 +48,20 @@
     <p class="text-success">You are currently logged-in &nbsp;<i class="fa fa-thumbs-up"></i></p>
   </ng-template>
 </div>
-<ng-template #isServer> <!-- initial render (server-side) -->
-  <h1>Login</h1>
-  <hr>
+<!-- Processing login -->
+<div *ngIf="auth.isLoading && system.isBrowser()">
   <div class="col-lg-8 mt-5 mb-4 mr-lg-auto ml-lg-auto">
-    <form [formGroup]="loginForm">
-      <label for="email">Email</label>
-      <input type="email" name="email" class="form-control" disabled>
-      <div class="p-2 pb-3"></div>
-      <label for="password">Password</label>
-      <input type="password" name="password" class="form-control" disabled>
-      <div class="p-2 pb-3"></div>
-      <button type="submit" class="btn btn-elegant btn-submit-login waves-effect m-0 mt-3" disabled>Login</button>
-    </form>
+    <p class="text-center">Logging-In...</p>
   </div>
-</ng-template>
+</div>
+<!-- Initial render (server-side) -->
+<div *ngIf="!system.isBrowser()" class="d-none">
+  <h1>Login</h1>
+  <label for="email">Email</label>
+  <input type="email" name="email" class="form-control" disabled>
+  <div class="p-2 pb-3"></div>
+  <label for="password">Password</label>
+  <input type="password" name="password" class="form-control" disabled>
+  <div class="p-2 pb-3"></div>
+  <button type="submit" class="btn btn-elegant btn-submit-login waves-effect m-0 mt-3" disabled>Login</button>
+</div>

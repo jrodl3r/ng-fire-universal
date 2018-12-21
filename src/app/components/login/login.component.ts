@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.auth.redirectAfterSignIn();
     this.buildForm();
   }
 

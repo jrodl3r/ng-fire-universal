@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { switchMap, shareReplay, startWith, tap } from 'rxjs/operators';
 
@@ -14,6 +14,7 @@ import { IUser } from '../models/user';
 })
 export class AuthService {
   user: Observable<IUser | null>;
+  isLoading: Boolean = false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,9 +25,9 @@ export class AuthService {
   ) {
     this.user = system.isBrowser() ? afAuth.authState.pipe(
       switchMap(user => user ? this.afs.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null)),
-      tap(user => localStorage.setItem('user', JSON.stringify(user))),
+      tap(user => sessionStorage.setItem('user', JSON.stringify(user))),
       shareReplay(1), // Cache user
-      startWith(JSON.parse(localStorage.getItem('user')))
+      startWith(JSON.parse(sessionStorage.getItem('user')))
     ) : afAuth.authState;
   }
 
@@ -48,15 +49,36 @@ export class AuthService {
 
   // OAuth login
   private oAuthLogin(provider: any) {
+    if (this.system.isBrowser()) {
+      sessionStorage.setItem('login-pending', '1');
+    }
     this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(credential => this.createUser(credential.user))
-      .then(() => this.zone.run(async () => await this.router.navigate(['/dashboard'])))
-      .catch(error => this.system.error(error));
+      .signInWithRedirect(provider)
+      .catch(error => {
+        if (this.system.isBrowser()) {
+          sessionStorage.removeItem('login-pending');
+        }
+        this.system.error(error);
+      });
+  }
+
+  public redirectAfterSignIn() {
+    if (this.system.isBrowser() && sessionStorage.getItem('login-pending')) {
+      this.isLoading = true;
+      sessionStorage.removeItem('login-pending');
+      this.afAuth.auth.getRedirectResult()
+        .then(res => {
+          if (res.user) {
+            this.zone.run(async () => await this.router.navigate(['/dashboard']))
+              .then(() => this.isLoading = false);
+          }
+        })
+        .catch(error => this.system.error(error));
+    }
   }
 
   public googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new auth.GoogleAuthProvider();
     this.oAuthLogin(provider);
   }
 
@@ -95,7 +117,7 @@ export class AuthService {
   public logout() {
     this.afAuth.auth.signOut().then(() => {
       if (this.system.isBrowser) {
-        localStorage.clear();
+        sessionStorage.clear();
       }
       this.router.navigate(['/login']);
     });
@@ -103,7 +125,7 @@ export class AuthService {
 
   public isLoggedIn(): Boolean {
     if (this.system.isBrowser()) {
-      return !!localStorage.getItem('user') && localStorage.getItem('user') !== 'null';
+      return !!sessionStorage.getItem('user') && sessionStorage.getItem('user') !== 'null';
     }
     return this.afAuth.auth.currentUser !== null ? true : false;
   }
