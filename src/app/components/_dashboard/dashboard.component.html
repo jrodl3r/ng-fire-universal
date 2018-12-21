@@ -1,5 +1,5 @@
 <div *ngIf="(auth.user | async) as user">
-  <div *ngIf="system.isBrowser()">
+  <div *ngIf="system.isBrowser() && system.isOnline()">
     <h1>Dashboard</h1>
     <hr>
     <p>
@@ -14,4 +14,7 @@
     <hr>
     <router-outlet></router-outlet>
   </div>
+</div>
+<div *ngIf="system.isBrowser() && !system.isOnline()">
+  <p class="text-warning text-center">Connection Lost!<br>Please check your connection.</p>
 </div>
