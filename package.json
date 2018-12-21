@@ -16,6 +16,7 @@
     "webpack:ssr": "webpack --config webpack.server.config.js",
     "firebase:review": "npm run build:prod && firebase serve --host 0.0.0.0",
     "firebase:deploy": "npm run build:prod && firebase deploy",
+    "init": "mkdir public && mkdir functions/dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
