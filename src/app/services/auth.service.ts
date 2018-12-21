@@ -75,8 +75,6 @@ export class AuthService {
       this.afAuth.auth.getRedirectResult()
         .then(response => {
           if (response.user) {
-            console.log(response.user);
-
             this.createUser(response.user);
             this.zone.run(async () => await this.router.navigate(['/dashboard']))
               .then(() => this.isLoading = false);

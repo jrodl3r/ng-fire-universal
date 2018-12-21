@@ -1,7 +1,10 @@
 <nav class="navbar">
   <a
     class="navbar-brand text-white"
-    routerLink="/">ngFireUniversal 🔥</a>
+    routerLink="/">
+      <span class="logo-text">ngFireUniversal</span>
+      <span class="logo-icon"></span>
+  </a>
   <ul
     *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isServer"
     class="navbar-nav ml-auto flex-row">
