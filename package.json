@@ -2,6 +2,7 @@
   "name": "ng-fire-universal",
   "version": "0.8.0",
   "repository": "https://github.com/jrodl3r/ng-fire-universal",
+  "author": "John Rodler",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

@@ -51,12 +51,6 @@ export class AuthService {
       });
   }
 
-  // Google login
-  public googleLogin() {
-    const provider = new auth.GoogleAuthProvider();
-    this.oAuthLogin(provider);
-  }
-
   // OAuth login
   private oAuthLogin(provider: any) {
     if (this.system.isBrowser()) {
@@ -70,7 +64,7 @@ export class AuthService {
     }
   }
 
-  // Redirect after OAuth login
+  // Redirect OAuth login
   public redirectAfterSignIn() {
     if (this.system.isBrowser() && sessionStorage.getItem('login-pending')) {
       this.isLoading = true;
@@ -85,6 +79,12 @@ export class AuthService {
         })
         .catch(error => this.system.error(error));
     }
+  }
+
+  // Google login
+  public googleLogin() {
+    const provider = new auth.GoogleAuthProvider();
+    this.oAuthLogin(provider);
   }
 
   // Email login
