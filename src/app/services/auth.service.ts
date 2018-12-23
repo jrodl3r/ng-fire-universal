@@ -28,8 +28,8 @@ export class AuthService {
       tap(user => sessionStorage.setItem('user', JSON.stringify(user))),
       shareReplay(1), // Cache user
       startWith(() => {
-        const ssUser = sessionStorage.getItem('user');
-        return ssUser !== 'undefined' ? JSON.parse(ssUser) : null;
+        const user = sessionStorage.getItem('user');
+        return user !== 'undefined' ? JSON.parse(user) : null;
       })
     ) : afAuth.authState;
   }

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-import { FormsService } from '../../services/forms.service';
 import { SystemService } from '../../services/system.service';
+import { FormsService } from '../../services/forms.service';
+import { SeoService } from '../../services/seo.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -36,11 +37,17 @@ export class SignupComponent implements OnInit {
     public auth: AuthService,
     public system: SystemService,
     private forms: FormsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private seo: SeoService
   ) { }
 
   ngOnInit() {
     this.auth.redirectAfterSignIn();
+    this.seo.setMetaTags({
+      title: 'Sign Up',
+      description: 'NgFireUniversal » Sign Up',
+      slug: 'signup'
+    });
     this.buildForm();
   }
 

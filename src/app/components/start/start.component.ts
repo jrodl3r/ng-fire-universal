@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.scss']
 })
-export class StartComponent {
+export class StartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private seo: SeoService) { }
+
+  ngOnInit() {
+    this.seo.setMetaTags({
+      title: 'Getting Started',
+      description: 'NgFireUniversal » Getting Started',
+      slug: 'start'
+    });
+  }
 
 }
