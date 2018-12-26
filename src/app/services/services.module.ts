@@ -5,6 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AuthService } from './auth.service';
 import { SystemService } from './system.service';
+import { NavService } from './nav.service';
 import { SeoService } from './seo.service';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SeoService } from './seo.service';
   providers: [
     SystemService,
     AuthService,
+    NavService,
     SeoService
   ]
 })

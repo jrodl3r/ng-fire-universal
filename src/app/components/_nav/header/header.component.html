@@ -1,18 +1,18 @@
-<nav class="nav">
+<nav class="nav" (click)="nav.collapseHeader()">
   <a class="logo" routerLink="/">
     <span class="logo-text">ngFireUniversal</span>
     <span class="logo-icon"></span>
   </a>
   <div
-    (click)="toggleMenu()"
     class="menu-toggle"
-    [class.active]="isMenuExpanded">
+    [class.active]="nav.isHeaderMenuExpanded"
+    (click)="nav.toggleMenu($event)">
     <i class="fa fa-bars"></i>
   </div>
   <ul
-    *ngIf="(auth.user | async) !== undefined && !auth.isLoading && system.isBrowser(); else isServer"
     class="menu"
-    [class.expanded]="isMenuExpanded">
+    [class.expanded]="nav.isHeaderMenuExpanded"
+    *ngIf="(auth.user | async) !== undefined && !auth.isLoading && system.isBrowser(); else isServer">
     <li class="menu-item">
       <a
         class="menu-link"
@@ -32,17 +32,19 @@
         routerLinkActive="active">Login</a>
     </li>
     <li
-      *ngIf="auth.isLoggedIn() && (auth.user | async) as user"
-      (click)="toggleAccountMenu()"
-      class="menu-item dropdown">
-      <div class="menu-link dropdown-toggle">
+      class="menu-item dropdown"
+      *ngIf="auth.isLoggedIn() && (auth.user | async) as user">
+      <div
+        class="menu-link dropdown-toggle"
+        (click)="nav.toggleAccountMenu($event)">
         <span class="avatar">
           <img [src]="user.avatar ? user.avatar : '/assets/img/user.png'">
         </span>
       </div>
       <div
         class="dropdown-menu"
-        [class.expanded]="isAccountMenuExpanded">
+        [class.expanded]="nav.isHeaderAccountMenuExpanded"
+        (click)="nav.collapseHeader()">
         <div class="dropdown-divider"></div>
         <a
           class="dropdown-item"
