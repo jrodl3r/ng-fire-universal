@@ -1,15 +1,22 @@
 @import '../../../styles/variables';
 @import '../../../styles/colors';
 
-.navbar {
+.nav {
+  padding: .5rem 1rem;
   background: $special-dark-color;
   box-shadow: none;
 }
 
-.navbar-brand {
+.logo {
+  display: inline-block;
+  margin-right: 1rem;
   padding-top: 0;
   padding-bottom: 0;
-  transition: none;
+  color: #FFF;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  user-select: none;
 
   .logo-text {
     position: relative;
@@ -28,7 +35,227 @@
   }
 }
 
-.nav-item {
-  margin-right: 12px;
-  margin-left: 12px;
+.menu {
+  display: none;
+  flex-direction: row;
+  margin-left: auto;
+
+  &.expanded {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    @media (min-width: $sm-screen) {
+      flex-direction: row;
+      width: auto;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  @media (min-width: $sm-screen) {
+    display: flex;
+    width: auto;
+  }
+}
+
+.menu-toggle {
+  margin-right: .25rem;
+  margin-left: auto;
+  color: #FFF;
+  font-size: 25px;
+
+  &:hover, &.active {
+    color: $grey-color;
+    cursor: pointer;
+  }
+
+  @media (min-width: $sm-screen) {
+    display: none;
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.menu-link {
+  height: 37px;
+  width: 100%;
+  margin-top: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-size: 1.15rem;
+  border-radius: 4px;
+  user-select: none;
+  transition: color .25s ease-in-out, background-color .25s ease-in-out;
+
+  &.active {
+    color: $primary-color;
+    cursor: default;
+  }
+
+  &:not(.active):hover {
+    color: $grey-color;
+    background: rgba(0,0,0, .1);
+    cursor: pointer;
+
+    .avatar {
+      border-color: $grey-color;
+    }
+  }
+
+  @media (min-width: $sm-screen) {
+    height: 100%;
+    width: auto;
+    margin-top: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 1rem;
+
+    &.active {
+      color: $grey-color;
+    }
+
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.avatar {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin-left: 3px;
+  display: inline-block;
+  border: 1px solid #FFF;
+  border-radius: 16px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.dropdown-toggle {
+  display: none;
+  padding-right: 0;
+
+  &:after {
+    margin-left: .6em;
+  }
+
+  @media (min-width: $sm-screen) {
+    display: inline-flex;
+  }
+}
+
+.dropdown-menu {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: none;
+  border: none;
+
+  &.expanded {
+    display: flex;
+    flex-direction: column;
+    top: 38px;
+    right: 0;
+    left: auto;
+  }
+
+  @media (min-width: $sm-screen) {
+    position: absolute;
+    padding: 5px 0;
+    background: #FFF;
+    border: 1px solid rgba(27,31,35, .15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(27,31,35, .15);
+
+    &:not(.expanded) {
+      display: none;
+    }
+  }
+}
+
+.dropdown-divider {
+  height: 0;
+  margin: .5rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(0,0,0, .1);
+
+  &:first-of-type {
+    margin-bottom: 1.15rem;
+  }
+
+  @media (min-width: $sm-screen) {
+    border-color: $offset-grey-color;
+
+    &:first-of-type {
+      display: none;
+    }
+  }
+}
+
+.dropdown-item {
+  height: 37px;
+  width: 100%;
+  margin-bottom: 5px;
+  color: #FFF;
+  font-size: 1.15rem;
+  text-align: center;
+  border-radius: 4px;
+  user-select: none;
+  transition: color .25s ease-in-out, background-color .25s ease-in-out;
+
+  &.active {
+    color: $primary-color;
+    background: none;
+    cursor: default;
+  }
+
+  &.logout {
+    color: $mid-grey-color;
+  }
+
+  &:not(.active):hover {
+    background: rgba(0,0,0, .1);
+  }
+
+  &:last-of-type {
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+
+  @media (min-width: $sm-screen) {
+    height: 100%;
+    width: auto;
+    margin-bottom: 0;
+    padding: 4px 10px 4px 15px;
+    font-size: .95rem;
+    text-align: left;
+
+    &:not(.active, .logout) {
+      color: $dark-color;
+    }
+
+    &:not(.active):hover {
+      color: #000;
+      text-shadow: 0 0 1px rgba(0,0,0, .1);
+      background-color: $light-grey-color-alt;
+    }
+
+    &:last-of-type {
+      margin-top: 0;
+    }
+  }
 }

@@ -1,59 +1,95 @@
-<nav class="navbar">
-  <a
-    class="navbar-brand text-white"
-    routerLink="/">
-      <span class="logo-text">ngFireUniversal</span>
-      <span class="logo-icon"></span>
+<nav class="nav">
+  <a class="logo" routerLink="/">
+    <span class="logo-text">ngFireUniversal</span>
+    <span class="logo-icon"></span>
   </a>
+  <div
+    (click)="toggleMenu()"
+    class="menu-toggle"
+    [class.active]="isMenuExpanded">
+    <i class="fa fa-bars"></i>
+  </div>
   <ul
-    *ngIf="(auth.user | async) !== undefined && system.isBrowser(); else isServer"
-    class="navbar-nav ml-auto flex-row">
-    <li class="nav-item">
+    *ngIf="(auth.user | async) !== undefined && !auth.isLoading && system.isBrowser(); else isServer"
+    class="menu"
+    [class.expanded]="isMenuExpanded">
+    <li class="menu-item">
       <a
-        class="nav-link text-white"
+        class="menu-link"
         routerLink="/start"
         routerLinkActive="active">Get Started</a>
     </li>
-    <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+    <li class="menu-item" *ngIf="!auth.isLoggedIn()">
       <a
-        class="nav-link text-white"
+        class="menu-link"
         routerLink="/signup"
         routerLinkActive="active">Sign Up</a>
     </li>
-    <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+    <li class="menu-item" *ngIf="!auth.isLoggedIn()">
       <a
-        class="nav-link text-white"
+        class="menu-link"
         routerLink="/login"
         routerLinkActive="active">Login</a>
     </li>
-    <li class="nav-item" *ngIf="auth.isLoggedIn()">
-      <a
-        class="nav-link text-white"
-        routerLink="/dashboard"
-        routerLinkActive="active">Dashboard</a>
+    <li
+      *ngIf="auth.isLoggedIn() && (auth.user | async) as user"
+      (click)="toggleAccountMenu()"
+      class="menu-item dropdown">
+      <div class="menu-link dropdown-toggle">
+        <span class="avatar">
+          <img [src]="user.avatar ? user.avatar : '/assets/img/user.png'">
+        </span>
+      </div>
+      <div
+        class="dropdown-menu"
+        [class.expanded]="isAccountMenuExpanded">
+        <div class="dropdown-divider"></div>
+        <a
+          class="dropdown-item"
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">My Profile</a>
+        <a
+          class="dropdown-item"
+          routerLink="/dashboard/projects"
+          routerLinkActive="active">My Projects</a>
+        <a
+          class="dropdown-item"
+          routerLink="/dashboard/reports"
+          routerLinkActive="active">My Reports</a>
+        <a
+          class="dropdown-item"
+          routerLink="/settings"
+          routerLinkActive="active">Settings</a>
+        <div class="dropdown-divider"></div>
+        <a
+          href="#"
+          class="dropdown-item logout"
+          (click)="logout($event);">Sign Out</a>
+      </div>
     </li>
   </ul>
   <!-- Initial render (server-side) + Offline / PWA -->
   <ng-template #isServer>
     <ul
-      class="navbar-nav ml-auto flex-row"
+      class="menu"
       [class.d-none]="system.isOnline()"
       [class.d-flex]="!system.isOnline()">
-      <li class="nav-item">
+      <li class="menu-item">
         <a
-          class="nav-link text-white"
+          class="menu-link"
           routerLink="/start"
           routerLinkActive="active">Get Started</a>
       </li>
-      <li class="nav-item">
+      <li class="menu-item">
         <a
-          class="nav-link text-white"
+          class="menu-link"
           routerLink="/signup"
           routerLinkActive="active">Sign Up</a>
       </li>
-      <li class="nav-item">
+      <li class="menu-item">
         <a
-          class="nav-link text-white"
+          class="menu-link"
           routerLink="/login"
           routerLinkActive="active">Login</a>
       </li>

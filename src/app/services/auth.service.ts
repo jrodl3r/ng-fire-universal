@@ -74,7 +74,7 @@ export class AuthService {
           if (response.user) {
             this.createUser(response.user);
             this.zone.run(async () => await this.router.navigate(['/dashboard']))
-              .then(() => this.isLoading = false);
+              .then(() => setTimeout(() => this.isLoading = false, 100));
           }
         })
         .catch(error => this.system.error(error));
