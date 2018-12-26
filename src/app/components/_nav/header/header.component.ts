@@ -29,4 +29,5 @@ export class HeaderComponent {
     event.preventDefault();
     this.auth.logout();
   }
+
 }

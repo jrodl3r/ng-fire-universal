@@ -1,0 +1,10 @@
+#toast-container {
+  width: 100% !important;
+
+  & > div {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    opacity: .95;
+  }
+}

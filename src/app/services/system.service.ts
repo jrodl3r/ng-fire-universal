@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SystemService {
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   public isBrowser = () => {
     return typeof window !== 'undefined';
@@ -15,28 +16,28 @@ export class SystemService {
     return this.isBrowser() ? navigator.onLine : true;
   }
 
-  notify(msg: String) { // TODO: Setup toastr notifications
-    // if (this.isBrowser()) {
-    //   toastr.info(msg);
-    // }
-    console.log(msg);
+  public notify(msg: string) {
+    if (this.isBrowser()) {
+      this.toastr.info(msg);
+    }
+    this.log(msg);
   }
 
-  success(msg: String) {
-    // if (this.isBrowser()) {
-    //   toastr.success(msg);
-    // }
-    console.log(msg);
+  public success(msg: string) {
+    if (this.isBrowser()) {
+      this.toastr.success(msg);
+    }
+    this.log(msg);
   }
 
-  error(err: Error) {
-    // if (this.isBrowser()) {
-    //   toastr.error(err);
-    // }
+  public error(err: string) {
+    if (this.isBrowser()) {
+      this.toastr.error(err);
+    }
     console.error(err);
   }
 
-  log(msg: String) {
+  public log(msg: string) {
     console.log(msg);
   }
 
