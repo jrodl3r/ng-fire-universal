@@ -7,6 +7,8 @@ import { Observable, of } from 'rxjs';
 import { switchMap, shareReplay, startWith, tap } from 'rxjs/operators';
 
 import { SystemService } from './system.service';
+import { NotifyService } from './notify.service';
+
 import { IUser } from '../models/user';
 
 @Injectable({
@@ -17,11 +19,12 @@ export class AuthService {
   isLoading: Boolean = false;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+    private system: SystemService,
+    private notify: NotifyService,
     private router: Router,
     private zone: NgZone,
-    private system: SystemService
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore
   ) {
     this.user = system.isBrowser() ? afAuth.authState.pipe(
       switchMap(user => user ? this.afs.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null)),
@@ -59,7 +62,7 @@ export class AuthService {
         .signInWithRedirect(provider)
         .catch(error => {
           sessionStorage.removeItem('login-pending');
-          this.system.error(error);
+          this.notify.error(error);
         });
     }
   }
@@ -77,7 +80,7 @@ export class AuthService {
               .then(() => setTimeout(() => this.isLoading = false, 100));
           }
         })
-        .catch(error => this.system.error(error));
+        .catch(error => this.notify.error(error));
     }
   }
 
@@ -92,7 +95,7 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(() => this.router.navigate(['/dashboard']))
-      .catch(error => this.system.error(error));
+      .catch(error => this.notify.error(error));
   }
 
   // Email sign up
@@ -101,23 +104,23 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(credential => this.createUser(credential.user))
       .then(() => this.router.navigate(['/dashboard']))
-      .catch(error => this.system.error(error));
+      .catch(error => this.notify.error(error));
   }
 
   // Send password reset email
   public resetPassword(email: string) {
     return this.afAuth.auth
       .sendPasswordResetEmail(email)
-      .then(() => this.system.notify('Password reset email sent.'))
-      .catch(error => this.system.error(error));
+      .then(() => this.notify.info('Password reset email sent.'))
+      .catch(error => this.notify.error(error));
   }
 
   // Change password
   public updatePassword(password: string) {
     return this.afAuth.auth.currentUser
       .updatePassword(password)
-      .then(() => this.system.success('Password changed successfully.'))
-      .catch(error => this.system.error(error));
+      .then(() => this.notify.success('Password changed successfully.'))
+      .catch(error => this.notify.error(error));
   }
 
   public logout() {

@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-import { AuthService } from './auth.service';
 import { SystemService } from './system.service';
+import { NotifyService } from './notify.service';
+import { AuthService } from './auth.service';
 import { NavService } from './nav.service';
 import { SeoService } from './seo.service';
 
@@ -23,6 +24,7 @@ import { SeoService } from './seo.service';
   ],
   providers: [
     SystemService,
+    NotifyService,
     AuthService,
     NavService,
     SeoService

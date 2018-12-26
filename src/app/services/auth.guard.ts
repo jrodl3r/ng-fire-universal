@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
 import { SystemService } from './system.service';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,10 @@ import { SystemService } from './system.service';
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private afAuth: AngularFireAuth,
+    private system: SystemService,
+    private notify: NotifyService,
     private router: Router,
-    private system: SystemService
+    private afAuth: AngularFireAuth
   ) { }
 
   canActivate(): Observable<boolean> | boolean {
@@ -24,7 +26,7 @@ export class AuthGuard implements CanActivate {
         map(state => !!state),
         tap(loggedIn => {
           if (!loggedIn) {
-            this.system.log('You must be logged in.');
+            this.notify.error('You must be logged in.');
             this.router.navigate(['/login']);
           }
         })
