@@ -1,10 +1,12 @@
 @import '../../../styles/variables';
+@import '../../../styles/animation';
 @import '../../../styles/colors';
 
 .nav {
   padding: .5rem 1rem;
   background: $special-dark-color;
   box-shadow: none;
+  transition: $default-anim;
 }
 
 .logo {
@@ -123,7 +125,7 @@
     }
 
     &:hover {
-      background: none;
+      background: none !important;
     }
   }
 }
