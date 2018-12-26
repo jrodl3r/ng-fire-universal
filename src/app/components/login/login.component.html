@@ -51,7 +51,7 @@
 <!-- Processing login -->
 <div *ngIf="auth.isLoading && system.isBrowser()">
   <div class="col-lg-8 mt-5 mb-4 mr-lg-auto ml-lg-auto">
-    <p class="text-center">Logging-In...</p>
+    <div class="loading-ellipsis">Logging-In</div>
   </div>
 </div>
 <!-- Initial render (server-side) + Offline / PWA -->
