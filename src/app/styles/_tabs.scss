@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'colors';
+
+.tab-container {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+
+  @media (min-width: $md-screen) {
+    max-width: initial;
+  }
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-link {
+  display: block;
+  padding: 12px 22px 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #555;
+  border-bottom: 2px solid transparent;
+
+  &:hover { color: #000; }
+
+  &.active {
+    color: #000;
+    border-bottom: 2px solid $primary-color;
+    pointer-events: none;
+  }
+}

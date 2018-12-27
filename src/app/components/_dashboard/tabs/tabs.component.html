@@ -1,0 +1,31 @@
+<div class="tab-container">
+  <ul
+    class="tabs"
+    role="tablist">
+    <li class="tab-item">
+      <a
+        class="tab-link"
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        data-toggle="tab"
+        role="tab">Overview</a>
+    </li>
+    <li class="tab-item">
+      <a
+        class="tab-link"
+        routerLink="/dashboard/projects"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab">Projects</a>
+    </li>
+    <li class="tab-item">
+      <a
+        class="tab-link"
+        routerLink="/dashboard/reports"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab">Reports</a>
+    </li>
+  </ul>
+</div>
