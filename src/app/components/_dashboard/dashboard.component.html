@@ -3,11 +3,15 @@
     *ngIf="system.isBrowser() && system.isOnline()"
     class="row mt-md-4 mb-5">
     <div class="col-12 col-md-3 pr-md-1 pr-lg-2">
-      <app-tabs class="mobile-tabs"></app-tabs>
+      <app-tabs
+        class="mobile-tabs"
+        [tabs]="tabs"></app-tabs>
       <app-profile [user]="user"></app-profile>
     </div>
     <div class="col-12 col-md-9 pr-0 pr-sm-3 pl-0 pl-sm-3">
-      <app-tabs class="desktop-tabs"></app-tabs>
+      <app-tabs
+        class="desktop-tabs"
+        [tabs]="tabs"></app-tabs>
       <router-outlet></router-outlet>
     </div>
   </div>

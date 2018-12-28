@@ -14,6 +14,18 @@
 .tabs {
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+
+  &.justify-sm-center {
+    // NOTE: This is custom and needs to be adjusted for +/- tab(s)
+    @media (min-width: 400px) {
+      justify-content: center;
+    }
+
+    @media (min-width: $md-screen) {
+      justify-content: initial;
+    }
+  }
 }
 
 .tab-link {

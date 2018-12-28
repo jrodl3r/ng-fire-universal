@@ -1,0 +1,16 @@
+<div class="tab-container">
+  <ul
+    class="tabs"
+    [class.flex-md-column]="flexMdColumn"
+    [class.justify-sm-center]="justifySmCenter">
+    <li
+      *ngFor="let tab of tabs"
+      class="tab-item">
+      <a
+        class="tab-link"
+        routerLink="{{ tab.routerLink }}"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">{{ tab.label }}</a>
+    </li>
+  </ul>
+</div>
