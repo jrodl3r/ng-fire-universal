@@ -3,10 +3,15 @@
 
 .profile {
   position: relative;
-  left: calc(-1 * (100vw - 100%) / 2);
-  width: 100vw;
+  left: 0;
+  width: 100%;
   background: #F9F9F9 linear-gradient(to top, rgba(0,0,0, .03) 0%, transparent, 10px, transparent 100%);
   overflow: hidden;
+
+  @media (min-width: $xs-screen) {
+    left: calc(-1 * (100vw - 100%) / 2);
+    width: 100vw;
+  }
 
   @media (min-width: $md-screen) {
     height: 100%;
