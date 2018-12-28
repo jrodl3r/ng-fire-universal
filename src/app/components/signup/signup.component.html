@@ -4,7 +4,7 @@
       <h1>Sign Up
         <button
           (click)="auth.googleLogin()"
-          class="btn btn-sm btn-outline-elegant btn-login-google waves-effect float-right">
+          class="btn btn-sm btn-outline-elegant btn-login-google float-right">
             <i class="fa fa-google mr-2"></i> Use Google
         </button>
       </h1>
@@ -31,7 +31,7 @@
           <div *ngIf="formErrors.password" class="text-danger p-2 pb-3">{{ formErrors.password }}</div>
           <button
             type="submit"
-            class="btn btn-elegant btn-submit-signup waves-effect m-0 mt-3"
+            class="btn btn-elegant btn-submit-signup m-0 mt-3"
             [disabled]="!signupForm.valid">Sign Up</button>
         </form>
       </div>
