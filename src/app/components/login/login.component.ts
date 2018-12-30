@@ -65,11 +65,9 @@ export class LoginComponent implements OnInit {
         Validators.maxLength(25)
       ]]
     });
-
     this.loginForm.valueChanges.subscribe((data) =>
       this.forms.validate(data, this.loginForm, this.formErrors, this.validationMessages, ['email', 'password'])
     );
-    this.forms.validate({}, this.loginForm, this.formErrors, this.validationMessages, ['email', 'password']);
   }
 
   login() {

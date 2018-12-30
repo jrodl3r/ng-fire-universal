@@ -64,11 +64,9 @@ export class SignupComponent implements OnInit {
         Validators.maxLength(25)
       ]]
     });
-
     this.signupForm.valueChanges.subscribe((data) =>
       this.forms.validate(data, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password'])
     );
-    this.forms.validate({}, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password']);
   }
 
   signup() {

@@ -9,6 +9,7 @@ import { SettingsComponent } from './settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SettingsComponent,
     ProfileComponent,
     AccountComponent,
-    DashboardComponent
+    DashboardComponent,
+    AvatarUploadComponent
   ]
 })
 export class SettingsModule { }

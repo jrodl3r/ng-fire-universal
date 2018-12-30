@@ -8,8 +8,8 @@ export interface IUser {
 }
 
 export interface IProfile {
-  company: String;
-  fname: String;
-  lname: String;
-  website: String;
+  company?: String;
+  fname?: String;
+  lname?: String;
+  website?: String;
 }

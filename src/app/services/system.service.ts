@@ -12,7 +12,7 @@ export class SystemService {
   }
 
   isOnline = () => {
-    return this.isBrowser() ? navigator.onLine : true;
+    return this.isBrowser() ? navigator.onLine : false;
   }
 
 }

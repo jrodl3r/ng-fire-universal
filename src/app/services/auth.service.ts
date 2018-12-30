@@ -44,10 +44,11 @@ export class AuthService {
       .then(userDoc => {
         if (!userDoc.exists) {
           const data: IUser = {
-            uid: user.uid,
-            email: user.email,
+            created: new Date(),
             displayName: user.displayName || '',
-            created: new Date()
+            email: user.email,
+            profile: {},
+            uid: user.uid
           };
           return userRef.set(data);
         }
@@ -136,7 +137,11 @@ export class AuthService {
     if (this.system.isBrowser()) {
       return !!sessionStorage.getItem('user') && sessionStorage.getItem('user') !== 'null';
     }
-    return this.afAuth.auth.currentUser !== null ? true : false;
+    return this.afAuth.auth.currentUser !== null;
+  }
+
+  public getUserID(): String {
+    return this.afAuth.auth.currentUser.uid;
   }
 
 }
