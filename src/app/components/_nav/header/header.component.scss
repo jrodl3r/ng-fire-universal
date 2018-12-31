@@ -7,6 +7,10 @@
   background: $special-dark-color;
   box-shadow: none;
   transition: $default-anim;
+
+  &.offline {
+    margin-top: 34px;
+  }
 }
 
 .logo {
@@ -34,6 +38,16 @@
     width: 33px;
     background-image: url(/assets/icons/icon-72x72.png);
     background-size: 100%;
+  }
+}
+
+.menu-container {
+  display: flex;
+  width: 100%;
+
+  @media (min-width: $sm-screen) {
+    width: auto;
+    margin-left: auto;
   }
 }
 
@@ -136,6 +150,7 @@
   height: 32px;
   margin-left: 3px;
   display: inline-block;
+  background: rgba(255,255,255, .25);
   border: 1px solid #FFF;
   border-radius: 16px;
   overflow: hidden;

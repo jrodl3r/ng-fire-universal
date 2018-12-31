@@ -1,7 +1,5 @@
-<div *ngIf="(auth.user | async) as user">
-  <div
-    *ngIf="system.isBrowser() && system.isOnline()"
-    class="row mt-md-4 mb-5">
+<div *ngIf="user.isActive; else isLoading">
+  <div class="row mt-md-4 mb-5">
     <div class="col-12 col-md-3 pr-0 pr-md-1 pr-lg-2 pl-0">
       <app-tabs
         class="mobile-tabs"
@@ -16,7 +14,8 @@
     </div>
   </div>
 </div>
-<!-- Offline / PWA -->
-<div *ngIf="system.isBrowser() && !system.isOnline()">
-  <p class="text-warning text-center">Connection Lost!<br>Please check your connection.</p>
-</div>
+<ng-template #isLoading>
+  <div class="loading-spinner">
+    <i class="fa fa-refresh"></i>
+  </div>
+</ng-template>

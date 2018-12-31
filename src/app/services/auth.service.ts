@@ -47,6 +47,7 @@ export class AuthService {
             created: new Date(),
             displayName: user.displayName || '',
             email: user.email,
+            isActive: true,
             profile: {},
             uid: user.uid
           };

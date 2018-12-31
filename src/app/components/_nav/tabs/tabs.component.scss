@@ -44,6 +44,8 @@
     }
 
     .tab-link {
+      padding: 8px 20px;
+
       @media (min-width: $md-screen) {
         position: relative;
         display: block;
