@@ -53,8 +53,8 @@
   </div>
   <!-- Processing login -->
   <div *ngIf="auth.isLoading && system.isBrowser()">
-    <div class="col-lg-8 mt-5 mb-4 mr-lg-auto ml-lg-auto">
-      <div class="loading-ellipsis">Logging-In</div>
+    <div class="loading-spinner">
+      <i class="fa fa-refresh"></i>
     </div>
   </div>
   <!-- Initial render (server-side) + Offline / PWA -->

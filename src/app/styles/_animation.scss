@@ -1,3 +1,5 @@
+@import 'colors';
+
 $default-anim: .25s ease-in-out;
 
 .loading-spinner {
@@ -7,32 +9,12 @@ $default-anim: .25s ease-in-out;
   height: 200px;
   width: 100%;
   font-size: 50px;
-  color: #DDD;
+  color: $grey-color;
 
   i { animation: spin 1.25s infinite linear; }
 }
 
 @keyframes spin {
-  from { transform:rotate(0deg); }
-  to { transform:rotate(360deg); }
-}
-
-.loading-ellipsis {
-  text-align: center;
-
-  &:after {
-    display: inline-block;
-    width: 30px;
-    margin-left: 2px;
-    font-weight: 700;
-    text-align: left;
-    content: '';
-    animation: ellipsis steps(4) 1s infinite;
-  }
-}
-
-@keyframes ellipsis {
-  33% { content: '.'; }
-  66% { content: '..'; }
-  100% { content: '...'; }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
