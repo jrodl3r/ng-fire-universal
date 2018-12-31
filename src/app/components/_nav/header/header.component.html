@@ -16,7 +16,7 @@
     class="menu-container"
     *ngIf="(auth.user | async) as user; else isStatic">
     <ul
-      *ngIf="user.isActive && !auth.isLoading"
+      *ngIf="user?.isActive && !auth.isLoading"
       class="menu"
       [class.expanded]="nav.isHeaderMenuExpanded">
       <li class="menu-item">
