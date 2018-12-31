@@ -6,6 +6,7 @@ const APP_NAME = 'ng-fire-universal';
 module.exports = {
   entry: {  server: './server.ts' },
   resolve: { extensions: ['.js', '.ts'] },
+  stats: 'errors-only',
   mode: 'development',
   target: 'node',
   externals: [
