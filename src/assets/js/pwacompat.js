@@ -35,7 +35,7 @@
   function setup() {
     // const manifestEl = document.head.querySelector('link[rel="manifest"]');
     // const manifestHref = manifestEl ? manifestEl.href : '';
-    // NOTE: PWA hack for iOS homescreen-oauth issue (https://goo.gl/mfrv87)
+    // NOTE: Fix for iOS homescreen / oAuth issue (https://goo.gl/mfrv87)
     const manifestHref = 'manifest.json';
     const hrefFactory = buildHrefFactory([manifestHref, window.location]);
 
@@ -97,7 +97,9 @@
     icons.sort((a, b) => parseInt(b.sizes, 10) - parseInt(a.sizes, 10));  // largest first
     const appleTouchIcons = icons.map((icon) => {
       // create icons as byproduct
-      const attr = {'rel': 'icon', 'href': urlFactory(icon['src']), 'sizes': icon['sizes']};
+      // NOTE: /assets always on root
+      const href = icon['src'].indexOf('assets/') > -1 ? '/' + icon['src'] : urlFactory(icon['src']);
+      const attr = {'rel': 'icon', 'href': href, 'sizes': icon['sizes']};
       push('link', attr);
       if (isSafari) {
         attr['rel'] = 'apple-touch-icon';
