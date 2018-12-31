@@ -64,6 +64,7 @@ export class AuthService {
         .signInWithRedirect(provider)
         .catch(error => {
           sessionStorage.removeItem('login-pending');
+          this.isLoading = false;
           this.notify.error(error);
         });
     }
@@ -82,7 +83,10 @@ export class AuthService {
               .then(() => setTimeout(() => this.isLoading = false, 100));
           }
         })
-        .catch(error => this.notify.error(error));
+        .catch(error => {
+          this.isLoading = false;
+          this.notify.error(error);
+        });
     }
   }
 
