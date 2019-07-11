@@ -1,16 +1,10 @@
 export interface IUser {
-  avatar?: String;
+  active?: boolean;
   created?: Date;
-  displayName?: String;
-  email: String;
-  isActive?: Boolean;
-  profile?: IProfile;
-  uid: String;
-}
-
-export interface IProfile {
-  company?: String;
-  fname?: String;
-  lname?: String;
-  website?: String;
+  displayName: string;
+  email: string;
+  lastActive?: any;
+  lastLogin?: any;
+  photoURL: string;
+  uid: string;
 }

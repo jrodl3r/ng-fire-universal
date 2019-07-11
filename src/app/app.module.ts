@@ -1,45 +1,47 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
 import { NavModule } from './components/_nav/nav.module';
 
-import { HomeComponent } from './components/home/home.component';
-import { StartComponent } from './components/start/start.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { LoginComponent } from './components/login/login.component';
+import { AppComponent } from './app.component';
 import { ErrorComponent } from './components/error/error.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
-import { environment } from '../environments/environment';
+import { config } from '../../firebase';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    StartComponent,
-    SignupComponent,
-    LoginComponent,
-    ErrorComponent
-  ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-fire-universal' }),
-    AppRoutingModule,
-    ServicesModule,
-    NavModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule,
+    AngularFireFunctionsModule,
+    AppRoutingModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    NavModule,
+    RouterModule,
+    ServicesModule
+  ],
+  declarations: [
+    AppComponent,
+    ErrorComponent,
+    HomeComponent,
+    LoginComponent,
+    LoadingComponent,
+    ProfileComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

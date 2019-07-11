@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
-import { SystemService } from './system.service';
+import { PlatformService } from './platform.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,32 +9,38 @@ import { SystemService } from './system.service';
 export class NotifyService {
 
   constructor(
-    private system: SystemService,
+    private platform: PlatformService,
     private toastr: ToastrService
   ) { }
 
   info(msg: string) {
-    if (this.system.isBrowser()) {
+    if (this.platform.isBrowser()) {
       this.toastr.info(msg);
     }
     this.log(msg);
   }
 
   success(msg: string) {
-    if (this.system.isBrowser()) {
+    if (this.platform.isBrowser()) {
       this.toastr.success(msg);
     }
-    this.log(msg);
   }
 
-  error(err: string) {
-    if (this.system.isBrowser()) {
-      this.toastr.error(err);
+  warn(msg: string) {
+    if (this.platform.isBrowser()) {
+      this.toastr.error(msg);
     }
-    console.error(err);
+  }
+
+  error(msg: string, err: string = '') {
+    if (this.platform.isBrowser()) {
+      this.toastr.error(msg);
+    }
+    console.error(err ? err : msg);
   }
 
   log(msg: string) {
     console.log(msg);
   }
+
 }

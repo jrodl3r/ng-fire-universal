@@ -1,44 +1,38 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# firebase
+.firebaserc
+firebase.ts
 
-# compiled output
+# compiled
 /dist
-/functions/dist
-/public
-/out-tsc
 /tmp
-/.firebase
+/out-tsc
 
 # dependencies
 /node_modules
 /functions/node_modules
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# profiling
+chrome-profiler-events.json
+speed-measure-plugin.json
 
-# IDE - VSCode
+# editor
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.history/*
 
 # misc
 /.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
-firebase-debug.log
 npm-debug.log
 yarn-error.log
 testem.log
 /typings
 
-# System Files
+# system
 .DS_Store
 Thumbs.db

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavService {
-  isHeaderMenuExpanded: Boolean = false;
-  isHeaderAccountMenuExpanded: Boolean = false;
+  isHeaderMenuExpanded = false;
+  isHeaderAccountMenuExpanded = false;
 
   constructor() { }
 
@@ -20,7 +21,8 @@ export class NavService {
   }
 
   collapseHeader() {
-    this.isHeaderMenuExpanded = false;
     this.isHeaderAccountMenuExpanded = false;
+    this.isHeaderMenuExpanded = false;
   }
+
 }

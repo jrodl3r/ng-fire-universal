@@ -3,6 +3,7 @@
 
 #toast-container {
   width: 100% !important;
+  animation: fade .5s linear;
 
   & > div {
     width: 100% !important;
@@ -12,23 +13,7 @@
   }
 }
 
-.offline-warning {
-  position: absolute;
-  display: flex;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 0;
-  width: 100%;
-  padding: 5px 15px;
-  color: #FFF;
-  text-align: center;
-  background-color: $danger-color;
-  opacity: 0;
-  transition: opacity $default-anim;
-
-  &.active {
-    height: auto;
-    opacity: .95;
-  }
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

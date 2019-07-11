@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { TabsComponent } from './tabs/tabs.component';
+// import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   imports: [
@@ -14,12 +14,12 @@ import { TabsComponent } from './tabs/tabs.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    TabsComponent
+    // TabsComponent
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    TabsComponent
+    // TabsComponent
   ]
 })
 export class NavModule { }

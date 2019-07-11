@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject, forwardRef } from '@angular/core';
 
-import { AuthService } from '../../../services/auth.service';
-import { SystemService } from '../../../services/system.service';
-import { NavService } from '../../../services/nav.service';
+import { PlatformService } from 'src/app/services/platform.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-header',
@@ -10,15 +10,16 @@ import { NavService } from '../../../services/nav.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
   constructor(
-    public auth: AuthService,
-    public system: SystemService,
-    public nav: NavService
+    @Inject(forwardRef(() => PlatformService)) public platform: PlatformService,
+    @Inject(forwardRef(() => AuthService)) public auth: AuthService,
+    @Inject(forwardRef(() => NavService)) public nav: NavService
   ) { }
 
-  logout(event: Event) {
-    event.preventDefault();
-    this.auth.logout();
+  signOut() {
+    this.nav.collapseHeader();
+    this.auth.signOut();
   }
 
 }
