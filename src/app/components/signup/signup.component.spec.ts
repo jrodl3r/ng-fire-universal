@@ -3,23 +3,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthService } from './../../services/auth.service';
 
-import { LoginComponent } from './login.component';
+import { SignupComponent } from './signup.component';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('SignupComponent', () => {
+  let component: SignupComponent;
+  let fixture: ComponentFixture<SignupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [LoginComponent],
+      declarations: [SignupComponent],
       providers: [AuthService]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(SignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

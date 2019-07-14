@@ -1,7 +1,7 @@
 @import 'colors';
 
 $default-anim: .25s ease-in-out;
-$fast-anim: .1s ease-in-out;
+$fast-anim: .15s ease-in-out;
 
 
 .loading-spinner {
@@ -15,7 +15,6 @@ $fast-anim: .1s ease-in-out;
 
   i { animation: spin 1.25s infinite linear; }
 }
-
 
 @keyframes spin {
   from { transform: rotate(0deg); }

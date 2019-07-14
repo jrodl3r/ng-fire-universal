@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-import { PlatformService } from './platform.service';
-import { NotifyService } from './notify.service';
 import { AuthService } from './auth.service';
+import { FormsService } from './forms.service';
+import { NotifyService } from './notify.service';
+import { PlatformService } from './platform.service';
 
 @NgModule({
   declarations: [],
@@ -21,9 +22,10 @@ import { AuthService } from './auth.service';
     })
   ],
   providers: [
-    PlatformService,
+    AuthService,
+    FormsService,
     NotifyService,
-    AuthService
+    PlatformService
   ]
 })
 export class ServicesModule { }

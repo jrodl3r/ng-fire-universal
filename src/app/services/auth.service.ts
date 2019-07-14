@@ -73,15 +73,38 @@ export class AuthService {
       this.afAuth.auth.getRedirectResult()
         .then(response => {
           if (response.user) {
-            this.saveUser(response.user);
-            this.zone.run(async () => await this.router.navigate(['/']));
+            this.updateUser(response.user);
+            this.zone.run(async () => await this.router.navigate(['/me']));
           } else { this.notify.error('Error fetching user account'); }
         })
         .catch(error => this.notify.error(error));
     }
   }
 
-  private saveUser(user: IUser) {
+  public emailLogin(email: string, password: string) {
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(credential => this.updateUser(credential.user))
+      .then(() => this.router.navigate(['/me']))
+      .catch(error => this.notify.error(error));
+  }
+
+  public emailSignUp(email: string, password: string) {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(credential => this.updateUser(credential.user))
+      .then(() => this.router.navigate(['/me']))
+      .catch(error => this.notify.error(error));
+  }
+
+  public resetPassword(email: string) {
+    return this.afAuth.auth
+      .sendPasswordResetEmail(email)
+      .then(() => this.notify.info('Password reset email sent'))
+      .catch(error => this.notify.error(error));
+  }
+
+  private updateUser(user: IUser) {
     const date = new Date();
     this.userDoc = this.db.doc<IUser>(`users/${user.uid}`);
     this.userDoc.ref.get()
@@ -119,17 +142,16 @@ export class AuthService {
   }
 
   public signOut() {
-    this.afAuth.auth.signOut()
-      .then(() => {
-        if (this.platform.isBrowser) {
-          sessionStorage.clear();
-        }
-      })
-      .catch(error => this.notify.error('Error signing-out', error));
+    this.afAuth.auth.signOut().then(() => {
+      if (this.platform.isBrowser) {
+        sessionStorage.clear();
+      }
+    })
+    .catch(error => this.notify.error('Error signing-out', error));
   }
 
   public isLoggedIn(): boolean {
-    return this.afAuth.auth.currentUser !== null;
+    return this.afAuth ? this.afAuth.auth.currentUser !== null : false;
   }
 
   public getUserID(): string {
@@ -140,7 +162,15 @@ export class AuthService {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
   }
 
-  public setAdmin(state: boolean) {
+  /* ------------------------------------------------------------- */
+  /* NOTE: This is currently the only way to set the custom claim  */
+  /* for the root-admin - This will be removed once Firebase       */
+  /* enables setting custom user claims from the CP or CLI         */
+  /* ------------------------------------------------------------- */
+  /* TODO: Remove this function after initializing the root-admin  */
+  /*       Don't worry, this logic exists in the admin module      */
+  /* ------------------------------------------------------------- */
+  public setAdmin(state) {
     const call = this.afFunctions.httpsCallable(state ? 'addAdmin' : 'removeAdmin');
     const email = this.getUserEmail();
     call({ email }).subscribe(

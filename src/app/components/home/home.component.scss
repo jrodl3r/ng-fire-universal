@@ -1,9 +1,1 @@
-@import '../../styles/colors';
-
-:host {
-  color: $dark-color !important;
-}
-
-ul {
-  min-height: 100px;
-}
+ul { min-height: 100px; }

@@ -1,3 +1,7 @@
+@import 'breakpoints';
+
+html, body { height: 100%; }
+
 app-root {
   display: flex;
   flex-direction: column;
@@ -13,15 +17,23 @@ app-root {
 }
 
 .container {
-  @media (min-width: 768px) {
-    max-width: 760px !important;
-  }
+  @media (min-width: $md-screen) { max-width: 760px !important; }
+  @media (min-width: $lg-screen) { max-width: 960px !important; }
+  @media (min-width: $xl-screen) { max-width: 960px !important; }
+}
 
-  @media (min-width: 992px) {
-    max-width: 960px !important;
-  }
+.page {
+  padding: 2rem 0;
+  @media (min-width: $md-screen) { padding: 3rem 0; }
+}
 
-  @media (min-width: 1200px) {
-    max-width: 960px !important;
-  }
+hr {
+  margin-bottom: 2rem;
+  @media (min-width: $md-screen) { margin-bottom: 3rem; }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

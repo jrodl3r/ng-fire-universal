@@ -3,18 +3,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { FormsService } from '../../services/forms.service';
-import { NotifyService } from './../../services/notify.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class SignupComponent implements OnInit {
+  signupForm: FormGroup;
   formErrors: FormErrors = {
     email: '',
     password: '',
@@ -31,12 +30,10 @@ export class LoginComponent implements OnInit {
       maxlength: 'Less than 25 characters long'
     }
   };
-  isPassReset = false;
 
   constructor(
     @Inject(forwardRef(() => AuthService)) public auth: AuthService,
     private forms: FormsService,
-    private notify: NotifyService,
     private fb: FormBuilder
   ) { }
 
@@ -49,7 +46,7 @@ export class LoginComponent implements OnInit {
 
   buildForm() {
     if (this.fb) {
-      this.loginForm = this.fb.group({
+      this.signupForm = this.fb.group({
         email: ['', [
           Validators.required,
           Validators.email,
@@ -61,24 +58,15 @@ export class LoginComponent implements OnInit {
           Validators.maxLength(25)
         ]]
       });
-      this.loginForm.valueChanges.subscribe((data) =>
-        this.forms.validate(data, this.loginForm, this.formErrors, this.validationMessages, ['email', 'password'])
+      this.signupForm.valueChanges.subscribe((data) =>
+        this.forms.validate(data, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password'])
       );
     }
   }
 
-  login() {
-    const input = this.loginForm.getRawValue();
-    this.auth.emailLogin(input.email, input.password);
-  }
-
-  resetPassword() {
-    if (this.loginForm.getRawValue().email && !this.formErrors.email) {
-      this.auth.resetPassword(this.loginForm.getRawValue().email)
-        .then(() => this.isPassReset = true);
-    } else {
-      this.notify.info('Please enter your email to proceed');
-    }
+  signup() {
+    const input = this.signupForm.getRawValue();
+    this.auth.emailSignUp(input.email, input.password);
   }
 
 }

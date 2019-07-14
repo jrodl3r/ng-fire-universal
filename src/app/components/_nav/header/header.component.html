@@ -26,7 +26,7 @@
         <a
           class="menu-link"
           href="https://github.com/jrodl3r/ng-fire-universal">
-          <i class="fa fa-github mr-2"></i> GitHub
+          <i class="fab fa-github mr-2"></i> GitHub
         </a>
       </li>
       <li
@@ -47,9 +47,9 @@
           [class.expanded]="nav.isHeaderAccountMenuExpanded">
           <a
             class="dropdown-item"
-            routerLink="/profile"
+            routerLink="/me"
             routerLinkActive="active"
-            (click)="nav.collapseHeader()">Profile</a>
+            (click)="nav.collapseHeader()">My Account</a>
           <a
             class="dropdown-item"
             routerLink="/admin"
@@ -70,13 +70,23 @@
   <ng-template #isStatic>
     <ul
       class="menu"
-      [class.expanded]="nav.isHeaderMenuExpanded || nav.isHeaderAccountMenuExpanded">
+      [class.expanded]="nav.isHeaderMenuExpanded || nav.isHeaderAccountMenuExpanded"
+      *ngIf="!(auth.isLoading | async)">
       <li class="menu-item">
         <a
           class="menu-link"
           href="https://github.com/jrodl3r/ng-fire-universal"
           (click)="nav.collapseHeader()">
-          <i class="fa fa-github mr-2"></i> GitHub
+          <i class="fab fa-github mr-2"></i> GitHub
+        </a>
+      </li>
+      <li class="menu-item">
+        <a
+          class="menu-link"
+          routerLink="/signup"
+          routerLinkActive="active"
+          (click)="nav.collapseHeader()">
+          <i class="fas fa-fire mr-2"></i> Sign Up
         </a>
       </li>
       <li class="menu-item">
@@ -85,7 +95,7 @@
           routerLink="/login"
           routerLinkActive="active"
           (click)="nav.collapseHeader()">
-          <i class="fa fa-sign-in mr-2"></i> Login
+          <i class="fas fa-sign-in-alt mr-2"></i> Login
         </a>
       </li>
     </ul>
@@ -98,7 +108,8 @@
   *ngIf="platform.isBrowser() && !platform.isOnline()">
   <div class="container">
     <span>
-      <i class="fa fa-warning mr-2"></i> Offline / Connection Lost
+      <i class="fa fa-warning mr-2"></i>
+      Offline / Connection Lost
     </span>
   </div>
 </div>
