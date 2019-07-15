@@ -1,14 +1,14 @@
 <nav
-  [class.expanded]="nav.isHeaderMenuExpanded"
+  [class.expanded]="nav.isMenuOpen"
   [class.offline]="platform.isBrowser() && !platform.isOnline()">
   <div class="top">
     <a
       class="logo"
       routerLink="/"
-      (click)="nav.collapseHeader()">ng-fire-universal</a>
+      (click)="nav.closeMenu()">ng-fire-universal</a>
     <div
       class="menu-toggle"
-      [class.active]="nav.isHeaderMenuExpanded"
+      [class.active]="nav.isMenuOpen"
       (click)="nav.toggleMenu($event)">
       <i class="fa fa-bars"></i>
     </div>
@@ -17,12 +17,12 @@
   <!-- Logged-in -->
   <div
     class="menu-container"
-    [class.expanded]="nav.isHeaderMenuExpanded"
+    [class.expanded]="nav.isMenuOpen"
     *ngIf="auth.user | async as user; else isStatic"
-    (click)="nav.collapseHeader()">
+    (click)="nav.closeMenu()">
     <ul
       class="menu logged-in"
-      [class.expanded]="nav.isHeaderMenuExpanded || nav.isHeaderAccountMenuExpanded">
+      [class.expanded]="nav.isMenuOpen">
       <li class="menu-item">
         <a
           class="menu-link store-link"
@@ -48,8 +48,8 @@
         *ngIf="user">
         <div
           class="menu-link dropdown-toggle"
-          (click)="nav.toggleAccountMenu($event)"
-          [class.expanded]="nav.isHeaderAccountMenuExpanded">
+          (click)="nav.toggleMenu($event)"
+          [class.expanded]="nav.isMenuOpen">
           <span class="avatar">
             <img
               [class.inactive]="!user.active"
@@ -62,7 +62,7 @@
         </div>
         <div
           class="dropdown-menu"
-          [class.expanded]="nav.isHeaderAccountMenuExpanded">
+          [class.expanded]="nav.isMenuOpen">
           <a
             class="dropdown-item"
             routerLink="/me"
@@ -86,8 +86,8 @@
   <ng-template #isStatic>
     <ul
       class="menu"
-      [class.expanded]="nav.isHeaderMenuExpanded || nav.isHeaderAccountMenuExpanded"
-      (click)="nav.collapseHeader()"
+      [class.expanded]="nav.isMenuOpen"
+      (click)="nav.closeMenu()"
       *ngIf="!(auth.isLoading | async)">
       <li class="menu-item">
         <a

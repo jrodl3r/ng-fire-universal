@@ -1,26 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavService {
-  isHeaderMenuExpanded = false;
-  isHeaderAccountMenuExpanded = false;
+  isMenuOpen = false;
 
   toggleMenu(event: Event) {
     event.stopPropagation();
-    this.isHeaderMenuExpanded = !this.isHeaderMenuExpanded;
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
-  toggleAccountMenu(event: Event) {
-    event.stopPropagation();
-    this.isHeaderAccountMenuExpanded = !this.isHeaderAccountMenuExpanded;
-  }
-
-  collapseHeader() {
-    this.isHeaderAccountMenuExpanded = false;
-    this.isHeaderMenuExpanded = false;
-  }
+  closeMenu() { this.isMenuOpen = false; }
 
 }

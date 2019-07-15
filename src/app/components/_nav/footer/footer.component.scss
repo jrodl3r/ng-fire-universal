@@ -8,7 +8,7 @@ footer {
   align-items: center;
   flex-shrink: 0;
   position: relative;
-  height: 80px;
+  height: 100px;
   color: $grey-color;
   font-family: $font-logo;
   font-size: 1.4rem;
@@ -24,6 +24,7 @@ footer {
   right: -5px;
   opacity: .65;
   transform: rotate(-45deg);
+  outline: none;
 
   &:hover {
     opacity: 1;

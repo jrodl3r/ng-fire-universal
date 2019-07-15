@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { NavModule } from '../_nav/nav.module';
 
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +17,8 @@ import { AdminService } from './admin.service';
 @NgModule({
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    NavModule
   ],
   declarations: [
     AdminComponent,

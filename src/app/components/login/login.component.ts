@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       this.auth.resetPassword(this.loginForm.getRawValue().email)
         .catch(error => console.log(error));
     } else {
-      this.notify.warn('Please enter your email');
+      this.notify.warn('Please enter your email first');
     }
   }
 

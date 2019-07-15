@@ -1,5 +1,12 @@
-<div class="page">
+<div class="section tabbed">
   <h2>My Account</h2>
   <hr>
-  <router-outlet></router-outlet>
+  <div class="content">
+    <app-tabs [tabs]="tabs"></app-tabs>
+    <div
+      class="outlet"
+      [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </div>
 </div>

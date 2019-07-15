@@ -5,7 +5,13 @@ $font-logo: 'Lobster', cursive;
 $font-primary: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 
-body { font-family: $font-primary; }
+body {
+  font-family: $font-primary;
+  font-size: .95rem;
+
+  @media (min-width: $md-screen) { font-size: 1rem; }
+}
+
 p a { text-decoration: underline; }
 b, strong { font-weight: bold; }
 * { -webkit-font-smoothing: antialiased; }

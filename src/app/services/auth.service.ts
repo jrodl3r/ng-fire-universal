@@ -164,11 +164,12 @@ export class AuthService {
 
   /* ------------------------------------------------------------- */
   /* NOTE: This is currently the only way to set the custom claim  */
-  /* for the root-admin - This will be removed once Firebase       */
-  /* enables setting custom user claims from the CP or CLI         */
+  /* for the root-admin - This will be removed after setting       */
+  /* custom user claims from the CP or CLI is enabled.             */
   /* ------------------------------------------------------------- */
-  /* TODO: Remove this function after initializing the root-admin  */
-  /*       Don't worry, this logic exists in the admin module      */
+  /* TODO: Remove this function after initializing the root-admin. */
+  /*       (Don't worry, this logic also exists in admin module)   */
+  /*       See: `/docs/Setup_Root_Admin.md`                        */
   /* ------------------------------------------------------------- */
   public setAdmin(state) {
     const call = this.afFunctions.httpsCallable(state ? 'addAdmin' : 'removeAdmin');

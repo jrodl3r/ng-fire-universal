@@ -1,20 +1,12 @@
-<div class="page">
+<div class="section tabbed">
   <h2>Admin</h2>
   <hr>
-  <router-outlet></router-outlet>
-</div>
-<!-- <div class="container p-0">
-  <div class="row mt-md-4 mb-5 flex-column flex-md-row">
-    <div class="col-12 col-md-3 pr-0 pr-md-0 pl-0 pl-md-3">
-      <app-tabs
-        class="admin-tabs"
-        [tabs]="tabs"
-        [flexMdColumn]="true"
-        [justifySmCenter]="true"
-        [verticalDesktop]="true"></app-tabs>
-    </div>
-    <div class="col-12 col-md-9 pr-0 pr-sm-3 pl-0 pl-sm-4">
-      <router-outlet></router-outlet>
+  <div class="content">
+    <app-tabs [tabs]="tabs"></app-tabs>
+    <div
+      class="outlet"
+      [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+      <router-outlet #outlet="outlet"></router-outlet>
     </div>
   </div>
-</div> -->
+</div>

@@ -1,0 +1,74 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/animation';
+@import '../../../styles/colors';
+
+:host {
+  position: absolute;
+  height: 48px;
+  width: 100%;
+  min-width: 320px;
+  left: 0;
+  background: linear-gradient(to top, rgba(0,0,0, .02) 0%, rgba(0,0,0, 0) 50%);
+  border-top: 1px solid rgba(0,0,0, .1);
+  border-bottom: 1px solid rgba(0,0,0, .1);
+
+  @media (min-width: $md-screen) {
+    flex: 1;
+    position: initial;
+    height: initial;
+    min-height: 280px;
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    padding: 2rem 0;
+    border: 0;
+    border-right: 1px solid rgba(0,0,0, .1);
+    background: none;
+  }
+
+  @media (min-width: $lg-screen) {
+    max-width: 240px;
+    padding: 2rem 0;
+  }
+}
+
+ul {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  max-width: 540px;
+  margin: 0 auto;
+  overflow-x: scroll;
+
+  @media (min-width: $md-screen) { flex-direction: column; }
+}
+
+.tab-link {
+  display: block;
+  padding: 12px 18px;
+  color: $dark-color;
+  font-size: 15px;
+  white-space: nowrap;
+  user-select: none;
+  transition: color $default-anim;
+
+  &:hover { color: $mid-grey-color; }
+
+  &.active {
+    color: $purple-color;
+    font-weight: 500;
+    pointer-events: none;
+  }
+
+  @media (min-width: $md-screen) {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,0,0, 0);
+
+    &.active {
+      background: linear-gradient(-15deg, rgba(0,0,0, .02) 0%, rgba(0,0,0, 0) 50%);
+      border-bottom: 1px solid rgba(0,0,0, .05);
+    }
+  }
+
+  @media (min-width: $lg-screen) { padding: 15px 20px; }
+}

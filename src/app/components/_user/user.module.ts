@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
+import { NavModule } from '../_nav/nav.module';
 
 import { UserComponent } from './user.component';
 import { HomeComponent } from './home/home.component';
@@ -13,7 +14,8 @@ import { UserService } from './user.service';
 @NgModule({
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    NavModule
   ],
   declarations: [
     UserComponent,
