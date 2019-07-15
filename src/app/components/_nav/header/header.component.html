@@ -54,7 +54,7 @@
             <img
               [class.inactive]="!user.active"
               [class.disabled]="!user.photoURL"
-              [src]="user.photoURL">
+              [src]="user.photoURL || ''">
             <i
               class="fas fa-user"
               *ngIf="user.active && !user.photoURL"></i>

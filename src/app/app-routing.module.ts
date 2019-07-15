@@ -4,13 +4,12 @@ import { AngularFireAuthGuard, customClaims } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ErrorComponent } from './components/error/error.component';
 
-const isLoggedIn = () => pipe(map(user => !!user ? true : ['/']));
+const isUser = () => pipe(map(user => !!user ? true : ['/']));
 const isAdmin = () => pipe(customClaims, map(claims =>
   claims.admin === true ? claims.admin : ['/']
 ));
@@ -25,12 +24,20 @@ const routes: Routes = [
   },
   {
     path: 'me',
-    component: ProfileComponent,
+    loadChildren: () => import('./components/_user/user.module').then(m => m.UserModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: isLoggedIn }
+    data: { authGuardPipe: isUser }
   },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'cart',
+    loadChildren: () => import('./components/_cart/cart.module').then(m => m.CartModule)
+  },
+  {
+    path: 'store',
+    loadChildren: () => import('./components/_store/store.module').then(m => m.StoreModule)
+  },
   { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', component: ErrorComponent }
 ];
 

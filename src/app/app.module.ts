@@ -16,12 +16,11 @@ import { NavModule } from './components/_nav/nav.module';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 import { config } from '../../firebase';
-import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   imports: [
@@ -33,19 +32,18 @@ import { SignupComponent } from './components/signup/signup.component';
     AngularFireFunctionsModule,
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NavModule,
-    RouterModule,
-    ServicesModule
+    ServicesModule,
+    NavModule
   ],
   declarations: [
     AppComponent,
     ErrorComponent,
     HomeComponent,
-    LoginComponent,
     LoadingComponent,
-    ProfileComponent,
+    LoginComponent,
     SignupComponent
   ],
   providers: [],

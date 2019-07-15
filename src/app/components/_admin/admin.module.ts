@@ -1,33 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminRoutingModule } from './admin-routing.module';
-// import { NavModule } from '../_nav/nav.module';
 
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
+import { OrdersComponent } from './orders/orders.component';
+import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
-import { SettingsComponent } from './settings/settings.component';
 
-// import { AdminService } from './admin.service';
+import { AdminService } from './admin.service';
 
 // import { SortUsersPipe } from '../../services/pipes/sort-users.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
-    AdminRoutingModule,
-    // ReactiveFormsModule,
-    // FormsModule,
-    // NavModule
+    AdminRoutingModule
   ],
   declarations: [
     AdminComponent,
     HomeComponent,
-    SettingsComponent,
+    OrdersComponent,
+    ProductsComponent,
     UsersComponent
   ],
-  // providers: [AdminService]
+  providers: [AdminService]
 })
 export class AdminModule { }
