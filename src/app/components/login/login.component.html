@@ -38,19 +38,11 @@
         class="btn btn-sm btn-secondary"
         [class.disabled]="!loginForm.valid"
         [disabled]="!loginForm.valid">Ready</button>
-      <p
-        class="reset-password"
-        *ngIf="!isPassReset">
+      <p class="reset-password">
         Forget your password?
         <span
           class="text-secondary ml-2"
           (click)="resetPassword()">Reset Password</span>
-      </p>
-      <p
-        class="reset-password success"
-        *ngIf="isPassReset">
-        Check your email to proceed
-        <i class="fas fa-thumbs-up ml-2"></i>
       </p>
     </form>
   </div>

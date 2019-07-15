@@ -1,3 +1,4 @@
+@import '../../../styles/breakpoints';
 @import '../../../styles/typography';
 @import '../../../styles/colors';
 
@@ -6,9 +7,42 @@ footer {
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  position: relative;
   height: 80px;
   color: $grey-color;
   font-family: $font-logo;
   font-size: 1.4rem;
+  overflow: hidden;
   user-select: none;
+}
+
+// Credit: http://tholman.com/github-corners
+.github {
+  display: none;
+  position: absolute;
+  bottom: -60px;
+  right: -5px;
+  opacity: .65;
+  transform: rotate(-45deg);
+
+  &:hover {
+    opacity: 1;
+    .octo-arm { animation: wave 560ms ease-in-out; }
+  }
+
+  svg {
+    height: 120px;
+    width: 120px;
+  }
+
+  .octo-body, .octo-arm { fill: $grey-color; }
+  .octo-arm { transform-origin: 130px 106px; }
+
+  @media (min-width: $md-screen) { display: block; }
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0); }
+  20%, 60% { transform: rotate(-25deg); }
+  40%, 80% { transform: rotate(10deg); }
 }

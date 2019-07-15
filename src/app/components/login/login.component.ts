@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
       maxlength: 'Less than 25 characters long'
     }
   };
-  isPassReset = false;
 
   constructor(
     @Inject(forwardRef(() => AuthService)) public auth: AuthService,
@@ -75,9 +74,9 @@ export class LoginComponent implements OnInit {
   resetPassword() {
     if (this.loginForm.getRawValue().email && !this.formErrors.email) {
       this.auth.resetPassword(this.loginForm.getRawValue().email)
-        .then(() => this.isPassReset = true);
+        .catch(error => console.log(error));
     } else {
-      this.notify.info('Please enter your email to proceed');
+      this.notify.warn('Please enter your email');
     }
   }
 

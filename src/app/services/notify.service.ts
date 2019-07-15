@@ -28,7 +28,7 @@ export class NotifyService {
 
   warn(msg: string) {
     if (this.platform.isBrowser()) {
-      this.toastr.error(msg);
+      this.toastr.warning(msg);
     }
   }
 

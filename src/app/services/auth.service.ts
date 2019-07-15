@@ -100,7 +100,7 @@ export class AuthService {
   public resetPassword(email: string) {
     return this.afAuth.auth
       .sendPasswordResetEmail(email)
-      .then(() => this.notify.info('Password reset email sent'))
+      .then(() => this.notify.success('Password reset email sent'))
       .catch(error => this.notify.error(error));
   }
 

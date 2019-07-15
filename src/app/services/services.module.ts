@@ -14,10 +14,11 @@ import { PlatformService } from './platform.service';
     CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
-      extendedTimeOut: 500,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
       newestOnTop: true,
       preventDuplicates: true,
+      progressBar: true,
       positionClass: 'toast-bottom-center'
     })
   ],
