@@ -13,4 +13,21 @@
       font-size: 13px;
     }
   }
+
+  &[type='submit'] {
+    display: block;
+    width: 160px;
+    margin: 45px auto 0;
+    font-size: 14px;
+
+    &:disabled { opacity: .3; }
+
+    @media (min-width: $md-screen) {
+      margin-top: 65px;
+      padding: .75rem 2rem;
+      font-size: 15px;
+    }
+
+    @media (min-width: $lg-screen) { width: 220px; }
+  }
 }

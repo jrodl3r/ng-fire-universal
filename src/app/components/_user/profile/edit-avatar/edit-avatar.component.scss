@@ -1,0 +1,12 @@
+@import '../../../../styles/breakpoints';
+
+:host {
+  min-width: 180px;
+  padding: 2rem;
+  border-bottom: 1px solid rgba(0,0,0, .1);
+
+  @media (min-width: $lg-screen) {
+    border-bottom: 0;
+    border-left: 1px solid rgba(0,0,0, .1);
+  }
+}

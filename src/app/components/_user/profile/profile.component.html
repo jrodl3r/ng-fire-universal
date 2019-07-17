@@ -1,4 +1,58 @@
-<p class="d-flex align-items-center p-3 pl-md-5">
-  <span class="badge bg-primary mr-3">TODO</span>
-  Setup Profile Form
-</p>
+<app-edit-avatar></app-edit-avatar>
+<form
+  *ngIf="profile"
+  [formGroup]="profileForm">
+  <label for="fname">First Name *</label>
+  <input required
+    type="text"
+    id="fname"
+    name="fname"
+    class="form-control"
+    [class.mb-4]="!formErrors.fname"
+    formControlName="fname"
+    (keyup)="detectChange()">
+  <div
+    class="invalid-label text-danger p-2 pb-3 pl-1"
+    *ngIf="formErrors.fname">{{ formErrors.fname }}</div>
+  <label for="lname">Last Name *</label>
+  <input required
+    type="text"
+    id="lname"
+    name="lname"
+    class="form-control"
+    [class.mb-4]="!formErrors.lname"
+    formControlName="lname"
+    (keyup)="detectChange()">
+  <div
+    class="invalid-label text-danger p-2 pb-3 pl-1"
+    *ngIf="formErrors.lname">{{ formErrors.lname }}</div>
+  <label for="company">Company</label>
+  <input
+    type="text"
+    id="company"
+    name="company"
+    class="form-control"
+    [class.mb-4]="!formErrors.company"
+    formControlName="company"
+    (keyup)="detectChange()">
+  <div
+    class="invalid-label text-danger p-2 pb-3 pl-1"
+    *ngIf="formErrors.company">{{ formErrors.company }}</div>
+  <label for="website">Website</label>
+  <input
+    type="text"
+    id="website"
+    name="website"
+    class="form-control"
+    [class.mb-4]="!formErrors.website"
+    formControlName="website"
+    (keyup)="detectChange()">
+  <div
+    class="invalid-label text-danger p-2 pb-3 pl-1"
+    *ngIf="formErrors.website">{{ formErrors.website }}</div>
+  <button
+    type="submit"
+    class="btn btn-sm btn-secondary"
+    [disabled]="!isDirty || isUpdating || !profileForm.valid"
+    (click)="updateProfile()">Save</button>
+</form>

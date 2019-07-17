@@ -14,8 +14,8 @@ export class AdminComponent implements OnInit {
   tabs: ITab[] = [
     { label: 'Dashboard', routerLink: '/admin' },
     { label: 'Users', routerLink: '/admin/users' },
-    { label: 'Orders', routerLink: '/admin/orders' },
     { label: 'Products', routerLink: '/admin/products' },
+    { label: 'Orders', routerLink: '/admin/orders' }
   ];
 
   constructor() { }

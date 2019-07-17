@@ -39,8 +39,6 @@ export class NotifyService {
     console.error(err ? err : msg);
   }
 
-  log(msg: string) {
-    console.log(msg);
-  }
+  log(msg: string) { console.log(msg); }
 
 }

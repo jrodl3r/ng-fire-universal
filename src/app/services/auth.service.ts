@@ -97,13 +97,6 @@ export class AuthService {
       .catch(error => this.notify.error(error));
   }
 
-  public resetPassword(email: string) {
-    return this.afAuth.auth
-      .sendPasswordResetEmail(email)
-      .then(() => this.notify.success('Password reset email sent'))
-      .catch(error => this.notify.error(error));
-  }
-
   private updateUser(user: IUser) {
     const date = new Date();
     this.userDoc = this.db.doc<IUser>(`users/${user.uid}`);
@@ -130,15 +123,11 @@ export class AuthService {
       .catch(error => this.notify.error('Error saving user account', error));
   }
 
-  public logActivity() {
-    this.userDoc = this.db.doc<IUser>(`users/${this.getUserID()}`);
-    this.userDoc.ref.get()
-      .then(user => {
-        if (user.exists) {
-          this.userDoc.update({ lastActive: new Date() });
-        }
-      })
-      .catch(error => this.notify.error('Error logging user activity', error));
+  public resetPassword(email: string) {
+    return this.afAuth.auth
+      .sendPasswordResetEmail(email)
+      .then(() => this.notify.success('Password reset email sent'))
+      .catch(error => this.notify.error(error));
   }
 
   public signOut() {
@@ -160,24 +149,6 @@ export class AuthService {
 
   public getUserEmail(): string {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
-  }
-
-  /* ------------------------------------------------------------- */
-  /* NOTE: This is currently the only way to set the custom claim  */
-  /* for the root-admin - This will be removed after setting       */
-  /* custom user claims from the CP or CLI is enabled.             */
-  /* ------------------------------------------------------------- */
-  /* TODO: Remove this function after initializing the root-admin. */
-  /*       (Don't worry, this logic also exists in admin module)   */
-  /*       See: `/docs/Setup_Root_Admin.md`                        */
-  /* ------------------------------------------------------------- */
-  public setAdmin(state) {
-    const call = this.afFunctions.httpsCallable(state ? 'addAdmin' : 'removeAdmin');
-    const email = this.getUserEmail();
-    call({ email }).subscribe(
-      status => this.notify.info(`${status.message} (You must sign-out before this takes effect)`),
-      error => this.notify.error(`Error ${state ? 'adding' : 'removing'} admin`, error)
-    );
   }
 
 }

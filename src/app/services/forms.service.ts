@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormsService {
+  urlPattern = '(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
 
   validate(data?: any, form?: any, errors?: any, msgs?: any, fields?: any) {
     if (!form) { return; }
@@ -23,34 +23,6 @@ export class FormsService {
           }
         }
       }
-    }
-  }
-
-  emailsMatch(control: AbstractControl) {
-    if (control && (control.value !== null || control.value !== undefined)) {
-      const confirmEmail = control.value;
-      const newEmailControl = control.root.get('newEmail');
-      if (newEmailControl) {
-        const newEmail = newEmailControl.value;
-        if (newEmail !== confirmEmail) {
-          return { matchingEmail: true };
-        }
-      }
-      return null;
-    }
-  }
-
-  passwordsMatch(control: AbstractControl) {
-    if (control && (control.value !== null || control.value !== undefined)) {
-      const confirmPassword = control.value;
-      const newPasswordControl = control.root.get('newPassword');
-      if (newPasswordControl) {
-        const newPassword = newPasswordControl.value;
-        if (newPassword !== confirmPassword && confirmPassword.length > 5) {
-          return { matchingPassword: true };
-        }
-      }
-      return null;
     }
   }
 
