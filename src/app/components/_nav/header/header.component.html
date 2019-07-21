@@ -22,7 +22,8 @@
     (click)="nav.closeMenu()">
     <ul
       class="menu logged-in"
-      [class.expanded]="nav.isMenuOpen">
+      [class.expanded]="nav.isMenuOpen"
+      *ngIf="user.active">
       <li class="menu-item">
         <a
           class="menu-link store-link"
@@ -50,15 +51,15 @@
           class="menu-link dropdown-toggle"
           (click)="nav.toggleMenu($event)"
           [class.expanded]="nav.isMenuOpen">
-          <span class="avatar">
+          <div class="avatar">
             <img
               [class.inactive]="!user.active"
-              [class.disabled]="!user.photoURL"
-              [src]="user.photoURL || ''">
+              [src]="user.photoURL"
+              *ngIf="user.active && user.photoURL">
             <i
               class="fas fa-user"
               *ngIf="user.active && !user.photoURL"></i>
-          </span>
+          </div>
         </div>
         <div
           class="dropdown-menu"
@@ -66,7 +67,16 @@
           <a
             class="dropdown-item"
             routerLink="/me"
-            routerLinkActive="active">My Account</a>
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">My Account</a>
+          <a
+            class="dropdown-item hide-my"
+            routerLink="/me/profile"
+            routerLinkActive="active">My Profile</a>
+          <a
+            class="dropdown-item"
+            routerLink="/me/orders"
+            routerLinkActive="active">Orders</a>
           <a
             class="dropdown-item"
             routerLink="/admin"
@@ -82,13 +92,13 @@
     </ul>
   </div>
 
-  <!-- Logged-out / initial render (server-side) -->
+  <!-- Logged-out / SSR -->
   <ng-template #isStatic>
     <ul
       class="menu"
       [class.expanded]="nav.isMenuOpen"
       (click)="nav.closeMenu()"
-      *ngIf="!(auth.isLoading | async)">
+      *ngIf="!auth.isLoggedIn()">
       <li class="menu-item">
         <a
           class="menu-link store-link"

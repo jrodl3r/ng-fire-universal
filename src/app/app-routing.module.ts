@@ -19,6 +19,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./components/_admin/admin.module').then(m => m.AdminModule),
+    // TODO: Uncomment after initializing root admin (more info: docs/GETTING_STARTED.md)
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: isAdmin }
   },

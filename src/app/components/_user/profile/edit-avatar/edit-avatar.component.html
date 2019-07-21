@@ -1,4 +1,27 @@
-<p class="d-flex align-items-center">
-    <span class="badge bg-primary mr-3">TODO</span>
-    Add Edit + Upload Avatar
-  </p>
+<h3>My Avatar</h3>
+<div class="inner">
+  <div class="avatar">
+    <img
+      alt="My Avatar"
+      [src]="user.avatar"
+      *ngIf="user.avatar">
+    <i
+      class="fas fa-user"
+      *ngIf="user.profile && !user.avatar"></i>
+  </div>
+  <button
+    type="button"
+    [disabled]="user.isUpdating || !platform.isOnline()"
+    (click)="trigger()"
+    class="btn btn-sm btn-primary">
+    <i class="fa fa-upload mr-1"></i>
+    Upload Avatar
+  </button>
+</div>
+<input
+  type="file"
+  class="d-none"
+  id="upload"
+  name="upload"
+  accept=".png,.jpg"
+  (change)="upload($event)">

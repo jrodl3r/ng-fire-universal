@@ -103,6 +103,7 @@ nav {
   opacity: 0;
   overflow: hidden;
   transition: height $default-anim, opacity .25s .15s ease-in-out;
+  animation: fade-in .25s forwards ease-in;
 
   &.expanded {
     display: flex;
@@ -383,12 +384,13 @@ nav {
   img {
     height: 100%;
     width: 100%;
+    border: 1px solid rgba(0,0,0, 0);
     border-radius: 18px;
-    transition: $default-anim;
     overflow: hidden;
+    transition: $default-anim;
+    animation: fade-in .25s forwards ease-in;
 
     &.inactive { opacity: 0; }
-    &.disabled { display: none; }
   }
 
   i {
@@ -407,27 +409,18 @@ nav {
   top: 0;
   right: 0;
   left: 0;
+  height: 34px;
   width: 100%;
   padding: 5px 15px;
   color: #FFF;
   text-align: center;
   background-color: $danger-color;
-  animation: expand .15s forwards ease-in;
-  cursor: default;
+  animation: fade-in .15s forwards ease-in;
   overflow: hidden;
+  cursor: default;
+}
 
-  @keyframes expand {
-    from { height: 0; }
-    to { height: 34px; }
-  }
-
-  span {
-    opacity: 0;
-    animation: fade-in .25s .1s forwards ease-in;
-
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../services/auth.service';
 import { FormsService } from '../../../services/forms.service';
+import { PlatformService } from '../../../services/platform.service';
 import { UserService } from '../../../services/user.service';
 
 import { IProfile } from '../../../models/user';
@@ -45,7 +46,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private user: UserService,
     private forms: FormsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public platform: PlatformService
   ) { }
 
   ngOnInit() {
@@ -61,16 +63,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   buildForm() {
     this.profileForm = this.fb.group({
-      company: [this.profile.company, [Validators.maxLength(100)]],
-      fname: [this.profile.fname, [
+      company: [this.profile.company || '', [Validators.maxLength(100)]],
+      fname: [this.profile.fname || '', [
         Validators.required,
         Validators.maxLength(60)
       ]],
-      lname: [this.profile.lname, [
+      lname: [this.profile.lname || '', [
         Validators.required,
         Validators.maxLength(60)
       ]],
-      website: [this.profile.website, [
+      website: [this.profile.website || '', [
         Validators.maxLength(100),
         Validators.pattern(this.forms.urlPattern)
       ]]

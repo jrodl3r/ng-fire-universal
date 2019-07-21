@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { fadeAnimation } from '../../app.animation';
 
@@ -10,7 +10,7 @@ import { ITab } from '../../models/tab';
   styleUrls: ['./admin.component.scss'],
   animations: [fadeAnimation]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   tabs: ITab[] = [
     { label: 'Dashboard', routerLink: '/admin' },
     { label: 'Users', routerLink: '/admin/users' },
@@ -19,7 +19,5 @@ export class AdminComponent implements OnInit {
   ];
 
   constructor() { }
-
-  ngOnInit() { }
 
 }

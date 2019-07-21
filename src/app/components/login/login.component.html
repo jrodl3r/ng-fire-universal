@@ -50,7 +50,7 @@
   <ng-template #isLoggedIn>
     <h5
       class="d-flex justify-content-center text-success mt-4"
-      *ngIf="!(auth.isLoading | async)">
+      *ngIf="auth.isLoggedIn() && !(auth.isLoading | async)">
       You're currently logged-in
       <i class="far fa-smile ml-2 mt-auto mb-auto"></i>
     </h5>

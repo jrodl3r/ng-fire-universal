@@ -2,7 +2,6 @@ import { Injectable, Inject, forwardRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth } from 'firebase/app';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { switchMap, shareReplay, startWith, tap } from 'rxjs/operators';
@@ -26,8 +25,7 @@ export class AuthService {
     private router: Router,
     private zone: NgZone,
     private db: AngularFirestore,
-    private afAuth: AngularFireAuth,
-    private afFunctions: AngularFireFunctions
+    private afAuth: AngularFireAuth
   ) {
     this.isLoading.next(true);
     this.user = platform.isBrowser() && afAuth ? afAuth.authState.pipe(
@@ -82,18 +80,22 @@ export class AuthService {
   }
 
   public emailLogin(email: string, password: string) {
+    this.isLoading.next(true);
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
       .then(() => this.router.navigate(['/me']))
+      .finally(() => this.isLoading.next(false))
       .catch(error => this.notify.error(error));
   }
 
   public emailSignUp(email: string, password: string) {
+    this.isLoading.next(true);
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
       .then(() => this.router.navigate(['/me']))
+      .finally(() => this.isLoading.next(false))
       .catch(error => this.notify.error(error));
   }
 
@@ -113,12 +115,11 @@ export class AuthService {
             displayName: user.displayName || '',
             photoURL: user.photoURL || ''
           };
-          return this.userDoc.set(data);
+          this.userDoc.set(data);
+        } else {
+          this.userDoc.update({ lastLogin: date });
         }
-        this.userDoc.update({
-          lastLogin: date,
-          photoURL: user.photoURL
-        });
+        // TODO: Log activity: [].push('logged-in')
       })
       .catch(error => this.notify.error('Error saving user account', error));
   }
@@ -149,6 +150,10 @@ export class AuthService {
 
   public getUserEmail(): string {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
+  }
+
+  public getUserPhoto(): string {
+    return this.isLoggedIn() ? this.afAuth.auth.currentUser.photoURL : '';
   }
 
 }

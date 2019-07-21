@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { fadeAnimation } from '../../app.animation';
+
+import { AuthService } from '../../services/auth.service';
 
 import { ITab } from '../../models/tab';
 
@@ -10,15 +12,13 @@ import { ITab } from '../../models/tab';
   styleUrls: ['./user.component.scss'],
   animations: [fadeAnimation]
 })
-export class UserComponent implements OnInit {
+export class UserComponent {
   tabs: ITab[] = [
     { label: 'Home', routerLink: '/me' },
     { label: 'My Profile', routerLink: '/me/profile' },
     { label: 'My Orders', routerLink: '/me/orders' }
   ];
 
-  constructor() { }
-
-  ngOnInit() { }
+  constructor(public auth: AuthService) { }
 
 }

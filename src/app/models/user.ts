@@ -1,5 +1,6 @@
 export interface IUser {
   active?: boolean;
+  activity?: IUserAction[];
   created?: Date;
   displayName: string;
   email: string;
@@ -15,4 +16,10 @@ export interface IProfile {
   fname: string;
   lname: string;
   website?: string;
+}
+
+export interface IUserAction {
+  meta: any;
+  type: string;
+  timestamp: Date;
 }

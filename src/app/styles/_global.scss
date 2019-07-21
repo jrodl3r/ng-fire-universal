@@ -59,7 +59,7 @@ app-root {
       }
     }
 
-    hr {
+    & > hr {
       display: none;
 
       @media (min-width: $md-screen) {

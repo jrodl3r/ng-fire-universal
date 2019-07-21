@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
+
+import { UserService } from 'src/app/services/user.service';
+import { PlatformService } from 'src/app/services/platform.service';
+
+import { IProfile } from 'src/app/models/user';
+
+interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-edit-avatar',
   templateUrl: './edit-avatar.component.html',
   styleUrls: ['./edit-avatar.component.scss']
 })
-export class EditAvatarComponent implements OnInit {
+export class EditAvatarComponent {
+  @Input() profile: IProfile;
+  @Input() avatar: string;
 
-  constructor() { }
+  constructor(
+    public user: UserService,
+    public platform: PlatformService,
+    private elementRef: ElementRef
+  ) { }
 
-  ngOnInit() {
+  upload(event: HTMLInputEvent) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const fileType = file.type.split('/')[0];
+      const imageType = file.type.split('/')[1];
+      this.user.updateAvatar(file, fileType, imageType);
+    }
   }
+
+  trigger() { this.elementRef.nativeElement.querySelector('#upload').click(); }
 
 }

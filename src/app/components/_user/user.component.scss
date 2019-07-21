@@ -1,0 +1,19 @@
+@import '../../styles/breakpoints';
+@import '../../styles/colors';
+
+h2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  span {
+    display: none;
+    margin-right: 15px;
+    margin-left: auto;
+    color: $grey-color;
+    font-size: medium;
+    font-weight: normal;
+
+    @media (min-width: $md-screen) { display: inline-block; }
+  }
+}

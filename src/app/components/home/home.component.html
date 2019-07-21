@@ -3,7 +3,9 @@
   <hr>
   <h3 class="font-weight-bold mb-3">Some Firestore Docs</h3>
   <ul>
-    <li class="text" *ngFor="let item of items | async">
+    <li
+      class="grey-text"
+      *ngFor="let item of items | async">
       {{item.name}}
     </li>
   </ul>
