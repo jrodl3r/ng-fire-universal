@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, forwardRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isUpdating = false;
 
   constructor(
-    private auth: AuthService,
+    @Inject(forwardRef(() => AuthService)) private auth: AuthService,
     private user: UserService,
     private forms: FormsService,
     private fb: FormBuilder,
@@ -51,10 +51,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.userSub = this.auth.user.subscribe(user => {
+    this.userSub = this.auth.user ? this.auth.user.subscribe(user => {
       this.profile = user.profile || {} as IProfile;
       this.buildForm();
-    });
+    }) : null;
   }
 
   ngOnDestroy() {

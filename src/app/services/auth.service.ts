@@ -152,6 +152,10 @@ export class AuthService {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
   }
 
+  public getUserName(): string {
+    return this.isLoggedIn() ? this.afAuth.auth.currentUser.displayName : '';
+  }
+
   public getUserPhoto(): string {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.photoURL : '';
   }

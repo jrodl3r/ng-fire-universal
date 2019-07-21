@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, forwardRef } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, tap } from 'rxjs/operators';
@@ -20,20 +20,22 @@ export class UserService {
   isUpdating = false;
 
   constructor(
-    private auth: AuthService,
+    @Inject(forwardRef(() => AuthService)) private auth: AuthService,
     private notify: NotifyService,
-    private afs: AngularFirestore,
+    private db: AngularFirestore,
     private storage: AngularFireStorage
   ) {
-    this.auth.user.pipe(tap(user => {
-      this.avatar = user.photoURL;
-      this.profile = user.profile;
-    })).subscribe();
+    if (this.auth.user) {
+      this.auth.user.pipe(tap(user => {
+        this.avatar = user.photoURL;
+        this.profile = user.profile;
+      })).subscribe();
+    }
   }
 
   public updateProfile(profile: IProfile) {
     this.isUpdating = true;
-    this.userDoc = this.userDoc || this.afs.doc(`users/${this.auth.getUserID()}`);
+    this.userDoc = this.userDoc || this.db.doc(`users/${this.auth.getUserID()}`);
     return this.userDoc.update({ profile })
       .then(() => this.notify.success('Successfully updated your profile'))
       .finally(() => this.isUpdating = false)
@@ -57,7 +59,7 @@ export class UserService {
     this.uploadTask.snapshotChanges().pipe(
       finalize(() => {
         this.storageRef.getDownloadURL().subscribe(photoURL => {
-          this.userDoc = this.userDoc || this.afs.doc(`users/${this.auth.getUserID()}`);
+          this.userDoc = this.userDoc || this.db.doc(`users/${this.auth.getUserID()}`);
           return this.userDoc.update({ photoURL })
             .then(() => this.notify.success('Successfully updated your avatar'))
             .finally(() => this.isUpdating = false)

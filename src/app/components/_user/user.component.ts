@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 import { fadeAnimation } from '../../app.animation';
 
-import { AuthService } from '../../services/auth.service';
-
 import { ITab } from '../../models/tab';
 
 @Component({
@@ -19,6 +17,6 @@ export class UserComponent {
     { label: 'My Orders', routerLink: '/me/orders' }
   ];
 
-  constructor(public auth: AuthService) { }
+  constructor() { }
 
 }

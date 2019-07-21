@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, Inject, forwardRef } from '@angular/core';
 
 import { UserService } from 'src/app/services/user.service';
 import { PlatformService } from 'src/app/services/platform.service';
@@ -19,8 +19,8 @@ export class EditAvatarComponent {
   @Input() avatar: string;
 
   constructor(
-    public user: UserService,
-    public platform: PlatformService,
+    @Inject(forwardRef(() => UserService)) public user: UserService,
+    @Inject(forwardRef(() => PlatformService)) public platform: PlatformService,
     private elementRef: ElementRef
   ) { }
 
