@@ -1,5 +1,5 @@
 <div class="section">
-  <div *ngIf="!auth.isLoggedIn() && !(auth.isLoading | async); else isLoggedIn">
+  <div *ngIf="!auth.isLoggedIn()">
     <h2>Login
       <button
         class="btn btn-sm btn-outline-dark"
@@ -45,14 +45,4 @@
       </p>
     </form>
   </div>
-
-  <!-- Logged-In -->
-  <ng-template #isLoggedIn>
-    <h5
-      class="d-flex justify-content-center text-success mt-4"
-      *ngIf="auth.isLoggedIn() && !(auth.isLoading | async)">
-      You're currently logged-in
-      <i class="far fa-smile ml-2 mt-auto mb-auto"></i>
-    </h5>
-  </ng-template>
 </div>

@@ -1,0 +1,10 @@
+@import '../../../styles/breakpoints';
+
+.inner {
+  padding-top: 2.5rem;
+
+  @media (min-width: $md-screen) {
+    margin-left: 2.5rem;
+    padding-top: 3rem;
+  }
+}

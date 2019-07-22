@@ -135,6 +135,7 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => {
       if (this.platform.isBrowser) {
         sessionStorage.clear();
+        this.router.navigate(['/login']);
       }
     })
     .catch(error => this.notify.error('Error signing-out', error));
@@ -152,12 +153,15 @@ export class AuthService {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
   }
 
-  public getUserName(): string {
-    return this.isLoggedIn() ? this.afAuth.auth.currentUser.displayName : '';
-  }
-
   public getUserPhoto(): string {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.photoURL : '';
+  }
+
+  public getUserName(part: string): string {
+    return this.isLoggedIn() && this.afAuth.auth.currentUser.displayName
+      ? part === 'first'
+        ? this.afAuth.auth.currentUser.displayName.replace(/ .*/, '')
+        : this.afAuth.auth.currentUser.displayName : '';
   }
 
 }

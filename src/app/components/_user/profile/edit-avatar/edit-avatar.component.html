@@ -1,21 +1,28 @@
 <h3>My Avatar</h3>
 <div class="inner">
-  <div class="avatar">
-    <img
-      alt="My Avatar"
-      [src]="user.avatar"
-      *ngIf="user.avatar">
+  <div
+    class="avatar"
+    (click)="trigger()">
+    <div
+      class="image"
+      [style.backgroundImage]="'url(' + user.avatar + ')'"
+      *ngIf="user.avatar && !user.isUploading"></div>
     <i
       class="fas fa-user"
-      *ngIf="user.profile && !user.avatar"></i>
+      *ngIf="user.profile && !user.avatar && !user.isUploading"></i>
+    <div
+      class="loading-spinner"
+      *ngIf="user.isUploading">
+      <i class="fas fa-sync-alt"></i>
+    </div>
   </div>
   <button
     type="button"
-    [disabled]="user.isUpdating || !platform.isOnline()"
+    [disabled]="user.isUpdating || user.isUploading || !platform.isOnline()"
     (click)="trigger()"
     class="btn btn-sm btn-primary">
-    <i class="fa fa-upload mr-1"></i>
-    Upload Avatar
+    <i class="fa fa-upload mr-1 mr-md-2"></i>
+    Change Avatar
   </button>
 </div>
 <input

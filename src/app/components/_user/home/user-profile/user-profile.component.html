@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="avatar" *ngIf="!user.isLoading">
+    <div
+      class="image"
+      [style.backgroundImage]="'url(' + user.avatar + ')'"
+      *ngIf="user.avatar"></div>
+    <i
+      class="fas fa-user"
+      *ngIf="!user.avatar"></i>
+  </div>
+  <div class="info" *ngIf="!user.isLoading">
+    <div
+      class="title"
+      *ngIf="user.profile?.fname || user.fname">
+      <i class="fas fa-user mr-2"></i>
+      {{ user.profile?.fname && user.profile?.lname
+        ? user.profile?.fname + ' ' + user.profile?.lname
+        : user.fname }}
+    </div>
+    <div
+      class="title"
+      *ngIf="user.profile?.company">
+      <span>
+        <i class="fas fa-building mr-2"></i>
+        {{ user.profile.company }}
+      </span>
+    </div>
+    <div *ngIf="user.profile?.website">
+      <i class="fas fa-globe mr-2"></i>
+      {{ user.profile.website }}
+    </div>
+    <div>
+      <i class="fa fa-envelope mr-2"></i>
+      {{ user.email }}
+    </div>
+    <a
+      routerLink="/me/profile"
+      *ngIf="user.profile && !user.profile?.fname || !user.profile?.company || !user.profile?.website">
+        <i class="fas fa-pencil-alt mr-2"></i>
+        <span class="ml-1">Edit Profile</span>
+    </a>
+  </div>
+</div>

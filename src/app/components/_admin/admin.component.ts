@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 
-import { fadeAnimation } from '../../app.animation';
-
 import { ITab } from '../../models/tab';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
-  animations: [fadeAnimation]
+  styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
   tabs: ITab[] = [
@@ -17,7 +14,4 @@ export class AdminComponent {
     { label: 'Products', routerLink: '/admin/products' },
     { label: 'Orders', routerLink: '/admin/orders' }
   ];
-
-  constructor() { }
-
 }

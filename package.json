@@ -1,6 +1,6 @@
 {
   "name": "ng-fire-universal",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "repository": "https://github.com/jrodl3r/ng-fire-universal",
   "author": "John Rodler",
   "license": "MIT",
@@ -21,7 +21,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "gcloud app deploy",
-    "deploy:functions": "firebase deploy --only functions"
+    "deploy:functions": "firebase deploy --only functions",
+    "init:functions": "cd functions && npm i && cd .. && npm run deploy:functions"
   },
   "dependencies": {
     "@angular/animations": "~8.0.1",

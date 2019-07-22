@@ -337,6 +337,8 @@ nav {
     color: $grey-color;
     background: none;
     opacity: .75;
+
+    &:not(.active) { cursor: pointer; }
   }
 
   &.active, &:focus, &:active { background: none !important; }
@@ -381,11 +383,12 @@ nav {
   overflow: hidden;
   transition: $default-anim;
 
-  img {
+  .image {
     height: 100%;
     width: 100%;
-    border: 1px solid rgba(0,0,0, 0);
-    border-radius: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     overflow: hidden;
     transition: $default-anim;
     animation: fade-in .25s forwards ease-in;

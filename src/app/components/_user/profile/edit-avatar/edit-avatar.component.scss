@@ -9,7 +9,7 @@
   padding: 1rem 0;
 
   @media (min-width: $lg-screen) {
-    padding: 2rem 0 2rem 2rem;
+    padding: 2rem 1rem 2rem 2rem;
     border-left: 1px solid rgba(0,0,0, .1);
   }
 }
@@ -17,6 +17,11 @@
 .inner {
   display: flex;
   flex-direction: row;
+
+  @media (min-width: $lg-screen) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .avatar {
@@ -30,10 +35,33 @@
   background: $grey-color;
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
 
-  img { width: 100%; }
+  @media (min-width: 360px) { margin-left: 15px; }
 
-  i {
+  @media (min-width: $sm-screen) {
+    height: 120px;
+    min-height: 120px;
+    width: 120px;
+    min-width: 120px;
+    margin-right: 0;
+  }
+
+  @media (min-width: $lg-screen) {
+    height: 150px;
+    width: 150px;
+    margin-left: 0;
+  }
+
+  .image {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  i.fa-user {
     position: absolute;
     top: 16px;
     left: 50%;
@@ -41,44 +69,35 @@
     font-size: 85px;
     opacity: .85;
     transform: translateX(-50%);
-  }
-}
 
-button { margin: auto 15px; }
+    @media (min-width: $sm-screen) {
+      top: 20px;
+      font-size: 102px;
+    }
 
-@media (min-width: $sm-screen) {
-  .inner { padding: 1rem 0; }
-  button { margin: auto; }
-
-  .avatar {
-    height: 120px;
-    min-height: 120px;
-    width: 120px;
-    min-width: 120px;
-    margin-right: 0;
-
-    i {
-      top: 22px;
-      font-size: 100px;
+    @media (min-width: $lg-screen) {
+      top: 18px;
+      font-size: 135px;
     }
   }
 }
 
-@media (min-width: $lg-screen) {
-  .inner {
-    flex-direction: column;
-    align-items: center;
+button {
+  margin: auto 15px;
+
+  &.btn.btn-sm i { font-size: .8rem; }
+
+  @media (min-width: 360px) { margin-left: 35px; }
+  @media (min-width: $md-screen) {
+    &.btn.btn-sm i { font-size: .9rem; }
   }
+  @media (min-width: $lg-screen) { margin: 35px auto 0; }
+}
 
-  .avatar {
-    height: 150px;
-    width: 150px;
+.loading-spinner {
+  height: 100%;
+  width: 100%;
+  font-size: 30px;
 
-    i {
-      top: 15px;
-      font-size: 140px;
-    }
-  }
-
-  button { margin-top: 30px; }
+  i { color: rgba(255,255,255, .5); }
 }

@@ -1,16 +1,11 @@
-<p class="p-3 pl-md-5">
-  Welcome back, {{ auth.getUserName() }}.
-  Your email is <strong>{{ auth.getUserEmail() }}</strong>.
-</p>
-<p class="d-flex align-items-center p-3 pl-md-5">
-  <span class="badge bg-primary mr-3">TODO</span>
-  Show Cart Summary
-</p>
-<p class="d-flex align-items-center pl-3 pb-3 pl-md-5">
-  <span class="badge bg-primary mr-3">TODO</span>
-  Show Recent Order Summary
-</p>
-<p class="d-flex align-items-center pl-3 pb-3 pl-md-5">
-  <span class="badge bg-primary mr-3">TODO</span>
-  Solicit Remaining User Info
-</p>
+<app-user-profile></app-user-profile>
+<div class="inner">
+  <h3>Welcome<span *ngIf="user.fname">, {{ user.fname }}</span></h3>
+  <app-cart-summary></app-cart-summary>
+  <app-recent-orders></app-recent-orders>
+  <p class="d-flex align-items-center">
+    <span class="badge bg-secondary mr-3">TODO</span>
+    Solicit User Info
+  </p>
+</div>
+

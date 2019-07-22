@@ -37,14 +37,13 @@ app-root {
       flex-direction: column;
       width: 100%;
       margin-top: 1rem;
-      overflow: hidden;
 
-      .outlet {
+      & > *:not(router-outlet):not(app-tabs) {
         display: flex;
         flex-direction: column;
-        flex: 1;
         padding-top: 5rem;
         padding-bottom: 3rem;
+        flex: 1;
       }
 
       @media (min-width: $md-screen) {
@@ -52,7 +51,7 @@ app-root {
         margin-top: 0;
         padding-bottom: 5rem;
 
-        .outlet {
+        & > *:not(router-outlet):not(app-tabs) {
           padding-top: 2rem;
           padding-bottom: 4rem;
         }
@@ -70,7 +69,10 @@ app-root {
   }
 }
 
-hr { margin-bottom: 2rem; }
+hr {
+  width: 100%;
+  margin-bottom: 2rem;
+}
 
 ul {
   margin: 0;

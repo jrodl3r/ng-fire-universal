@@ -52,10 +52,10 @@
           (click)="nav.toggleMenu($event)"
           [class.expanded]="nav.isMenuOpen">
           <div class="avatar">
-            <img
+            <div class="image"
               [class.inactive]="!user.active"
-              [src]="user.photoURL"
-              *ngIf="user.active && user.photoURL">
+              [style.backgroundImage]="'url(' + user.photoURL + ')'"
+              *ngIf="user.active && user.photoURL"></div>
             <i
               class="fas fa-user"
               *ngIf="user.active && !user.photoURL"></i>
@@ -83,10 +83,9 @@
             routerLinkActive="active"
             *ngIf="auth.isAdmin">Admin</a>
           <div class="dropdown-divider"></div>
-          <a
-            href="#"
+          <div
             class="dropdown-item sign-out"
-            (click)="signOut()">Sign Out</a>
+            (click)="signOut()">Sign Out</div>
         </div>
       </li>
     </ul>
