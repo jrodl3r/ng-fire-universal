@@ -34,33 +34,34 @@ export class LoginComponent implements OnInit {
 
   constructor(
     @Inject(forwardRef(() => AuthService)) public auth: AuthService,
+    @Inject(forwardRef(() => FormBuilder)) private fb: FormBuilder,
     private forms: FormsService,
-    private notify: NotifyService,
-    private fb: FormBuilder
+    private notify: NotifyService
   ) { }
 
   ngOnInit() {
+    if (this.auth) {
+      this.auth.redirectAfterSignIn();
+    }
     this.buildForm();
   }
 
   buildForm() {
-    if (this.fb) {
-      this.loginForm = this.fb.group({
-        email: ['', [
-          Validators.required,
-          Validators.email,
-          Validators.maxLength(100)
-        ]],
-        password: ['', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(25)
-        ]]
-      });
-      this.loginForm.valueChanges.subscribe((data) =>
-        this.forms.validate(data, this.loginForm, this.formErrors, this.validationMessages, ['email', 'password'])
-      );
-    }
+    this.loginForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(100)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(25)
+      ]]
+    });
+    this.loginForm.valueChanges.subscribe((data) =>
+      this.forms.validate(data, this.loginForm, this.formErrors, this.validationMessages, ['email', 'password'])
+    );
   }
 
   login() {

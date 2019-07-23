@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Inject, forwardRef } from '@angular/core';
+import { Component, Inject, forwardRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { AuthService } from '../../../services/auth.service';
 import { FormsService } from '../../../services/forms.service';
@@ -17,8 +17,7 @@ type FormErrors = { [u in UserFields]: string };
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, OnDestroy {
-  userSub: Subscription;
+export class ProfileComponent {
   profile: IProfile;
   profileForm: FormGroup;
   formErrors: FormErrors = { company: '', fname: '', lname: '', website: '' };
@@ -48,17 +47,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private forms: FormsService,
     private fb: FormBuilder,
     public platform: PlatformService
-  ) { }
-
-  ngOnInit() {
-    this.userSub = this.auth.user ? this.auth.user.subscribe(user => {
-      this.profile = user.profile || {} as IProfile;
-      this.buildForm();
-    }) : null;
-  }
-
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
+  ) {
+    if (this.auth.user) {
+      this.auth.user.pipe(
+        tap(data => {
+          if (data) {
+            this.profile = data.profile || {} as IProfile;
+            this.buildForm();
+          }
+        })
+      ).subscribe();
+    }
   }
 
   buildForm() {

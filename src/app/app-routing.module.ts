@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AngularFireAuthGuard, customClaims, canActivate, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, customClaims } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,11 +9,11 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { ErrorComponent } from './components/error/error.component';
 
-const isUser = () => pipe(map(user => !!user ? true : ['/']));
+const isLoggedOut = () => pipe(map(user => !!user ? ['me'] : true));
+const isLoggedIn = () => pipe(map(user => !!user ? true : ['/']));
 const isAdmin = () => pipe(customClaims, map(claims =>
   claims.admin === true ? claims.admin : ['/']
 ));
-const redirectLoggedIn = redirectLoggedInTo(['me']);
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,13 +31,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    ...canActivate(redirectLoggedIn)
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: isLoggedOut }
   },
   {
     path: 'me',
     loadChildren: () => import('./components/_user/user.module').then(m => m.UserModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: isUser }
+    data: { authGuardPipe: isLoggedIn }
   },
   {
     path: 'store',
@@ -46,7 +47,8 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
-    ...canActivate(redirectLoggedIn)
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: isLoggedOut }
   },
   { path: '**', component: ErrorComponent }
 ];

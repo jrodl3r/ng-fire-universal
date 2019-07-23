@@ -153,15 +153,4 @@ export class AuthService {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
   }
 
-  public getUserPhoto(): string {
-    return this.isLoggedIn() ? this.afAuth.auth.currentUser.photoURL : '';
-  }
-
-  public getUserName(part: string): string {
-    return this.isLoggedIn() && this.afAuth.auth.currentUser.displayName
-      ? part === 'first'
-        ? this.afAuth.auth.currentUser.displayName.replace(/ .*/, '')
-        : this.afAuth.auth.currentUser.displayName : '';
-  }
-
 }

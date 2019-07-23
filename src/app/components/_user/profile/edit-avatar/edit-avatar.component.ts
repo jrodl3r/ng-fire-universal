@@ -1,9 +1,7 @@
-import { Component, Input, ElementRef, Inject, forwardRef } from '@angular/core';
+import { Component, ElementRef, Inject, forwardRef } from '@angular/core';
 
 import { UserService } from 'src/app/services/user.service';
 import { PlatformService } from 'src/app/services/platform.service';
-
-import { IProfile } from 'src/app/models/user';
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -15,8 +13,6 @@ interface HTMLInputEvent extends Event {
   styleUrls: ['./edit-avatar.component.scss']
 })
 export class EditAvatarComponent {
-  @Input() profile: IProfile;
-  @Input() avatar: string;
 
   constructor(
     @Inject(forwardRef(() => UserService)) public user: UserService,

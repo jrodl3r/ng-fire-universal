@@ -33,32 +33,33 @@ export class SignupComponent implements OnInit {
 
   constructor(
     @Inject(forwardRef(() => AuthService)) public auth: AuthService,
-    private forms: FormsService,
-    private fb: FormBuilder
+    @Inject(forwardRef(() => FormBuilder)) private fb: FormBuilder,
+    private forms: FormsService
   ) { }
 
   ngOnInit() {
+    if (this.auth) {
+      this.auth.redirectAfterSignIn();
+    }
     this.buildForm();
   }
 
   buildForm() {
-    if (this.fb) {
-      this.signupForm = this.fb.group({
-        email: ['', [
-          Validators.required,
-          Validators.email,
-          Validators.maxLength(100)
-        ]],
-        password: ['', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(25)
-        ]]
-      });
-      this.signupForm.valueChanges.subscribe((data) =>
-        this.forms.validate(data, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password'])
-      );
-    }
+    this.signupForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(100)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(25)
+      ]]
+    });
+    this.signupForm.valueChanges.subscribe((data) =>
+      this.forms.validate(data, this.signupForm, this.formErrors, this.validationMessages, ['email', 'password'])
+    );
   }
 
   signup() {

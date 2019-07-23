@@ -6,10 +6,10 @@
     <div
       class="image"
       [style.backgroundImage]="'url(' + user.avatar + ')'"
-      *ngIf="user.avatar && !user.isUploading"></div>
+      *ngIf="user.avatar && !user.isLoading && !user.isUploading"></div>
     <i
       class="fas fa-user"
-      *ngIf="user.profile && !user.avatar && !user.isUploading"></i>
+      *ngIf="!user.avatar && !user.isLoading && !user.isUploading"></i>
     <div
       class="loading-spinner"
       *ngIf="user.isUploading">

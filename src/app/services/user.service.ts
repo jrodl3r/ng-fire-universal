@@ -1,7 +1,6 @@
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { finalize, tap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
@@ -28,23 +27,24 @@ export class UserService {
     @Inject(forwardRef(() => AuthService)) private auth: AuthService,
     private notify: NotifyService,
     private db: AngularFirestore,
-    private afAuth: AngularFireAuth,
     private storage: AngularFireStorage
   ) {
-    this.afAuth.auth.onIdTokenChanged(() => this.clearProfile());
+    this.profile = {} as IProfile;
+    this.isLoading = true;
     if (auth.user) {
-      this.isLoading = true;
       auth.user.pipe(tap(user => {
         if (user && user.active) {
           this.avatar = user.photoURL;
-          this.profile = user.profile ? user.profile : null;
-          this.fname = user.profile && user.profile.fname
-            ? user.profile.fname
-            : auth.getUserName('first');
-          this.email = auth.getUserEmail();
+          this.email = user.email;
+          this.fname = user.profile
+            ? user.profile.fname || ''
+            : user.displayName ? user.displayName.replace(/ .*/, '') : '';
+          this.profile = user.profile || this.profile;
           this.isLoading = false;
         }
       })).subscribe();
+    } else {
+      this.clearProfile();
     }
   }
 
@@ -55,6 +55,11 @@ export class UserService {
       .then(() => this.notify.success('Successfully updated your profile'))
       .finally(() => this.isUpdating = false)
       .catch(error => this.notify.error(error));
+  }
+
+  private clearProfile() {
+    this.avatar = this.email = this.fname = '';
+    this.profile = null;
   }
 
   public updateAvatar(file: File, fileType: string, imageType: string) {
@@ -82,11 +87,6 @@ export class UserService {
         });
       })
     ).subscribe();
-  }
-
-  private clearProfile() {
-    this.avatar = this.email = this.fname = '';
-    this.profile = null;
   }
 
   // public logActivity() {
