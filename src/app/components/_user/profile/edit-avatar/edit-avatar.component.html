@@ -2,6 +2,7 @@
 <div class="inner">
   <div
     class="avatar"
+    [class.default]="!user.avatar && !user.isLoading && !user.isUploading"
     (click)="trigger()">
     <div
       class="image"

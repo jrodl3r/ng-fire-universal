@@ -32,7 +32,6 @@
   height: 100px;
   min-height: 100px;
   margin-right: 5px;
-  background: $grey-color;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
@@ -52,6 +51,8 @@
     width: 150px;
     margin-left: 0;
   }
+
+  &.default { background: $grey-color; }
 
   .image {
     height: 100%;
