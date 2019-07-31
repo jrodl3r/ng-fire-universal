@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    @Inject(forwardRef(() => AuthService)) public auth: AuthService,
-    @Inject(forwardRef(() => FormBuilder)) private fb: FormBuilder,
+    public auth: AuthService,
+    private fb: FormBuilder,
     private forms: FormsService,
     private notify: NotifyService
   ) { }

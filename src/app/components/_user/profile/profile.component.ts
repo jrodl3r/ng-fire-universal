@@ -42,7 +42,7 @@ export class ProfileComponent {
   isUpdating = false;
 
   constructor(
-    @Inject(forwardRef(() => AuthService)) private auth: AuthService,
+    private auth: AuthService,
     private user: UserService,
     private forms: FormsService,
     private fb: FormBuilder,

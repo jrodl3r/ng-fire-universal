@@ -1,7 +1,7 @@
-import { AuthService } from './../../../services/auth.service';
-import { Component, Inject, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent {
 
   constructor(
-    @Inject(forwardRef(() => AuthService)) public auth: AuthService,
-    @Inject(forwardRef(() => UserService)) public user: UserService
+    public auth: AuthService,
+    public user: UserService
   ) { }
 
 }

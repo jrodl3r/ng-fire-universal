@@ -1,4 +1,4 @@
-import { Component, Inject, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 export class ErrorComponent {
 
   constructor(
-    @Inject(forwardRef(() => Location)) private location: Location
+    private location: Location
   ) { }
 
   goBack() { this.location.back(); }

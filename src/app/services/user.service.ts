@@ -1,4 +1,4 @@
-import { Injectable, Inject, forwardRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, tap } from 'rxjs/operators';
@@ -24,7 +24,7 @@ export class UserService {
   isUploading = false;
 
   constructor(
-    @Inject(forwardRef(() => AuthService)) private auth: AuthService,
+    private auth: AuthService,
     private notify: NotifyService,
     private db: AngularFirestore,
     private storage: AngularFireStorage

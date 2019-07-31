@@ -10,7 +10,7 @@ import { NavService } from './services/nav.service';
 export class AppComponent {
 
   constructor(
-    @Inject(forwardRef(() => NavService)) public nav: NavService
+    public nav: NavService
   ) { }
 
 }

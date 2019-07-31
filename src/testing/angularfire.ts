@@ -41,6 +41,12 @@ export const AngularFireAuthStub = {
   },
 };
 
+export const AngularFireFunctionsStub = {
+  httpsCallable: (state: string) => {}
+};
+
+export const AngularFireStorageStub = {};
+
 export const FirestoreStub = {
   collection: (name: string) => ({
     doc: (id: string) => ({

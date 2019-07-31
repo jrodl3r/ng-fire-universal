@@ -1,8 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthService } from 'src/app/services/auth.service';
-import { PlatformService } from 'src/app/services/platform.service';
-import { UserService } from 'src/app/services/user.service';
+import { AngularFireAuthStub, AngularFireFunctionsStub, AngularFireStorageStub, FirestoreStub } from 'src/testing/angularfire';
+import { ToastrTestingModule } from 'src/testing/toastr';
 
 import { UserProfileComponent } from './user-profile.component';
 
@@ -12,12 +16,17 @@ describe('UserProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        ToastrTestingModule
+      ],
       declarations: [UserProfileComponent],
       providers: [
-        AuthService,
-        UserService,
-        PlatformService
-      ]
+        { provide: AngularFireAuth, useValue: AngularFireAuthStub },
+        { provide: AngularFireFunctions, useValue: AngularFireFunctionsStub },
+        { provide: AngularFirestore, useValue: FirestoreStub },
+        { provide: AngularFireStorage, useValue: AngularFireStorageStub }
+      ],
     })
     .compileComponents();
   }));

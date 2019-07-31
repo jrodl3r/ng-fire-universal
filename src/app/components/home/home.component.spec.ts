@@ -2,9 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { AuthService } from './../../services/auth.service';
-
-import { FirestoreStub } from '../../../tests/mocks';
+import { FirestoreStub } from '../../../testing/angularfire';
 
 import { HomeComponent } from './home.component';
 
@@ -16,10 +14,7 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
       imports: [RouterTestingModule],
-      providers: [
-        AuthService,
-        { provide: AngularFirestore, useValue: FirestoreStub }
-      ]
+      providers: [{ provide: AngularFirestore, useValue: FirestoreStub }]
     })
     .compileComponents();
   }));

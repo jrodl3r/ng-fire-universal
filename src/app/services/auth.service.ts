@@ -1,4 +1,4 @@
-import { Injectable, Inject, forwardRef, NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -21,7 +21,7 @@ export class AuthService {
   isAdmin = false;
 
   constructor(
-    @Inject(forwardRef(() => PlatformService)) private platform: PlatformService,
+    private platform: PlatformService,
     private notify: NotifyService,
     private router: Router,
     private zone: NgZone,

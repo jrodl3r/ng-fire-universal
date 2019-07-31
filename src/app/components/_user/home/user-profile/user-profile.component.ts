@@ -1,4 +1,4 @@
-import { Component, Inject, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserProfileComponent {
 
   constructor(
-    @Inject(forwardRef(() => UserService)) public user: UserService
+    public user: UserService
   ) { }
 
 }

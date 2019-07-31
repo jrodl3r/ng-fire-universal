@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, forwardRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 import { UserService } from 'src/app/services/user.service';
 import { PlatformService } from 'src/app/services/platform.service';
@@ -15,8 +15,8 @@ interface HTMLInputEvent extends Event {
 export class EditAvatarComponent {
 
   constructor(
-    @Inject(forwardRef(() => UserService)) public user: UserService,
-    @Inject(forwardRef(() => PlatformService)) public platform: PlatformService,
+    public user: UserService,
+    public platform: PlatformService,
     private elementRef: ElementRef
   ) { }
 

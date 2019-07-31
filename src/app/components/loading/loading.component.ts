@@ -1,4 +1,4 @@
-import { Component, Inject, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoadingComponent {
 
   constructor(
-    @Inject(forwardRef(() => AuthService)) public auth: AuthService
+    public auth: AuthService
   ) { }
 
 }

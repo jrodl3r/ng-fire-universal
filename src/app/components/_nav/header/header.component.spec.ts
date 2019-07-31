@@ -1,7 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFirestore } from '@angular/fire/firestore';
 
-import { AuthService } from './../../../services/auth.service';
+import { AngularFireAuthStub, AngularFireFunctionsStub, FirestoreStub } from 'src/testing/angularfire';
+import { ToastrTestingModule } from 'src/testing/toastr';
 
 import { HeaderComponent } from './header.component';
 
@@ -11,9 +15,16 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        ToastrTestingModule
+      ],
       declarations: [HeaderComponent],
-      providers: [AuthService]
+      providers: [
+        { provide: AngularFireAuth, useValue: AngularFireAuthStub },
+        { provide: AngularFireFunctions, useValue: AngularFireFunctionsStub },
+        { provide: AngularFirestore, useValue: FirestoreStub }
+      ]
     })
     .compileComponents();
   }));

@@ -1,4 +1,4 @@
-import { Component, Inject, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ export class HomeComponent {
   items: Observable<any[]>;
 
   constructor(
-    @Inject(forwardRef(() => AngularFirestore)) private db: AngularFirestore
+    private db: AngularFirestore
   ) {
     this.items = db.collection('items').valueChanges();
   }

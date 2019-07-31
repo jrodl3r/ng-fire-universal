@@ -1,10 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthService } from './../../services/auth.service';
+import { AngularFireAuthStub, AngularFireFunctionsStub, FirestoreStub } from 'src/testing/angularfire';
+import { ToastrTestingModule } from 'src/testing/toastr';
 
 import { LoginComponent } from './login.component';
-import { PlatformService } from 'src/app/services/platform.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -12,12 +16,17 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        RouterTestingModule,
+        ToastrTestingModule
+      ],
       declarations: [LoginComponent],
       providers: [
-        AuthService,
-        PlatformService
-      ]
+        { provide: AngularFireAuth, useValue: AngularFireAuthStub },
+        { provide: AngularFireFunctions, useValue: AngularFireFunctionsStub },
+        { provide: AngularFirestore, useValue: FirestoreStub }
+      ],
     })
     .compileComponents();
   }));
