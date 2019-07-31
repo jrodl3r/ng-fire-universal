@@ -2,6 +2,7 @@ import { Injectable, Inject, forwardRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth } from 'firebase/app';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { switchMap, shareReplay, startWith, tap } from 'rxjs/operators';
@@ -25,7 +26,8 @@ export class AuthService {
     private router: Router,
     private zone: NgZone,
     private db: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private afFunctions: AngularFireFunctions
   ) {
     this.isLoading.next(true);
     this.user = platform.isBrowser() && afAuth ? afAuth.authState.pipe(
@@ -151,6 +153,15 @@ export class AuthService {
 
   public getUserEmail(): string {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
+  }
+
+  public setAdmin(state) {
+    const call = this.afFunctions.httpsCallable(state ? 'addAdmin' : 'removeAdmin');
+    const email = this.getUserEmail();
+    call({ email }).subscribe(
+      status => this.notify.info(`${status.message} (You must sign-out before this takes effect)`),
+      error => this.notify.error(`Error ${state ? 'adding' : 'removing'} admin`, error)
+    );
   }
 
 }

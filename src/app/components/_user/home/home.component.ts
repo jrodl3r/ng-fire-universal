@@ -15,9 +15,4 @@ export class HomeComponent {
     @Inject(forwardRef(() => UserService)) public user: UserService
   ) { }
 
-  signOut(event: Event) {
-    event.preventDefault();
-    this.auth.signOut();
-  }
-
 }
