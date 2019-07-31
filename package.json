@@ -22,7 +22,7 @@
     "e2e": "ng e2e",
     "deploy": "gcloud app deploy",
     "deploy:functions": "firebase deploy --only functions",
-    "init:functions": "cd functions && npm i && cd .. && npm run deploy:functions"
+    "init:functions": "cd functions && npm i && cd .."
   },
   "dependencies": {
     "@angular/animations": "~8.0.1",
