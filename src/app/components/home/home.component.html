@@ -1,11 +1,9 @@
 <div class="section">
   <h2>Home</h2>
   <hr>
-  <h3 class="font-weight-bold mb-3">Some Firestore Docs</h3>
+  <h3>Some Firestore Docs</h3>
   <ul>
-    <li
-      class="grey-text"
-      *ngFor="let item of items | async">
+    <li *ngFor="let item of items | async">
       {{item.name}}
     </li>
   </ul>

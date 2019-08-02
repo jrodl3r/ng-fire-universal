@@ -4,3 +4,11 @@ handlers:
 - url: /.*
   script: auto
   secure: always
+
+- url: /favicon.ico
+  static_files: dist/browser/favicon.ico
+  upload: dist/browser/favicon.ico
+
+- url: /robots.txt
+  static_files: dist/browser/robots.txt
+  upload: dist/browser/robots.txt

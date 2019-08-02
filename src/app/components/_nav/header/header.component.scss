@@ -41,41 +41,24 @@ nav {
   position: relative;
   display: flex;
   height: 54px;
-  margin-left: 1rem;
-  color: #E4D4F3;
-  font-family: $font-logo;
-  font-size: 1.95rem;
-  line-height: 50px;
-  white-space: nowrap;
-  user-select: none;
-  text-shadow: 0 0 3px rgba(0,0,0, .25);
-  transition: 0s;
   outline: none;
 
-  &:after {
-    position: absolute;
-    display: flex;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 28px;
-    color: rgba(255,255,255, .9);
-    text-shadow: none;
-    overflow: hidden;
-    transition: 0s;
-    content: 'ng-fire-universal';
+  img {
+    width: 202px;
+    margin-top: 2px;
+    margin-left: 1rem;
+    user-select: none;
+    filter: drop-shadow(0 0 2px rgba(0,0,0, .25));
+
+    @media (min-width: $xs-screen) { margin-left: 0; }
+    @media (min-width: $md-screen) { margin-left: 1.2rem; }
   }
 
   @media (min-width: $xs-screen) {
     width: 100%;
-    margin: 0;
     justify-content: center;
 
     &:after { justify-content: center; }
-  }
-
-  @media (min-width: $md-screen) {
-    margin-left: 1.25rem;
   }
 }
 

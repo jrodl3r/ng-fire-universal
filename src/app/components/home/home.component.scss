@@ -1,1 +1,6 @@
-ul { min-height: 100px; }
+@import '../../styles/colors';
+
+ul {
+  min-height: 100px;
+  color: $dark-grey-color;
+}
