@@ -40,7 +40,10 @@ ul {
   margin: 0 auto;
   overflow-x: scroll;
 
-  @media (min-width: $md-screen) { flex-direction: column; }
+  @media (min-width: $md-screen) {
+    flex-direction: column;
+    overflow: hidden;
+  }
 }
 
 .tab-link {
