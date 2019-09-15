@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { FormsService } from '../../services/forms.service';
-import { NotifyService } from './../../services/notify.service';
+import { NotifyService } from '../../services/notify.service';
+import { PlatformService } from '../../services/platform.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
     public auth: AuthService,
     private fb: FormBuilder,
     private forms: FormsService,
-    private notify: NotifyService
+    private notify: NotifyService,
+    public platform: PlatformService
   ) { }
 
   ngOnInit() {

@@ -14,7 +14,7 @@ nav {
   box-shadow: 0 0 3px rgba(0,0,0, .35);
   transition: $fast-anim;
 
-  &.offline { margin-top: 34px; }
+  &.lowered { margin-top: 34px; }
 
   &.expanded {
     max-height: 1000px;
@@ -389,7 +389,8 @@ nav {
   }
 }
 
-.offline-warning {
+.offline-warning,
+.update-banner {
   position: absolute;
   display: flex;
   top: 0;
@@ -400,10 +401,16 @@ nav {
   padding: 5px 15px;
   color: #FFF;
   text-align: center;
+  white-space: nowrap;
   background-color: $danger-color;
   animation: fade-in .15s forwards ease-in;
   overflow: hidden;
   cursor: default;
+}
+
+.update-banner {
+  background-color: $primary-color;
+  cursor: pointer;
 }
 
 @keyframes fade-in {

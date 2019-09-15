@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { FormsService } from '../../services/forms.service';
+import { PlatformService } from '../../services/platform.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -34,7 +35,8 @@ export class SignupComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private fb: FormBuilder,
-    private forms: FormsService
+    private forms: FormsService,
+    public platform: PlatformService
   ) { }
 
   ngOnInit() {

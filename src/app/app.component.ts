@@ -1,4 +1,4 @@
-import { Component, Inject, forwardRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { NavService } from './services/nav.service';
 
@@ -9,8 +9,6 @@ import { NavService } from './services/nav.service';
 })
 export class AppComponent {
 
-  constructor(
-    public nav: NavService
-  ) { }
+  constructor(public nav: NavService) { }
 
 }

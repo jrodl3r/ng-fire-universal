@@ -1,7 +1,7 @@
 <footer>
   <img
     alt="ng-fire-universal"
-    src="/assets/img/logo/logo-default.svg">
+    src="/assets/img/logo-default.svg">
   <a
     class="github"
     title="View Source on GitHub"
@@ -20,3 +20,19 @@
     </svg>
   </a>
 </footer>
+
+<!-- PWA » iOS Install Notification -->
+<div
+  class="install-banner"
+  [class.active]="isInstallBannerActive"
+  (click)="closeInstallBanner()">
+  <div class="inner">
+    <p>
+      <i class="fa fa-times"></i>
+    </p>
+    <p>Install this app on your device.<br>Tap the share icon and then<br><strong>Add to Home Screen.</strong></p>
+    <p>
+      <i class="fa fa-arrow-down"></i>
+    </p>
+  </div>
+</div>

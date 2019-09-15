@@ -1,6 +1,6 @@
 <nav
   [class.expanded]="nav.isMenuOpen"
-  [class.offline]="platform.isBrowser() && !platform.isOnline()">
+  [class.lowered]="hasUpdates || !platform.isOnline()">
   <div class="top">
     <a
       class="logo"
@@ -8,7 +8,7 @@
       (click)="nav.closeMenu()">
       <img
         alt="ng-fire-universal"
-        src="/assets/img/logo/logo-primary.svg">
+        src="/assets/img/logo-primary.svg">
     </a>
     <div
       class="menu-toggle"
@@ -95,7 +95,7 @@
     </ul>
   </div>
 
-  <!-- Logged-out / SSR -->
+  <!-- Logged-out -->
   <ng-template #isStatic>
     <ul
       class="menu"
@@ -142,14 +142,27 @@
   </ng-template>
 </nav>
 
-<!-- Offline / PWA -->
+<!-- PWA » Offline -->
 <div
   class="offline-warning"
-  *ngIf="platform.isBrowser() && !platform.isOnline()">
+  *ngIf="!platform.isOnline()">
   <div class="container">
     <span>
       <i class="fa fa-warning mr-2"></i>
       Offline / Connection Lost
+    </span>
+  </div>
+</div>
+
+<!-- PWA » Updates Available -->
+<div
+  class="update-banner"
+  *ngIf="hasUpdates && platform.isOnline()"
+  (click)="reload()">
+  <div class="container">
+    <span>
+      <i class="fa fa-warning mr-2"></i>
+      Updates Available - Click Here
     </span>
   </div>
 </div>

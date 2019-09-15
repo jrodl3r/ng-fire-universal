@@ -36,7 +36,7 @@
       <button
         type="submit"
         class="btn btn-sm btn-secondary"
-        [disabled]="!signupForm.valid">Ready</button>
+        [disabled]="!signupForm.valid || !platform.isOnline()">Ready</button>
     </form>
   </div>
 </div>

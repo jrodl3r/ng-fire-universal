@@ -136,7 +136,7 @@ export class AuthService {
   public signOut() {
     this.afAuth.auth.signOut().then(() => {
       if (this.platform.isBrowser) {
-        sessionStorage.clear();
+        sessionStorage.removeItem('user');
         this.router.navigate(['/login']);
       }
     })
