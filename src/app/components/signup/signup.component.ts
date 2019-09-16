@@ -40,7 +40,6 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.redirectAfterSignIn();
     this.buildForm();
   }
 
