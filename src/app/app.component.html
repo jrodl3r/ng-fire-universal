@@ -1,5 +1,8 @@
 <app-header></app-header>
-<div class="wrapper" (click)="nav.closeMenu()">
+<div
+  class="wrapper"
+  [class.lowered]="update.hasUpdates && platform.isOnline() || !platform.isOnline()"
+  (click)="nav.closeMenu()">
   <div class="container">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>

@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { FormsService } from './forms.service';
 import { NotifyService } from './notify.service';
 import { PlatformService } from './platform.service';
+import { UpdateService } from './update.service';
 
 @NgModule({
   declarations: [],
@@ -26,7 +27,8 @@ import { PlatformService } from './platform.service';
     AuthService,
     FormsService,
     NotifyService,
-    PlatformService
+    PlatformService,
+    UpdateService
   ]
 })
 export class ServicesModule { }

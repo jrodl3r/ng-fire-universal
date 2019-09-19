@@ -1,6 +1,6 @@
 <nav
   [class.expanded]="nav.isMenuOpen"
-  [class.lowered]="hasUpdates || !platform.isOnline()">
+  [class.lowered]="update.hasUpdates && platform.isOnline() || !platform.isOnline()">
   <div class="top">
     <a
       class="logo"
@@ -140,6 +140,7 @@
       </li>
     </ul>
   </ng-template>
+  <div class="PWA-iOS-statusbar-notch"></div>
 </nav>
 
 <!-- PWA » Offline -->
@@ -157,7 +158,7 @@
 <!-- PWA » Updates Available -->
 <div
   class="update-banner"
-  *ngIf="hasUpdates && platform.isOnline()"
+  *ngIf="update.hasUpdates && platform.isOnline()"
   (click)="reload()">
   <div class="container">
     <span>

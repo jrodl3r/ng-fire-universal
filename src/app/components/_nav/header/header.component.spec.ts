@@ -3,11 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AngularFireAuthStub, AngularFireFunctionsStub, FirestoreStub } from 'src/testing/angularfire';
 import { ToastrTestingModule } from 'src/testing/toastr';
 
 import { HeaderComponent } from './header.component';
+
+import { environment } from 'src/environments/environment';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -17,7 +20,8 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        ToastrTestingModule
+        ToastrTestingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
       ],
       declarations: [HeaderComponent],
       providers: [

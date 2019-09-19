@@ -24,9 +24,11 @@ footer {
   width: 100%;
   opacity: 0;
 
-  &.active {
-    display: flex;
-    animation: fadeUpIn .25s 1s linear forwards;
+  @media all and (orientation: portrait) {
+    &.active {
+      display: flex;
+      animation: fadeUpIn .25s 1s linear forwards;
+    }
   }
 
   .inner {
@@ -62,7 +64,7 @@ footer {
   display: none;
   position: absolute;
   bottom: -60px;
-  right: -5px;
+  right: 10px;
   opacity: .65;
   transform: rotate(-45deg);
   outline: none;
