@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormsService } from '../../services/forms.service';
 import { NotifyService } from '../../services/notify.service';
 import { PlatformService } from '../../services/platform.service';
+import { SeoService } from '../../services/seo.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -38,10 +39,16 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private forms: FormsService,
     private notify: NotifyService,
-    public platform: PlatformService
+    public platform: PlatformService,
+    private seo: SeoService
   ) { }
 
   ngOnInit() {
+    this.seo.setMetaTags({
+      title: 'ng-fire-universal » Login',
+      description: 'ng-fire-universal » Login',
+      slug: 'login'
+    });
     this.buildForm();
   }
 

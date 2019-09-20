@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SeoService } from '../../services/seo.service';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private seo: SeoService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.seo.setMetaTags({
+      title: 'ng-fire-universal » Cart',
+      description: 'ng-fire-universal » Cart',
+      slug: 'cart'
+    });
+  }
 
 }

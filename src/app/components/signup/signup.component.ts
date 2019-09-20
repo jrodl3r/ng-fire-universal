@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { FormsService } from '../../services/forms.service';
 import { PlatformService } from '../../services/platform.service';
+import { SeoService } from 'src/app/services/seo.service';
 
 type UserFields = 'email' | 'password';
 type FormErrors = { [u in UserFields]: string };
@@ -36,10 +37,16 @@ export class SignupComponent implements OnInit {
     public auth: AuthService,
     private fb: FormBuilder,
     private forms: FormsService,
-    public platform: PlatformService
+    public platform: PlatformService,
+    private seo: SeoService
   ) { }
 
   ngOnInit() {
+    this.seo.setMetaTags({
+      title: 'ng-fire-universal » Sign Up',
+      description: 'ng-fire-universal » Sign Up',
+      slug: 'signup'
+    });
     this.buildForm();
   }
 
