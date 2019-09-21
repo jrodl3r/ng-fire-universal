@@ -1,7 +1,10 @@
-[![repo version](https://img.shields.io/badge/version-0.9.1-blueviolet)](#)
-[![node version](https://img.shields.io/badge/node-10.15.3-green)](#)
-[![demo online](https://img.shields.io/badge/demo-online-ed1c46.svg)](https://ngx-auth-firebaseui.firebaseapp.com)
+[![demo online](https://img.shields.io/badge/demo-online-success.svg)](https://ng-fire.com)
+![repo version](https://img.shields.io/badge/version-0.9.2-blueviolet)
+![node version](https://img.shields.io/badge/node-10.15.3-green)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
+
+<br>
+
 <a href="https://ng-fire.com">
 	<p><img src="https://dl.dropboxusercontent.com/s/f8lvc4rgdardide/feature-splash.png"></p>
 </a>
@@ -11,7 +14,7 @@
 <br>
 
 ## Quick Start
-**1.** `npm run init`
+**1. Install:** `npm run init`
 
 **2. Setup Google Cloud:**
 - Create an account + project at [cloud.google.com](https://cloud.google.com)
@@ -23,7 +26,7 @@
 
 - Add credentials to `/firebase.ts` (ignored by default in [.gitignore](https://github.com/jrodl3r/ng-fire-universal/blob/master/.gitignore)):
 
-```javascript
+	```javascript
 	export const config = {
 		apiKey: 'API_KEY',
 		authDomain: 'APP_NAME.firebaseapp.com',
@@ -33,9 +36,9 @@
 		messagingSenderId: '123456789012'
 		appId: '1:1234567890:web:1234567890'
 	};
-```
+	```
 
-**4.** `npm run publish`
+**4. Publish:** `npm run publish`
 
 <br>
 
@@ -48,7 +51,7 @@
 - `e2e` » Launch Cypress End-to-End Testing [TODO]
 - `deploy` » Start Google Cloud Platform Release
 - `deploy:functions` » Start Firebase Cloud Functions Release
-- `install` » Setup Project + Install Dependencies
+- `init` » Setup Project + Install Dependencies
 - `preview` » Build + Start Local Server w/ SSR
 - `publish` » Build + Deploy to Google Cloud & Firebase
 - `ship` » Build + Deploy to Google Cloud
