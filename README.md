@@ -27,15 +27,15 @@
 - Add credentials to `/firebase.ts` (ignored by default in [.gitignore](https://github.com/jrodl3r/ng-fire-universal/blob/master/.gitignore)):
 
 ```javascript
-export const config = {
-	apiKey: 'API_KEY',
-	authDomain: 'APP_NAME.firebaseapp.com',
-	databaseURL: 'https://APP_NAME.firebaseio.com',
-	projectId: 'APP_NAME',
-	storageBucket: 'APP_NAME.appspot.com',
-	messagingSenderId: '123456789012'
-	appId: '1:1234567890:web:1234567890'
-};
+  export const config = {
+    apiKey: 'API_KEY',
+    authDomain: 'APP_NAME.firebaseapp.com',
+    databaseURL: 'https://APP_NAME.firebaseio.com',
+    projectId: 'APP_NAME',
+    storageBucket: 'APP_NAME.appspot.com',
+    messagingSenderId: '123456789012'
+    appId: '1:1234567890:web:1234567890'
+  };
 ```
 
 **4. Publish:** `npm run publish`
