@@ -1,4 +1,4 @@
-[![demo online](https://img.shields.io/badge/demo-online-success.svg)](https://ng-fire.com)
+[![demo online](https://img.shields.io/badge/demo-online-orange.svg)](https://ng-fire.com)
 ![repo version](https://img.shields.io/badge/version-0.9.2-blueviolet)
 ![node version](https://img.shields.io/badge/node-10.15.3-green)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
@@ -26,17 +26,17 @@
 
 - Add credentials to `/firebase.ts` (ignored by default in [.gitignore](https://github.com/jrodl3r/ng-fire-universal/blob/master/.gitignore)):
 
-	```javascript
-	export const config = {
-		apiKey: 'API_KEY',
-		authDomain: 'APP_NAME.firebaseapp.com',
-		databaseURL: 'https://APP_NAME.firebaseio.com',
-		projectId: 'APP_NAME',
-		storageBucket: 'APP_NAME.appspot.com',
-		messagingSenderId: '123456789012'
-		appId: '1:1234567890:web:1234567890'
-	};
-	```
+```javascript
+export const config = {
+	apiKey: 'API_KEY',
+	authDomain: 'APP_NAME.firebaseapp.com',
+	databaseURL: 'https://APP_NAME.firebaseio.com',
+	projectId: 'APP_NAME',
+	storageBucket: 'APP_NAME.appspot.com',
+	messagingSenderId: '123456789012'
+	appId: '1:1234567890:web:1234567890'
+};
+```
 
 **4. Publish:** `npm run publish`
 
