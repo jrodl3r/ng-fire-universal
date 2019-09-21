@@ -1,5 +1,6 @@
-@import '../../../../styles/breakpoints';
-@import '../../../../styles/colors';
+@import 'src/app/styles/breakpoints';
+@import 'src/app/styles/animation';
+@import 'src/app/styles/colors';
 
 :host {
   position: relative;
@@ -140,9 +141,4 @@
   }
 
   .title { font-weight: 700; }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }

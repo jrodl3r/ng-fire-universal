@@ -9,8 +9,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserProfileComponent {
 
-  constructor(
-    public user: UserService
-  ) { }
+  constructor(public user: UserService) { }
 
 }

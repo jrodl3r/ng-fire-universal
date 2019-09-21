@@ -10,7 +10,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 
-// import { SortUsersPipe } from '../../services/pipes/sort-users.pipe';
+import { SortUsersPipe } from '../../services/pipes/sort-users.pipe';
+
+import { AdminService } from '../../services/admin.service';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { UsersComponent } from './users/users.component';
     HomeComponent,
     OrdersComponent,
     ProductsComponent,
-    UsersComponent
-  ]
+    UsersComponent,
+    SortUsersPipe
+  ],
+  providers: [AdminService]
 })
 export class AdminModule { }

@@ -5,21 +5,6 @@
   <app-recent-orders></app-recent-orders>
   <p class="d-flex align-items-center">
     <span class="badge bg-secondary mr-3">TODO</span>
-    Solicit User Info
-  </p>
-  <p class="mt-5">
-    <button class="btn btn-sm btn-dark" (click)="auth.signOut()">Sign-Out</button>
-    <button
-      class="btn btn-sm btn-primary ml-3"
-      (click)="auth.setAdmin(true)"
-      *ngIf="!auth.isAdmin">
-      Make Admin <i class="fas fa-lock ml-1"></i>
-    </button>
-    <button
-      class="btn btn-sm btn-danger ml-3"
-      (click)="auth.setAdmin(false)"
-      *ngIf="auth.isAdmin">
-      Remove Admin <i class="fas fa-lock ml-1"></i>
-    </button>
+    Get User Info
   </p>
 </div>

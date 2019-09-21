@@ -1,5 +1,6 @@
-@import 'fonts';
 @import 'breakpoints';
+@import 'fonts';
+@import 'colors';
 
 $font-primary: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
@@ -38,5 +39,6 @@ h3 {
   margin-bottom: 1.75rem;
   padding-bottom: .75rem;
   font-size: 1.5rem;
-  border-bottom: 1px solid rgba(0,0,0, .05);
+  font-weight: 500;
+  border-bottom: 1px solid $offset-grey-color;
 }

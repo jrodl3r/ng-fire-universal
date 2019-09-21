@@ -8,7 +8,7 @@
       (click)="nav.closeMenu()">
       <img
         alt="ng-fire-universal"
-        src="/assets/img/logo-primary.svg">
+        src="/assets/img/logo-header.svg">
     </a>
     <div
       class="menu-toggle"
@@ -85,7 +85,7 @@
             class="dropdown-item"
             routerLink="/admin"
             routerLinkActive="active"
-            *ngIf="auth.isAdmin">Admin</a>
+            *ngIf="user.isAdmin">Admin</a>
           <div class="dropdown-divider"></div>
           <div
             class="dropdown-item sign-out"

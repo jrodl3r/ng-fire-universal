@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -10,9 +9,6 @@ import { UserService } from '../../../services/user.service';
 })
 export class HomeComponent {
 
-  constructor(
-    public auth: AuthService,
-    public user: UserService
-  ) { }
+  constructor(public user: UserService) { }
 
 }

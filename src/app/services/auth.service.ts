@@ -2,7 +2,6 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth } from 'firebase/app';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { switchMap, shareReplay, startWith, tap } from 'rxjs/operators';
@@ -18,7 +17,6 @@ export class AuthService {
   user: Observable<IUser | null>;
   userDoc: AngularFirestoreDocument<IUser>;
   isLoading = new BehaviorSubject<boolean>(false);
-  isAdmin = false;
 
   constructor(
     private platform: PlatformService,
@@ -26,19 +24,13 @@ export class AuthService {
     private router: Router,
     private zone: NgZone,
     private db: AngularFirestore,
-    private afAuth: AngularFireAuth,
-    private afFunctions: AngularFireFunctions
+    private afAuth: AngularFireAuth
   ) {
     this.isLoading.next(true);
     this.user = platform.isBrowser() && afAuth ? afAuth.authState.pipe(
       switchMap(user => {
         this.isLoading.next(false);
-        if (user) {
-          user.getIdTokenResult().then(idTokenResult => // Check claims
-            this.isAdmin = idTokenResult.claims.admin ? true : false);
-          return this.db.doc<IUser>(`users/${user.uid}`).valueChanges();
-        }
-        return of(null);
+        return user ? this.db.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null);
       }),
       tap(user => sessionStorage.setItem('user', JSON.stringify(user))),
       shareReplay(1), // Cache user
@@ -121,7 +113,6 @@ export class AuthService {
         } else {
           this.userDoc.update({ lastLogin: date });
         }
-        // TODO: Log activity: [].push('logged-in')
       })
       .catch(error => this.notify.error('Error saving user account', error));
   }
@@ -153,15 +144,6 @@ export class AuthService {
 
   public getUserEmail(): string {
     return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
-  }
-
-  public setAdmin(state) {
-    const call = this.afFunctions.httpsCallable(state ? 'addAdmin' : 'removeAdmin');
-    const email = this.getUserEmail();
-    call({ email }).subscribe(
-      status => this.notify.info(`${status.message} (You must sign-out before this takes effect)`),
-      error => this.notify.error(`Error ${state ? 'adding' : 'removing'} admin`, error)
-    );
   }
 
 }

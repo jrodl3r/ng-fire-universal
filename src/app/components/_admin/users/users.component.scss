@@ -1,0 +1,66 @@
+@import '../../../styles/breakpoints';
+@import '../../../styles/colors';
+
+:host {
+  @media (min-width: $md-screen) {
+    padding-left: 2rem;
+  }
+}
+
+.modal-body {
+  .loading {
+    display: none;
+
+    &.isActive {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      background: #FFF;
+
+      .loading-spinner { font-size: 40px; }
+    }
+  }
+
+  .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-top: 8px;
+    font-size: 13px;
+
+    @media (min-width: $sm-screen) {
+      font-size: 15px;
+    }
+
+    .label {
+      min-width: 33%;
+      padding-right: 15px;
+      font-weight: 700;
+      text-align: right;
+      cursor: default;
+
+      @media (min-width: $sm-screen) {
+        width: 130px;
+      }
+    }
+
+    .value {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      &.uid {
+        font-size: 11px;
+
+        @media (min-width: $sm-screen) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

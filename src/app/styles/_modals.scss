@@ -1,3 +1,6 @@
+@import 'breakpoints';
+@import 'colors';
+
 .modal {
   background: rgba(0,0,0, .4);
   pointer-events: none;
@@ -17,11 +20,19 @@
   }
 }
 
+.modal-dialog {
+  @media (min-width: $sm-screen) {
+    margin: 4rem auto;
+  }
+}
+
 .modal-header {
   background-color: rgba(0,0,0, .03);
-  user-select: none;
 
-  .close { outline: none; }
+  .close {
+    outline: none;
+    user-select: none;
+  }
 
   &.modal-header-feature {
     flex-direction: column;
@@ -38,35 +49,35 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      margin: 10px 0 20px;
+      height: 100px;
+      width: 100px;
+      margin: 10px auto 20px;
+      background-color: #FFF;
+      border-radius: 50px;
+      animation: fade-in .15s forwards ease-in;
+      overflow: hidden;
 
-      img {
-        max-height: 100px;
-        max-width: 100px;
-
-        @media (min-width: $sm-screen) {
-          max-height: 140px;
-          max-width: 140px;
-        }
+      .image {
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
       }
 
-      .vignette {
-        display: flex;
-        justify-content: center;
-        height: 100px;
-        width: 100px;
-        margin: 0 auto;
-        overflow: hidden;
-        background: #FFF;
-        border: 1px solid #EEE;
-        border-radius: 50px;
+      i {
+        margin-top: 10px;
+        color: $grey-color;
+        font-size: 90px;
+        opacity: .75;
+      }
 
-        @media (min-width: $sm-screen) {
-          width: 140px;
-          height: 140px;
-          border-radius: 70px;
-        }
+      @media (min-width: $sm-screen) {
+        height: 120px;
+        width: 120px;
+        border-radius: 60px;
+
+        i { font-size: 110px; }
       }
     }
 
@@ -83,9 +94,11 @@
   }
 }
 
+.modal-title { font-weight: 700; }
+
 .modal-body {
   max-height: 50vh;
   overflow: scroll;
 }
 
-.modal-title { font-weight: 700; }
+.modal-footer { background-color: rgba(0,0,0, .01); }

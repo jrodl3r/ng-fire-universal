@@ -1,4 +1,5 @@
 @import '../../../styles/breakpoints';
+@import '../../../styles/animation';
 @import '../../../styles/typography';
 @import '../../../styles/colors';
 
@@ -27,7 +28,7 @@ footer {
   @media all and (orientation: portrait) {
     &.active {
       display: flex;
-      animation: fadeUpIn .25s 1s linear forwards;
+      animation: fade-up-in .25s 1s linear forwards;
     }
   }
 
@@ -41,7 +42,6 @@ footer {
     color: #FFF;
     background: rgba(0,0,0, .75);
     border-radius: 8px;
-    box-shadow: 0 0 3px rgba(0,0,0, .25);
 
     p { margin-bottom: 15px; }
   }
@@ -83,21 +83,4 @@ footer {
   .octo-arm { transform-origin: 130px 106px; }
 
   @media (min-width: $md-screen) { display: block; }
-}
-
-@keyframes wave {
-  0%, 100% { transform: rotate(0); }
-  20%, 60% { transform: rotate(-25deg); }
-  40%, 80% { transform: rotate(10deg); }
-}
-
-@keyframes bounce {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(10px); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes fadeUpIn {
-  from { transform: translate3d(0, 30px, 0); opacity: 0; }
-  to { transform: translate3d(0,0,0); opacity: 1; }
 }

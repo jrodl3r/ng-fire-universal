@@ -4,6 +4,7 @@ export interface IUser {
   created?: Date;
   displayName: string;
   email: string;
+  isAdmin?: boolean;
   lastActive?: any;
   lastLogin?: any;
   photoURL: string;
