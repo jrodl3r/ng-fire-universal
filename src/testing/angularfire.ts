@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const credentialsMock = {
   email: 'abc@123.com',
@@ -53,6 +53,6 @@ export const FirestoreStub = {
       valueChanges: () => new BehaviorSubject({name: 'name'}),
       set: (d: any) => new Promise((resolve, reject) => resolve())
     }),
-    valueChanges: () => {}
+    valueChanges: () => new Observable()
   }),
 };
