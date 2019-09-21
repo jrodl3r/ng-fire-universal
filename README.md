@@ -1,6 +1,6 @@
-[![demo online](https://img.shields.io/badge/demo-online-orange.svg)](https://ng-fire.com)
-![repo version](https://img.shields.io/badge/version-0.9.2-blueviolet)
+![repo version](https://img.shields.io/badge/version-0.9.3-blueviolet)
 ![node version](https://img.shields.io/badge/node-10.15.3-green)
+[![demo online](https://img.shields.io/badge/demo-online-ed1c46.svg)](https://ng-fire.com)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 
 <br>
@@ -9,7 +9,7 @@
 	<p><img src="https://dl.dropboxusercontent.com/s/f8lvc4rgdardide/feature-splash.png"></p>
 </a>
 
-> Ship [Angular](https://angular.io) + [Firebase](https://firebase.com) Apps to the Cloud (Fast) » [ng-fire.com](https://ng-fire.com)
+> Ship [Angular](https://angular.io) + [Firebase](https://firebase.com) Apps to [Google Cloud](https://cloud.google.com) (Fast) » [ng-fire.com](https://ng-fire.com)
 
 <br>
 
@@ -33,7 +33,7 @@
     databaseURL: 'https://APP_NAME.firebaseio.com',
     projectId: 'APP_NAME',
     storageBucket: 'APP_NAME.appspot.com',
-    messagingSenderId: '123456789012'
+    messagingSenderId: '123456789012',
     appId: '1:1234567890:web:1234567890'
   };
 ```
