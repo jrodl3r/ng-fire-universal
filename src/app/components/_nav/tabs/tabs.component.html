@@ -6,7 +6,7 @@
       class="tab-link"
       routerLink="{{ tab.routerLink }}"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{exact: true}">
+      [routerLinkActiveOptions]="tab.isExact ? {exact: true} : {exact: false}">
       {{ tab.label }}
       <span *ngIf="tab.count">({{ tab.count }})</span>
     </a>

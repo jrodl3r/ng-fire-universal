@@ -9,7 +9,7 @@ import { ITab } from '../../models/tab';
 })
 export class UserComponent {
   tabs: ITab[] = [
-    { label: 'Home', routerLink: '/me' },
+    { label: 'Home', routerLink: '/me', isExact: true },
     { label: 'My Profile', routerLink: '/me/profile' },
     { label: 'My Orders', routerLink: '/me/orders' }
   ];
