@@ -1,0 +1,41 @@
+/* iOS Scrolling + Notch */
+@supports (-webkit-overflow-scrolling: touch) {
+  @media all and (display-mode: standalone) {
+    app-root {
+      height: 100vh;
+      width: 100vw;
+
+      & > .wrapper {
+        padding-top: calc(#{$header-height} + env(safe-area-inset-top));
+        transition: $fast-anim;
+
+        &.lowered {
+          padding-top: calc(#{$header-height} + #{$banner-height} + env(safe-area-inset-top));
+
+          .modal { top: calc(#{$header-height} + #{$banner-height} + env(safe-area-inset-top)) !important; }
+        }
+
+        .modal {
+          top: calc(#{$header-height} + env(safe-area-inset-top)) !important;
+          transition: top $fast-anim;
+        }
+      }
+    }
+
+    app-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 8000;
+      transition: $fast-anim;
+      -webkit-transform: translatez(0);
+    }
+
+    @media (orientation: landscape) {
+
+      /* TODO: Add Landscape Orientation Splash Message */
+
+    }
+  }
+}

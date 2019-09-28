@@ -1,14 +1,10 @@
-@import 'variables';
-@import 'breakpoints';
-@import 'animation';
-
 html, body { height: 100%; }
 
 app-root {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-width: 320px;
+  min-width: $min-width;
 
   & > .wrapper { flex: 1 0 auto; }
 
@@ -74,49 +70,4 @@ app-root {
 hr {
   width: 100%;
   margin-bottom: 2rem;
-}
-
-/* iOS Scrolling + Notch */
-@supports (-webkit-overflow-scrolling: touch) {
-  app-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 8000;
-    transition: $fast-anim;
-  }
-
-  app-root > .wrapper {
-    padding-top: $header-height;
-    transition: $fast-anim;
-
-    &.lowered { padding-top: $header-height + $banner-height; }
-  }
-
-  @media all and (display-mode: standalone) {
-    app-root > .wrapper {
-      padding-top: calc(#{$header-height} + env(safe-area-inset-top));
-
-      &.lowered { padding-top: calc(#{$header-height} + #{$banner-height} + env(safe-area-inset-top)); }
-    }
-  }
-
-  @media (orientation: landscape) {
-    app-header { position: initial; }
-    app-root > .wrapper {
-      padding-top: 0;
-
-      &.lowered { padding-top: 0; }
-    }
-
-    @media all and (display-mode: standalone) {
-      app-header { position: fixed; }
-      app-root > .wrapper {
-        padding-top: $header-height !important;
-
-        &.lowered { padding-top: $header-height + $banner-height !important; }
-      }
-    }
-  }
 }

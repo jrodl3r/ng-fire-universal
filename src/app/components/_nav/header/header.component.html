@@ -146,7 +146,7 @@
 <!-- PWA » Offline -->
 <div
   class="offline-warning"
-  *ngIf="!platform.isOnline()">
+  [class.active]="!platform.isOnline()">
   <div class="container">
     <span>
       <i class="fa fa-warning mr-2"></i>
@@ -158,7 +158,7 @@
 <!-- PWA » Updates Available -->
 <div
   class="update-banner"
-  *ngIf="update.hasUpdates && platform.isOnline()"
+  [class.active]="update.hasUpdates && platform.isOnline()"
   (click)="reload()">
   <div class="container">
     <span>

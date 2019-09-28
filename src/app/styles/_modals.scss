@@ -1,6 +1,3 @@
-@import 'breakpoints';
-@import 'colors';
-
 .modal {
   background: rgba(0,0,0, .4);
   pointer-events: none;
@@ -15,7 +12,7 @@
 
   .modal.show {
     display: initial;
-    min-width: 320px;
+    min-width: $min-width;
     opacity: 1;
   }
 }

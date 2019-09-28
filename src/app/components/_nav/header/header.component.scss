@@ -16,11 +16,7 @@ nav {
   transition: $fast-anim;
 
   &.lowered { margin-top: $banner-height; }
-
-  &.expanded {
-    max-height: 1000px;
-    transition: $default-anim;
-  }
+  &.expanded { max-height: 1000px; }
 
   .top {
     display: flex;
@@ -84,9 +80,8 @@ nav {
   margin-left: auto;
   max-height: 0;
   padding: 0;
-  opacity: 0;
   overflow: hidden;
-  transition: height $default-anim, opacity .5s .15s ease-in-out;
+  transition: height $fast-anim;
   animation: fade-in .25s forwards ease-in;
 
   &.expanded {
@@ -95,12 +90,11 @@ nav {
     max-height: 1000px;
     width: 100%;
     padding: 10px 0 25px;
-    opacity: 1;
-    overflow: visible;
+    opacity: 0;
 
     .menu-item {
-      opacity: 1;
-      transition: .15s .15s ease-in-out;
+      opacity: 0;
+      animation: fade-in .25s forwards ease-in;
     }
 
     .dropdown-toggle { display: none; }
@@ -119,6 +113,12 @@ nav {
       padding-top: 0;
       padding-bottom: 0;
       opacity: 1;
+      overflow: visible;
+
+      .menu-item {
+        opacity: 1;
+        animation: none;
+      }
 
       .dropdown-toggle { display: inline-flex; }
       .dropdown-menu:not(.expanded) { display: none; }
@@ -128,7 +128,6 @@ nav {
   .menu-item {
     display: flex;
     align-items: center;
-    opacity: 0;
   }
 
   @media (min-width: $md-screen) {
@@ -173,9 +172,10 @@ nav {
   font-size: 1.15rem !important;
   font-weight: 300;
   border-radius: 4px;
+  opacity: 1;
   user-select: none;
   cursor: pointer;
-  transition: color .25s ease-in-out, background-color .25s ease-in-out;
+  transition: color $default-anim, opacity $default-anim;
 
   &:hover {
     color: $grey-color;
@@ -227,8 +227,6 @@ nav {
     margin-top: 0;
     padding: 5px 15px;
     font-size: 1.05rem !important;
-
-    &:hover { background: none !important; }
 
     &.active {
       color: rgba(255,255,255, .55);
@@ -407,17 +405,22 @@ nav {
   top: 0;
   right: 0;
   left: 0;
-  height: $banner-height;
+  height: 0;
   width: 100%;
-  padding: 5px 15px;
+  padding: 0;
   color: #FFF;
   text-align: center;
   white-space: nowrap;
   background-color: $danger-color;
-  animation: fade-in .15s forwards ease-in;
+  transition: $fast-anim;
   overflow: hidden;
   cursor: default;
   user-select: none;
+
+  &.active {
+    height: $banner-height;
+    padding: 5px 15px;
+  }
 }
 
 .update-banner {
@@ -443,8 +446,8 @@ nav {
       background: $purple-color;
     }
 
-    .offline-warning,
-    .update-banner {
+    .offline-warning.active,
+    .update-banner.active {
       height: calc(#{$banner-height} + env(safe-area-inset-top));
       padding-top: calc(5px + env(safe-area-inset-top));
     }
@@ -454,6 +457,10 @@ nav {
     nav {
       padding-right: env(safe-area-inset-right);
       padding-left: env(safe-area-inset-left);
+
+      .logo img { margin-left: 0; }
+      .menu:not(.logged-in) { margin-right: 0; }
+      .dropdown-toggle { padding-right: 0; }
     }
   }
 }
