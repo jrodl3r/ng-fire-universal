@@ -1,45 +1,46 @@
-<div>
-  <h3
-    class="heading"
-    *ngIf="admin.userList">Users ({{ admin.userList.length || 0 }})</h3>
-  <div *ngIf="!admin.isLoading; else showLoading">
-    <ul
-      class="list"
-      *ngIf="admin.userList">
-      <li
-        class="list-item action-item pt-3 pb-3"
-        [class.inactive]="!user.active"
-        [class.text-capitalize]="user.profile?.fname && user.profile?.lname || user.displayName"
-        *ngFor="let user of admin.userList | sortUsersPipe: 'desc'"
-        (click)="showUserModal(user.uid)">
-        <div class="avatar">
-          <div class="image"
-            [style.backgroundImage]="'url(' + user.photoURL + ')'"
-            *ngIf="user.photoURL"></div>
-          <i
-            class="fas fa-user"
-            *ngIf="!user.photoURL"></i>
-        </div>
-        <span class="title ml-0">
-          {{ user.profile?.fname && user.profile?.lname
-            ? user.profile?.fname + ' ' + user.profile?.lname
-            : user.displayName ? user.displayName : user.email }}
-        </span>
-        <div class="trigger ml-auto mr-3">
-          <i class="fa fa-chevron-right text-black-50"></i>
-        </div>
-      </li>
-    </ul>
-    <div *ngIf="!admin.userList">No Users</div>
+<div class="inner">
+  <div *ngIf="admin.userList && !admin.isFetching">
+    <h3 class="heading">
+      Users
+      <span *ngIf="admin.userList.length > 1">({{ admin.userList.length }})</span>
+    </h3>
+    <div>
+      <ul class="list">
+        <li
+          class="list-item action-item pt-3 pb-3"
+          [class.inactive]="!user.active"
+          [class.text-capitalize]="user.profile?.fname && user.profile?.lname || user.displayName"
+          *ngFor="let user of admin.userList | sortUsersPipe: 'desc'"
+          (click)="showUserModal(user.uid)">
+          <div class="avatar">
+            <div class="image"
+              [style.backgroundImage]="'url(' + user.photoURL + ')'"
+              *ngIf="user.photoURL"></div>
+            <i
+              class="fas fa-user"
+              *ngIf="!user.photoURL"></i>
+          </div>
+          <span class="title ml-0">
+            {{ user.profile?.fname && user.profile?.lname
+              ? user.profile?.fname + ' ' + user.profile?.lname
+              : user.displayName ? user.displayName : user.email }}
+          </span>
+          <div class="trigger ml-auto mr-3">
+            <i class="fa fa-chevron-right text-black-50"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <!-- Loading -->
-  <ng-template #showLoading>
-    <div class="loading-spinner mt-4">
-      <i class="fas fa-sync-alt"></i>
-    </div>
-  </ng-template>
+  <div
+    class="loading"
+    [class.disabled]="!admin.isFetching">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 </div>
+
 
 <!-- User Modal -->
 <div [class.modal-open]="isModalActive">

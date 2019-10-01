@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { NavModule } from '../_nav/nav.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
@@ -18,7 +19,8 @@ import { AdminService } from '../../services/admin.service';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    NavModule
+    NavModule,
+    SharedModule
   ],
   declarations: [
     AdminComponent,

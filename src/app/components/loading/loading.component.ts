@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../../services/auth.service';
+import { PlatformService } from '../../services/platform.service';
 
 @Component({
   selector: 'app-loading',
@@ -9,8 +9,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoadingComponent {
 
-  constructor(
-    public auth: AuthService
-  ) { }
+  constructor(public platform: PlatformService) { }
 
 }

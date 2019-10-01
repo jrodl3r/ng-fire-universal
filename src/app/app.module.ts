@@ -12,6 +12,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
+import { SharedModule } from './shared/shared.module';
 import { NavModule } from './components/_nav/nav.module';
 
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { config } from '../../firebase';
     ReactiveFormsModule,
     RouterModule,
     ServicesModule,
+    SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [

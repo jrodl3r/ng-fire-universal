@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap, shareReplay, startWith, tap } from 'rxjs/operators';
 
 import { PlatformService } from './platform.service';
@@ -16,7 +16,6 @@ import { IUser } from '../models/user';
 export class AuthService {
   user: Observable<IUser | null>;
   userDoc: AngularFirestoreDocument<IUser>;
-  isLoading = new BehaviorSubject<boolean>(false);
 
   constructor(
     private platform: PlatformService,
@@ -26,10 +25,10 @@ export class AuthService {
     private db: AngularFirestore,
     private afAuth: AngularFireAuth
   ) {
-    this.isLoading.next(true);
+    platform.setLoadingState(true);
     this.user = platform.isBrowser() && afAuth ? afAuth.authState.pipe(
       switchMap(user => {
-        this.isLoading.next(false);
+        platform.setLoadingState(false);
         return user ? this.db.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null);
       }),
       tap(user => sessionStorage.setItem('user', JSON.stringify(user))),
@@ -74,22 +73,22 @@ export class AuthService {
   }
 
   public emailLogin(email: string, password: string) {
-    this.isLoading.next(true);
+    this.platform.setLoadingState(true);
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
       .then(() => this.router.navigate(['/me']))
-      .finally(() => this.isLoading.next(false))
+      .finally(() => this.platform.setLoadingState(false))
       .catch(error => this.notify.error(error));
   }
 
   public emailSignUp(email: string, password: string) {
-    this.isLoading.next(true);
+    this.platform.setLoadingState(true);
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
       .then(() => this.router.navigate(['/me']))
-      .finally(() => this.isLoading.next(false))
+      .finally(() => this.platform.setLoadingState(false))
       .catch(error => this.notify.error(error));
   }
 
@@ -134,16 +133,10 @@ export class AuthService {
     .catch(error => this.notify.error('Error signing-out', error));
   }
 
-  public isLoggedIn(): boolean {
-    return this.afAuth ? this.afAuth.auth.currentUser !== null : false;
-  }
+  public isLoggedIn = (): boolean => this.afAuth ? this.afAuth.auth.currentUser !== null : false;
 
-  public getUserID(): string {
-    return this.isLoggedIn() ? this.afAuth.auth.currentUser.uid : '';
-  }
+  public getUserID = (): string => this.isLoggedIn() ? this.afAuth.auth.currentUser.uid : '';
 
-  public getUserEmail(): string {
-    return this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
-  }
+  public getUserEmail = (): string => this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
 
 }

@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlatformService {
+  isLoading = new BehaviorSubject<boolean>(false);
+
+  setLoadingState = (state: boolean) => this.isLoading.next(state);
 
   isBrowser = () => typeof window !== 'undefined';
 

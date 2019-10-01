@@ -3,18 +3,6 @@
 $default-anim: .25s ease-in-out;
 $fast-anim: .15s ease-in-out;
 
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  width: 100%;
-  font-size: 50px;
-  color: $grey-color;
-
-  i { animation: spin 1.25s infinite linear; }
-}
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }

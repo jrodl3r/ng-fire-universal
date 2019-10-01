@@ -1,0 +1,33 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #FFF;
+  overflow: hidden;
+
+  &.disabled {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transition: height 0s .25s, width 0s .25s, opacity .25s;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+  font-size: 40px;
+  color: $offset-grey-color;
+  opacity: 0;
+  animation: fade-in .25s .35s forwards ease-in;
+
+  i { animation: spin 1.25s infinite linear; }
+}

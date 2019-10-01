@@ -14,24 +14,26 @@ export class AdminService implements OnDestroy {
   userList: Array<IUser>;
   selectedUser: IUser;
   isUpdatingUser = false;
-  isLoading = false;
+  isFetching = false;
 
   constructor(
     private notify: NotifyService,
     private db: AngularFirestore,
     private afFunctions: AngularFireFunctions
   ) {
-    this.isLoading = true;
+    this.isFetching = true;
     this.selectedUser = null;
     this.userListCollection = this.db.collection<IUser>('users');
     this.userListSub = this.userListCollection.valueChanges()
       .subscribe(users => {
-        this.userList = users && users.length ? users : [];
-        this.isLoading = false;
+        if (users && users.length) {
+          this.userList = users;
+          this.isFetching = false;
+        }
       },
       error => (() => {
         this.notify.error('Error fetching users', error);
-        this.isLoading = false;
+        this.isFetching = false;
       }));
   }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from './../../../services/auth.service';
 import { AdminService } from '../../../services/admin.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -12,8 +12,9 @@ export class UsersComponent {
   isModalActive = false;
 
   constructor(
-    public auth: AuthService,
-    public admin: AdminService) { }
+    public admin: AdminService,
+    public auth: AuthService
+  ) { }
 
   public showUserModal(uid: string) {
     this.admin.selectUser(uid);

@@ -1,9 +1,7 @@
 <div
   class="loading"
-  [class.disabled]="!(auth.isLoading | async)">
+  [class.disabled]="!(platform.isLoading | async)">
   <div class="splash">
-    <div class="loading-spinner">
-      <i class="fas fa-sync-alt"></i>
-    </div>
+    <app-loading-spinner></app-loading-spinner>
   </div>
 </div>
