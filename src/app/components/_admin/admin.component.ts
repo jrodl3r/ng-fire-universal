@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { SeoService } from '../../services/seo.service';
+
 import { ITab } from '../../models/tab';
 
 @Component({
@@ -14,4 +16,12 @@ export class AdminComponent {
     { label: 'Products', routerLink: '/admin/products' },
     { label: 'Orders', routerLink: '/admin/orders' }
   ];
+
+  constructor(private seo: SeoService) {
+    this.seo.setMetaTags({
+      title: 'ng-fire-universal » Admin',
+      description: 'ng-fire-universal » Admin'
+    });
+  }
+
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { SeoService } from '../../services/seo.service';
+
 import { ITab } from '../../models/tab';
 
 @Component({
@@ -13,4 +15,12 @@ export class UserComponent {
     { label: 'My Profile', routerLink: '/me/profile' },
     { label: 'My Orders', routerLink: '/me/orders' }
   ];
+
+  constructor(private seo: SeoService) {
+    this.seo.setMetaTags({
+      title: 'ng-fire-universal » My Account',
+      description: 'ng-fire-universal » My Account'
+    });
+  }
+
 }
