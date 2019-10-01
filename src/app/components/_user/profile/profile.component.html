@@ -1,4 +1,4 @@
-<app-edit-avatar></app-edit-avatar>
+<app-edit-avatar [hasUnsavedChanged]="isDirty"></app-edit-avatar>
 <form
   *ngIf="profile"
   [formGroup]="profileForm">

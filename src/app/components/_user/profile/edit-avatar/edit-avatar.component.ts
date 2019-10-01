@@ -1,7 +1,8 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 
 import { UserService } from 'src/app/services/user.service';
 import { PlatformService } from 'src/app/services/platform.service';
+import { NotifyService } from 'src/app/services/notify.service';
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -13,10 +14,12 @@ interface HTMLInputEvent extends Event {
   styleUrls: ['./edit-avatar.component.scss']
 })
 export class EditAvatarComponent {
+  @Input() hasUnsavedChanged = false;
 
   constructor(
     public user: UserService,
     public platform: PlatformService,
+    private notify: NotifyService,
     private elementRef: ElementRef
   ) { }
 
@@ -29,6 +32,10 @@ export class EditAvatarComponent {
     }
   }
 
-  trigger() { this.elementRef.nativeElement.querySelector('#upload').click(); }
+  triggerUpload() {
+    this.hasUnsavedChanged
+      ? this.notify.warn('Unsaved profile changes')
+      : this.elementRef.nativeElement.querySelector('#upload').click();
+  }
 
 }
