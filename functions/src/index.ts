@@ -17,4 +17,4 @@ export const removeAdmin = functions.https.onCall((data, context) => {
   }).then(() => {
     return { message: `${data.email} is no longer an Admin` }
   }).catch(error => error);
-});
+}); 
