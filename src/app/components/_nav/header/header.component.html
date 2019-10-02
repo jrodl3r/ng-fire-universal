@@ -1,6 +1,6 @@
 <nav
   [class.expanded]="nav.isMenuOpen"
-  [class.lowered]="update.hasUpdates && platform.isOnline() || !platform.isOnline()">
+  [class.lowered]="platform.hasUpdates && platform.isOnline() || !platform.isOnline()">
   <div class="top">
     <a
       class="logo"
@@ -158,7 +158,7 @@
 <!-- PWA » Updates Available -->
 <div
   class="update-banner"
-  [class.active]="update.hasUpdates && platform.isOnline()"
+  [class.active]="platform.hasUpdates && platform.isOnline()"
   (click)="reload()">
   <div class="container">
     <span>

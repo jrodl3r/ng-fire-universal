@@ -10,7 +10,7 @@ export class FooterComponent {
   isInstallBannerActive;
 
   constructor(public platform: PlatformService) {
-    if (platform.isBrowser()) { // TODO: Move to Platform Service
+    if (platform.isBrowser()) {
       const isInstallBannerDismissed = localStorage.getItem('pwa-ios-install-banner-dismissed') || false;
       this.isInstallBannerActive = platform.isIOS() && !platform.isInStandaloneMode() && !isInstallBannerDismissed;
     }

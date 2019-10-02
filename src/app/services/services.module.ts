@@ -7,7 +7,6 @@ import { AuthService } from './auth.service';
 import { FormsService } from './forms.service';
 import { NotifyService } from './notify.service';
 import { PlatformService } from './platform.service';
-import { UpdateService } from './update.service';
 import { SeoService } from './seo.service';
 
 @NgModule({
@@ -29,7 +28,6 @@ import { SeoService } from './seo.service';
     FormsService,
     NotifyService,
     PlatformService,
-    UpdateService,
     SeoService
   ]
 })

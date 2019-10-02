@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavService } from 'src/app/services/nav.service';
 import { PlatformService } from 'src/app/services/platform.service';
-import { UpdateService } from 'src/app/services/update.service';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +13,7 @@ export class HeaderComponent {
   constructor(
     public auth: AuthService,
     public nav: NavService,
-    public platform: PlatformService,
-    public update: UpdateService
+    public platform: PlatformService
   ) { }
 
   reload() {
