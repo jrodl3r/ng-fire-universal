@@ -6,6 +6,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFirePerformanceModule } from '@angular/fire/performance';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -31,6 +32,7 @@ import { config } from '../../firebase';
     AngularFireAuthModule,
     AngularFireAuthGuardModule,
     AngularFireFunctionsModule,
+    AngularFirePerformanceModule,
     AngularFireStorageModule,
     AngularFirestoreModule.enablePersistence(),
     AppRoutingModule,
