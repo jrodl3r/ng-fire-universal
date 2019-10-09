@@ -2,19 +2,20 @@
 <div class="inner">
   <div
     class="avatar"
-    [class.default]="!user.avatar && !user.isLoading && !user.isUploading"
-    (click)="triggerUpload()">
+    [class.default]="!user.avatar"
+    (click)="triggerUpload()"
+    *ngIf="user.data | async as info">
     <div
       class="image"
-      [style.backgroundImage]="'url(' + user.avatar + ')'"
-      *ngIf="user.avatar && !user.isLoading && !user.isUploading"></div>
+      [style.backgroundImage]="'url(' + info.avatar + ')'"
+      *ngIf="info.avatar && !user.isUploading"></div>
     <i
       class="fas fa-user"
-      *ngIf="!user.avatar && !user.isLoading && !user.isUploading"></i>
+      *ngIf="!info.avatar && !user.isUploading"></i>
     <div
-      class="loading-spinner"
-      *ngIf="user.isUploading">
-      <i class="fas fa-sync-alt"></i>
+      class="loading"
+      [class.disabled]="!user.isUploading">
+      <app-loading-spinner></app-loading-spinner>
     </div>
   </div>
   <button

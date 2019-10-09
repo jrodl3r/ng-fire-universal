@@ -13,8 +13,6 @@ import { UsersComponent } from './users/users.component';
 
 import { SortUsersPipe } from '../../services/pipes/sort-users.pipe';
 
-import { AdminService } from '../../services/admin.service';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +27,6 @@ import { AdminService } from '../../services/admin.service';
     ProductsComponent,
     UsersComponent,
     SortUsersPipe
-  ],
-  providers: [AdminService]
+  ]
 })
 export class AdminModule { }

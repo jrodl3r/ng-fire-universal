@@ -1,4 +1,4 @@
-<app-edit-avatar [hasUnsavedChanged]="isDirty"></app-edit-avatar>
+<app-edit-avatar [hasUnsavedChanges]="hasChanges"></app-edit-avatar>
 <form
   *ngIf="profile"
   [formGroup]="profileForm">
@@ -54,6 +54,6 @@
   <button
     type="submit"
     class="btn btn-sm btn-secondary"
-    [disabled]="!isDirty || isUpdating || !profileForm.valid || !platform.isOnline()"
+    [disabled]="!hasChanges || user.isUpdating || !profileForm.valid || !platform.isOnline()"
     (click)="updateProfile()">Save</button>
 </form>

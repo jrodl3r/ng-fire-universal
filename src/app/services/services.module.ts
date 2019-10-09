@@ -8,6 +8,7 @@ import { FormsService } from './forms.service';
 import { NotifyService } from './notify.service';
 import { PlatformService } from './platform.service';
 import { SeoService } from './seo.service';
+import { SwService } from './sw.service';
 
 @NgModule({
   declarations: [],
@@ -28,7 +29,8 @@ import { SeoService } from './seo.service';
     FormsService,
     NotifyService,
     PlatformService,
-    SeoService
+    SeoService,
+    SwService
   ]
 })
 export class ServicesModule { }

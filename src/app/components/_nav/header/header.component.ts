@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavService } from 'src/app/services/nav.service';
 import { PlatformService } from 'src/app/services/platform.service';
+import { SwService } from 'src/app/services/sw.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent {
   constructor(
     public auth: AuthService,
     public nav: NavService,
-    public platform: PlatformService
+    public platform: PlatformService,
+    public serviceWorker: SwService
   ) { }
 
   reload() {

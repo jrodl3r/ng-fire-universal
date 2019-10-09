@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
 import { NavModule } from '../_nav/nav.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { UserComponent } from './user.component';
 import { HomeComponent } from './home/home.component';
@@ -22,7 +23,8 @@ import { UserService } from '../../services/user.service';
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NavModule
+    NavModule,
+    SharedModule
   ],
   declarations: [
     UserComponent,

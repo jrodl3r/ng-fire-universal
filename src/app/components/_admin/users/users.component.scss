@@ -10,22 +10,7 @@
 .inner { position: relative; }
 
 .modal-body {
-  .loading {
-    display: none;
-
-    &.isActive {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-      background: #FFF;
-
-      .loading-spinner { font-size: 40px; }
-    }
-  }
+  .loading { background: rgba(255,255,255, .85); }
 
   .item {
     display: flex;

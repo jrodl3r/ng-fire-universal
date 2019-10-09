@@ -25,10 +25,10 @@ export class AuthService {
     private db: AngularFirestore,
     private afAuth: AngularFireAuth
   ) {
-    platform.setLoadingState(true);
+    platform.loading(true);
     this.user = platform.isBrowser() && afAuth ? afAuth.authState.pipe(
       switchMap(user => {
-        platform.setLoadingState(false);
+        platform.loading(false);
         return user ? this.db.doc<IUser>(`users/${user.uid}`).valueChanges() : of(null);
       }),
       tap(user => sessionStorage.setItem('user', JSON.stringify(user))),
@@ -73,22 +73,22 @@ export class AuthService {
   }
 
   public emailLogin(email: string, password: string) {
-    this.platform.setLoadingState(true);
+    this.platform.loading(true);
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
       .then(() => this.router.navigate(['/me']))
-      .finally(() => this.platform.setLoadingState(false))
+      .finally(() => this.platform.loading(false))
       .catch(error => this.notify.error(error));
   }
 
   public emailSignUp(email: string, password: string) {
-    this.platform.setLoadingState(true);
+    this.platform.loading(true);
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
       .then(() => this.router.navigate(['/me']))
-      .finally(() => this.platform.setLoadingState(false))
+      .finally(() => this.platform.loading(false))
       .catch(error => this.notify.error(error));
   }
 
@@ -136,7 +136,5 @@ export class AuthService {
   public isLoggedIn = (): boolean => this.afAuth ? this.afAuth.auth.currentUser !== null : false;
 
   public getUserID = (): string => this.isLoggedIn() ? this.afAuth.auth.currentUser.uid : '';
-
-  public getUserEmail = (): string => this.isLoggedIn() ? this.afAuth.auth.currentUser.email : '';
 
 }

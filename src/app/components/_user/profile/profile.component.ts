@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { AuthService } from '../../../services/auth.service';
 import { FormsService } from '../../../services/forms.service';
 import { PlatformService } from '../../../services/platform.service';
 import { UserService } from '../../../services/user.service';
@@ -17,8 +17,9 @@ type FormErrors = { [u in UserFields]: string };
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnDestroy {
   profile: IProfile;
+  profileSub: Subscription;
   profileForm: FormGroup;
   formErrors: FormErrors = { company: '', fname: '', lname: '', website: '' };
   validationMessages = {
@@ -38,26 +39,26 @@ export class ProfileComponent {
       maxlength: 'Less than 100 characters long'
     }
   };
-  isDirty = false;
-  isUpdating = false;
+  hasChanges = false;
 
   constructor(
-    private auth: AuthService,
-    private user: UserService,
+    public user: UserService,
     private forms: FormsService,
     private fb: FormBuilder,
     public platform: PlatformService
   ) {
-    if (this.auth.user) {
-      this.auth.user.pipe(
-        tap(data => {
-          if (data) {
-            this.profile = data.profile || {} as IProfile;
-            this.buildForm();
-          }
-        })
-      ).subscribe();
-    }
+    this.profileSub = this.user.data.pipe(
+      tap(data => {
+        if (data) {
+          this.profile = data.profile;
+          this.buildForm();
+        }
+      })
+    ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.profileSub.unsubscribe();
   }
 
   buildForm() {
@@ -77,24 +78,27 @@ export class ProfileComponent {
       ]]
     });
     this.profileForm.valueChanges.subscribe((data) =>
-      this.forms.validate(data, this.profileForm, this.formErrors, this.validationMessages, ['fname', 'lname', 'company', 'website'])
+      this.forms.validate(
+        data,
+        this.profileForm,
+        this.formErrors,
+        this.validationMessages,
+        ['fname', 'lname', 'company', 'website'])
     );
   }
 
   detectChange() {
-    this.isDirty =
-      this.profile.fname === this.profileForm.value.fname && this.profile.lname === this.profileForm.value.lname
-      && this.profile.company === this.profileForm.value.company && this.profile.website === this.profileForm.value.website
+    this.hasChanges =
+      this.profile.fname === this.profileForm.value.fname &&
+      this.profile.lname === this.profileForm.value.lname &&
+      this.profile.company === this.profileForm.value.company &&
+      this.profile.website === this.profileForm.value.website
         ? false : true;
   }
 
   updateProfile() {
-    this.isUpdating = true;
     this.user.updateProfile(this.profileForm.value)
-      .then(() => {
-        this.isUpdating = false;
-        this.isDirty = false;
-      });
+      .then(() => this.hasChanges = false);
   }
 
 }

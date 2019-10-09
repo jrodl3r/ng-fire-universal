@@ -1,8 +1,8 @@
 <div class="inner">
-  <div *ngIf="admin.userList && !admin.isFetching">
+  <div *ngIf="users">
     <h3 class="heading">
       Users
-      <span *ngIf="admin.userList.length > 1">({{ admin.userList.length }})</span>
+      <span *ngIf="users.length > 1">({{ users.length }})</span>
     </h3>
     <div>
       <ul class="list">
@@ -10,8 +10,8 @@
           class="list-item action-item pt-3 pb-3"
           [class.inactive]="!user.active"
           [class.text-capitalize]="user.profile?.fname && user.profile?.lname || user.displayName"
-          *ngFor="let user of admin.userList | sortUsersPipe: 'desc'"
-          (click)="showUserModal(user.uid)">
+          *ngFor="let user of users | sortUsersPipe: 'desc'"
+          (click)="showModal(user.uid)">
           <div class="avatar">
             <div class="image"
               [style.backgroundImage]="'url(' + user.photoURL + ')'"
@@ -32,15 +32,7 @@
       </ul>
     </div>
   </div>
-
-  <!-- Loading -->
-  <div
-    class="loading"
-    [class.disabled]="!admin.isFetching">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
 </div>
-
 
 <!-- User Modal -->
 <div [class.modal-open]="isModalActive">
@@ -57,30 +49,30 @@
       class="modal-dialog modal-notify">
       <div
         class="modal-content"
-        *ngIf="admin.selectedUser">
+        *ngIf="user">
         <div class="modal-header modal-header-feature">
           <div class="avatar">
             <div class="image"
-              [style.backgroundImage]="'url(' + admin.selectedUser.photoURL + ')'"
-              *ngIf="admin.selectedUser.photoURL"></div>
+              [style.backgroundImage]="'url(' + user.photoURL + ')'"
+              *ngIf="user.photoURL"></div>
             <i
               class="fas fa-user"
-              *ngIf="!admin.selectedUser.photoURL"></i>
+              *ngIf="!user.photoURL"></i>
           </div>
           <h5
             class="modal-title"
-            [class.text-lowercase]="!admin.selectedUser.profile?.fname && !admin.selectedUser.displayName">
-            {{ admin.selectedUser.profile?.fname && admin.selectedUser.profile?.lname
-              ? admin.selectedUser.profile?.fname + ' ' + admin.selectedUser.profile?.lname
-              : admin.selectedUser.displayName ? admin.selectedUser.displayName : admin.selectedUser.email }}
+            [class.text-lowercase]="!user.profile?.fname && !user.displayName">
+            {{ user.profile?.fname && user.profile?.lname
+              ? user.profile?.fname + ' ' + user.profile?.lname
+              : user.displayName ? user.displayName : user.email }}
           </h5>
           <button
             type="button"
             class="close"
             data-dismiss="modal"
             aria-label="Close"
-            [disabled]="admin.isUpdatingUser"
-            (click)="hideUserModal($event)">
+            [disabled]="isUpdating"
+            (click)="hideModal($event)">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -88,73 +80,71 @@
           <div class="info">
             <div class="item">
               <span class="label">Last Login:</span>
-              <span class="value">{{ admin.selectedUser.lastLogin.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
+              <span class="value">{{ user.lastLogin.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
             </div>
             <div class="item">
               <span class="label">Last Active:</span>
-              <span class="value">{{ admin.selectedUser.lastActive.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
+              <span class="value">{{ user.lastActive.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
             </div>
             <div class="item">
               <span class="label">Account Status:</span>
-              <span class="value">{{ admin.selectedUser.active ? admin.selectedUser.isAdmin ? 'Admin' : 'Active User' : 'Deactivated' }}</span>
+              <span class="value">{{ user.active ? user.isAdmin ? 'Admin' : 'Active User' : 'Deactivated' }}</span>
             </div>
             <div
               class="item"
-              *ngIf="admin.selectedUser.profile?.fname && admin.selectedUser.profile?.lname">
+              *ngIf="user.profile?.fname && user.profile?.lname">
               <span class="label">Full Name:</span>
-              <span class="value">{{ admin.selectedUser.profile?.fname + ' ' + admin.selectedUser.profile?.lname }}</span>
+              <span class="value">{{ user.profile?.fname + ' ' + user.profile?.lname }}</span>
             </div>
             <div
               class="item"
-              *ngIf="admin.selectedUser.displayName">
+              *ngIf="user.displayName">
               <span class="label">OAuth Name:</span>
-              <span class="value">{{ admin.selectedUser.displayName }}</span>
+              <span class="value">{{ user.displayName }}</span>
             </div>
             <div class="item">
               <span class="label">Email:</span>
-              <span class="value">{{ admin.selectedUser.email }}</span>
+              <span class="value">{{ user.email }}</span>
             </div>
             <div
               class="item"
-              *ngIf="admin.selectedUser.profile?.company">
+              *ngIf="user.profile?.company">
               <span class="label">Company:</span>
-              <span class="value">{{ admin.selectedUser.profile?.company }}</span>
+              <span class="value">{{ user.profile?.company }}</span>
             </div>
             <div
               class="item"
-              *ngIf="admin.selectedUser.profile?.website">
+              *ngIf="user.profile?.website">
               <span class="label">Website:</span>
-              <span class="value">{{ admin.selectedUser.profile?.website }}</span>
+              <span class="value">{{ user.profile?.website }}</span>
             </div>
             <div class="item">
               <span class="label">UID:</span>
-              <span class="value uid">{{ admin.selectedUser.uid }}</span>
+              <span class="value uid">{{ user.uid }}</span>
             </div>
           </div>
           <div
             class="loading"
-            [class.isActive]="admin.isUpdatingUser">
-            <div class="loading-spinner mt-4">
-              <i class="fas fa-sync-alt"></i>
-            </div>
+            [class.disabled]="!isUpdating">
+            <app-loading-spinner></app-loading-spinner>
           </div>
         </div>
         <div class="modal-footer p-2">
           <button
             class="btn btn-sm ml-2 mr-auto"
-            [class.btn-primary]="!admin.selectedUser.isAdmin"
-            [class.btn-danger]="admin.selectedUser.isAdmin"
-            [disabled]="admin.selectedUser.uid === auth.getUserID() || !admin.selectedUser.active || admin.isUpdatingUser"
-            (click)="admin.setUserAdminState(admin.selectedUser.uid, admin.selectedUser.email, !admin.selectedUser.isAdmin)">
-            <span [innerHTML]="admin.selectedUser.isAdmin ? 'Revoke' : 'Make'"></span> Admin
+            [class.btn-primary]="!user.isAdmin"
+            [class.btn-danger]="user.isAdmin"
+            [disabled]="user.uid === auth.getUserID() || !user.active || isUpdating"
+            (click)="setAdmin(user.uid, user.email, !user.isAdmin)">
+            <span [innerHTML]="user.isAdmin ? 'Revoke' : 'Make'"></span> Admin
             <i class="fas fa-lock ml-1"></i>
           </button>
           <button
             type="button"
             class="btn btn-sm btn-grey mr-2"
             data-dismiss="modal"
-            [disabled]="admin.isUpdatingUser"
-            (click)="hideUserModal($event)">Close</button>
+            [disabled]="isUpdating"
+            (click)="hideModal($event)">Close</button>
         </div>
       </div>
     </div>

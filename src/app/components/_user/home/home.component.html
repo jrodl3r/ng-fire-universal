@@ -1,6 +1,11 @@
 <app-user-profile></app-user-profile>
-<div class="inner">
-  <h3>Welcome<span *ngIf="user.fname">, {{ user.fname }}</span></h3>
+<div
+  class="inner"
+  *ngIf="user.data | async as user">
+  <h3>
+    Welcome<span *ngIf="user.profile?.fname || user.displayName">,
+    {{ user.profile?.fname || user.displayName }}!</span>
+  </h3>
   <app-cart-summary></app-cart-summary>
   <app-recent-orders></app-recent-orders>
   <p class="d-flex align-items-center">
