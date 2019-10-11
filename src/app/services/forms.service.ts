@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FormsService {
+  phonePattern = '^[0-9]{3}\-?[0-9]{3}\-?[0-9]{4}$';
   urlPattern = '(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
 
   validate(data?: any, form?: any, errors?: any, msgs?: any, fields?: any) {
@@ -17,7 +18,7 @@ export class FormsService {
           if (control.errors) {
             for (const key in control.errors) {
               if (Object.prototype.hasOwnProperty.call(control.errors, key) ) {
-                errors[field] += `${(messages as {[key: string]: string})[key]}`;
+                errors[field] = `${(messages as {[key: string]: string})[key]}`;
               }
             }
           }

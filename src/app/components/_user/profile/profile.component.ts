@@ -9,7 +9,7 @@ import { UserService } from '../../../services/user.service';
 
 import { IProfile } from '../../../models/user';
 
-type UserFields = 'company' | 'fname' | 'lname' | 'website';
+type UserFields = 'company' | 'fname' | 'lname' | 'phone' | 'website';
 type FormErrors = { [u in UserFields]: string };
 
 @Component({
@@ -21,7 +21,7 @@ export class ProfileComponent implements OnDestroy {
   profile: IProfile;
   profileSub: Subscription;
   profileForm: FormGroup;
-  formErrors: FormErrors = { company: '', fname: '', lname: '', website: '' };
+  formErrors: FormErrors = { company: '', fname: '', lname: '', phone: '', website: '' };
   validationMessages = {
     company: {
       maxlength: 'Less than 100 characters long'
@@ -33,6 +33,11 @@ export class ProfileComponent implements OnDestroy {
     lname: {
       required: 'Last Name is required',
       maxlength: 'Less than 60 characters long'
+    },
+    phone: {
+      pattern: 'Valid Phone Number required',
+      minlength: 'At least 10 characters',
+      maxlength: 'Less than 12 characters'
     },
     website: {
       pattern: 'Valid URL required',
@@ -72,6 +77,7 @@ export class ProfileComponent implements OnDestroy {
         Validators.required,
         Validators.maxLength(60)
       ]],
+      phone: [this.profile.phone || '', [Validators.pattern(this.forms.phonePattern)]],
       website: [this.profile.website || '', [
         Validators.maxLength(100),
         Validators.pattern(this.forms.urlPattern)
@@ -83,15 +89,17 @@ export class ProfileComponent implements OnDestroy {
         this.profileForm,
         this.formErrors,
         this.validationMessages,
-        ['fname', 'lname', 'company', 'website'])
+        ['company', 'fname', 'lname', 'phone', 'website']
+      )
     );
   }
 
   detectChange() {
     this.hasChanges =
+    this.profile.company === this.profileForm.value.company &&
       this.profile.fname === this.profileForm.value.fname &&
       this.profile.lname === this.profileForm.value.lname &&
-      this.profile.company === this.profileForm.value.company &&
+      this.profile.phone === this.profileForm.value.phone &&
       this.profile.website === this.profileForm.value.website
         ? false : true;
   }

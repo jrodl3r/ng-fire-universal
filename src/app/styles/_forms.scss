@@ -2,5 +2,9 @@
 
 form {
   .invalid-label { font-size: 13px; }
-  .form-control::placeholder { color: $grey-color; }
+  .form-control {
+    max-width: 520px;
+
+    &::placeholder { color: $grey-color; }
+  }
 }

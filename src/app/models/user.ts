@@ -16,6 +16,7 @@ export interface IProfile {
   company?: string;
   fname: string;
   lname: string;
+  phone?: string;
   website?: string;
 }
 
