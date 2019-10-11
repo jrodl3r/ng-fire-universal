@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setMetaTags({
-      title: 'ng-fire-universal » Store',
-      description: 'ng-fire-universal » Store',
+      title: 'Store',
+      description: 'Store',
       slug: 'store'
     });
   }

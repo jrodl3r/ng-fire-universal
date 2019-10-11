@@ -13,8 +13,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setMetaTags({
-      title: 'ng-fire-universal » Cart',
-      description: 'ng-fire-universal » Cart',
+      title: 'Cart',
+      description: 'Cart',
       slug: 'cart'
     });
   }

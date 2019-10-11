@@ -19,8 +19,8 @@ export class AdminComponent {
 
   constructor(private seo: SeoService) {
     this.seo.setMetaTags({
-      title: 'ng-fire-universal » Admin',
-      description: 'ng-fire-universal » Admin'
+      title: 'Admin',
+      description: 'Admin'
     });
   }
 

@@ -34,7 +34,7 @@ const routes: Routes = [
     data: { authGuardPipe: isLoggedOut }
   },
   {
-    path: 'me',
+    path: 'user',
     loadChildren: () => import('./components/_user/user.module').then(m => m.UserModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: isLoggedIn }

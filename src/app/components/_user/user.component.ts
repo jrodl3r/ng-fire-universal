@@ -11,15 +11,15 @@ import { ITab } from '../../models/tab';
 })
 export class UserComponent {
   tabs: ITab[] = [
-    { label: 'Home', routerLink: '/me', isExact: true },
-    { label: 'My Profile', routerLink: '/me/profile' },
-    { label: 'My Orders', routerLink: '/me/orders' }
+    { label: 'Home', routerLink: '/user', isExact: true },
+    { label: 'My Profile', routerLink: '/user/profile' },
+    { label: 'My Orders', routerLink: '/user/orders' }
   ];
 
   constructor(private seo: SeoService) {
     this.seo.setMetaTags({
-      title: 'ng-fire-universal » My Account',
-      description: 'ng-fire-universal » My Account'
+      title: 'My Account',
+      description: 'My Account'
     });
   }
 

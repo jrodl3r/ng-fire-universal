@@ -1,7 +1,7 @@
 {
   "name": "ng-fire-universal",
   "short_name": "ng-fire-universal",
-  "description": "ng-fire-universal » Ship Angular + Firebase Apps to Google Cloud (Fast)",
+  "description": "Ship Angular + Firebase Apps to Google Cloud (Fast)",
   "theme_color": "#6E42F4",
   "background_color": "#FFFFFF",
   "display": "standalone",

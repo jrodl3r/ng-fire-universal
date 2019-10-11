@@ -17,7 +17,7 @@
       class="title"
       *ngIf="user.profile?.fname || user.displayName">
       <i class="fas fa-user mr-2"></i>
-      {{ user.profile?.fname + ' ' + user.profile?.lname || user.displayName }}
+      {{ user.profile?.fname ? user.profile?.fname + ' ' + user.profile?.lname : user.displayName }}
     </div>
     <div
       class="title"
@@ -36,7 +36,7 @@
       {{ user.email }}
     </div>
     <a
-      routerLink="/me/profile"
+      routerLink="/user/profile"
       *ngIf="!user.profile?.fname">
       <i class="fas fa-pencil-alt mr-2"></i>
       <span class="ml-1">Edit Profile</span>

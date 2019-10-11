@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setMetaTags({
-      title: 'ng-fire-universal » Login',
-      description: 'ng-fire-universal » Login',
+      title: 'Login',
+      description: 'Login',
       slug: 'login'
     });
     this.buildForm();

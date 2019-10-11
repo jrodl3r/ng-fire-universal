@@ -43,8 +43,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.seo.setMetaTags({
-      title: 'ng-fire-universal » Sign Up',
-      description: 'ng-fire-universal » Sign Up',
+      title: 'Sign Up',
+      description: 'Sign Up',
       slug: 'signup'
     });
     this.buildForm();
