@@ -26,6 +26,7 @@ export const AngularFireAuthStub = {
   authState: fakeAuthState,
   user: fakeAuthState,
   auth: {
+    currentUser: userMock,
     createUserWithEmailAndPassword: jasmine
       .createSpy('createUserWithEmailAndPassword')
       .and
@@ -55,4 +56,7 @@ export const FirestoreStub = {
     }),
     valueChanges: () => new Observable()
   }),
+  doc: (id: string) => ({
+    valueChanges: () => new BehaviorSubject({name: 'name'})
+  })
 };
