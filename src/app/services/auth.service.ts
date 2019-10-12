@@ -65,7 +65,7 @@ export class AuthService {
         .then(response => {
           if (response.user) {
             this.updateUser(response.user);
-            this.zone.run(async () => await this.router.navigate(['/me']));
+            this.zone.run(async () => await this.router.navigate(['/user']));
           } else { this.notify.error('Error fetching user account'); }
         })
         .catch(error => this.notify.error(error));
@@ -77,7 +77,7 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
-      .then(() => this.router.navigate(['/me']))
+      .then(() => this.router.navigate(['/user']))
       .finally(() => this.platform.loading(false))
       .catch(error => this.notify.error(error));
   }
@@ -87,7 +87,7 @@ export class AuthService {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(credential => this.updateUser(credential.user))
-      .then(() => this.router.navigate(['/me']))
+      .then(() => this.router.navigate(['/user']))
       .finally(() => this.platform.loading(false))
       .catch(error => this.notify.error(error));
   }
