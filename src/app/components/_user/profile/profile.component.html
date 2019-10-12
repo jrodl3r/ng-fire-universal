@@ -68,7 +68,7 @@
     *ngIf="formErrors.website">{{ formErrors.website }}</div>
   <button
     type="submit"
-    class="btn btn-sm btn-secondary"
+    class="btn btn-secondary"
     [disabled]="!hasChanges || user.isUpdating || !profileForm.valid || !platform.isOnline()"
     (click)="updateProfile()">Save</button>
 </form>

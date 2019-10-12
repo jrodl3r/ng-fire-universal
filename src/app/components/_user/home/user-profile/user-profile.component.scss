@@ -12,7 +12,7 @@
   margin: -2rem 0 0;
   padding: 1.25rem 0;
   background: linear-gradient(to top, rgba(0,0,0, .02) 0%, rgba(0,0,0, 0) 70%);
-  border-bottom: 1px solid rgba(0,0,0, .1);
+  border-bottom: 1px solid $border-color;
 
   @media (min-width: $sm-screen) {
     left: calc(-1 * (100vw - 100%) / 2);

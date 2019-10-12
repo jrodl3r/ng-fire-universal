@@ -19,6 +19,8 @@ form {
   max-width: 500px;
   margin: 0 auto;
 
+  .form-control { max-width: none; }
+
   @media (min-width: $md-screen) {
     padding-top: 1rem;
     max-width: 600px;

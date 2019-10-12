@@ -40,5 +40,10 @@ h3 {
   padding-bottom: .75rem;
   font-size: 1.5rem;
   font-weight: 500;
-  border-bottom: 1px solid $offset-grey-color;
+  border-bottom: 1px solid $border-light-color;
+}
+
+hr {
+  border-top-color: $border-color;
+  .content & { border-top-color: $border-light-color; }
 }

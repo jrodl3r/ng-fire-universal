@@ -3,6 +3,9 @@
 $default-anim: .25s ease-in-out;
 $fast-anim: .15s ease-in-out;
 
+.fade-in { animation: fade-in $default-anim forwards; }
+.fade-in-fast { animation: fade-in $fast-anim forwards; }
+
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }

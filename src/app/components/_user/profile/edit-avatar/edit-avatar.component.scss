@@ -9,7 +9,7 @@
 
   @media (min-width: $lg-screen) {
     padding: 2.5rem 1rem 2rem 2rem;
-    border-left: 1px solid rgba(0,0,0, .1);
+    border-left: 1px solid $border-color;
   }
 }
 

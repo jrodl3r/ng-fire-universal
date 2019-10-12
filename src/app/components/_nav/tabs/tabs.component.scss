@@ -8,9 +8,9 @@
   width: 100%;
   min-width: 320px;
   left: 0;
-  background: linear-gradient(to top, rgba(0,0,0, .02) 0%, rgba(0,0,0, 0) 50%);
-  border-top: 1px solid rgba(0,0,0, .1);
-  border-bottom: 1px solid rgba(0,0,0, .1);
+  background: linear-gradient(to top, rgba(0,0,0, .02) 0%, transparent 50%);
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 
   @media (min-width: $md-screen) {
     flex: 1;
@@ -22,7 +22,7 @@
     max-width: 200px;
     padding: 2rem 0;
     border: 0;
-    border-right: 1px solid rgba(0,0,0, .1);
+    border-right: 1px solid $border-color;
     background: none;
   }
 
@@ -65,11 +65,11 @@ ul {
 
   @media (min-width: $md-screen) {
     padding: 14px 16px;
-    border-bottom: 1px solid rgba(0,0,0, 0);
+    border-bottom: 1px solid transparent;
 
     &.active {
-      background: linear-gradient(-15deg, rgba(0,0,0, .02) 0%, rgba(0,0,0, 0) 50%);
-      border-bottom: 1px solid rgba(0,0,0, .05);
+      background: linear-gradient(-15deg, rgba(0,0,0, .02) 0%, transparent 50%);
+      border-bottom: 1px solid $border-light-color;
     }
   }
 
