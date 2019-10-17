@@ -20,7 +20,7 @@ Presently, we do not have a GUI method (ex: Firebase Console settings) for manag
 },
 ```
 
-**2. Replace [this line](...):** (_TBD: permalink `_admin/users/users.component.html:L42`_)
+**2. Replace [this line](https://github.com/jrodl3r/ng-fire-universal/blob/74b8837fcbb2bc7565e67b896c1919f8bb420913/src/app/components/_admin/users/users.component.html#L42):**
 ```javascript
 [isDisabled]="isUpdating"
 ```
@@ -40,8 +40,6 @@ We now have an Admin User with full control over all user accounts (except their
 <br>
 
 ## Add Database Rules
-_TBD - Work in progress_
-
 > _Firebase Console » Database » Rules_
 
 ```javascript
@@ -80,8 +78,6 @@ service cloud.firestore {
 <br>
 
 ## Add Cloud Storage Rules
-_TBD - Work in progress_
-
 > _Firebase Console » Storage » Rules_
 
 ```javascript
