@@ -46,20 +46,28 @@ export class UsersComponent implements OnDestroy {
     this.user = this.users.filter(user => user.uid === uid)[0];
   }
 
-  public showModal(uid: string) {
+  public showUserDetail(uid: string) {
     this.loadUser(uid);
     this.isModalActive = true;
   }
 
-  public hideModal(event: Event) {
-    event.stopPropagation();
-    setTimeout(() => {
-      this.loadUser(null);
-      this.isModalActive = false;
-    }, 100);
+  public hideUserDetail() {
+    this.isModalActive = false;
+    this.loadUser(null);
   }
 
-  public setAdmin(uid: string, email: string, state: boolean) {
+  public setActiveState(uid: string, state: boolean) {
+    this.isUpdating = true;
+    this.db.doc(`users/${uid}`).update({ active: state })
+      .then(() => {
+        this.loadUser(uid);
+        this.notify.success(`Successfully ${state ? 'activated' : 'deactivated'} user`);
+      })
+      .finally(() => this.isUpdating = false)
+      .catch(error => this.notify.error(error));
+  }
+
+  public setAdminState(uid: string, email: string, state: boolean) {
     const call = this.functions.httpsCallable(state ? 'addAdmin' : 'removeAdmin');
     this.isUpdating = true;
     call({ email }).subscribe(

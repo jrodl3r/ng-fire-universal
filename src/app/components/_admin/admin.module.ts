@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 import { SortUsersPipe } from '../../services/pipes/sort-users.pipe';
 
@@ -26,6 +27,7 @@ import { SortUsersPipe } from '../../services/pipes/sort-users.pipe';
     OrdersComponent,
     ProductsComponent,
     UsersComponent,
+    UserDetailComponent,
     SortUsersPipe
   ]
 })

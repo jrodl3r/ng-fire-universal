@@ -1,7 +1,7 @@
 export interface IUser {
   active?: boolean;
   activity?: IUserAction[];
-  created?: Date;
+  created?: any;
   displayName: string;
   email: string;
   isAdmin?: boolean;

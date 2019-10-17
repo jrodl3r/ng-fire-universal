@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -33,7 +34,8 @@ describe('UsersComponent', () => {
         { provide: AngularFireFunctions, useValue: AngularFireFunctionsStub },
         { provide: AngularFirestore, useValue: FirestoreStub },
         { provide: AngularFireStorage, useValue: AngularFireStorageStub }
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

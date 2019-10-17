@@ -1,8 +1,3 @@
-.modal {
-  background: rgba(0,0,0, .4);
-  pointer-events: none;
-}
-
 .modal-open {
   position: absolute;
   top: 0;
@@ -15,6 +10,12 @@
     min-width: $min-width;
     opacity: 1;
   }
+}
+
+.modal {
+  background: rgba(0,0,0, .4);
+  pointer-events: none;
+  z-index: 8000;
 }
 
 .modal-dialog {

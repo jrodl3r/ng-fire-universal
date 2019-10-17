@@ -1,0 +1,181 @@
+<div
+  [class.modal-open]="active"
+  (click)="hideActionMenu()">
+  <div
+    class="modal fade"
+    [class.show]="active"
+    id="userModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="userModal"
+    aria-hidden="true">
+    <div
+      role="document"
+      class="modal-dialog modal-notify">
+      <div
+        class="modal-content"
+        *ngIf="user">
+        <div class="modal-header modal-header-feature">
+          <div class="avatar">
+            <div class="image"
+              [style.backgroundImage]="'url(' + user.photoURL + ')'"
+              *ngIf="user.photoURL"></div>
+            <i
+              class="fas fa-user"
+              *ngIf="!user.photoURL"></i>
+          </div>
+          <h5
+            class="modal-title"
+            [class.text-lowercase]="!user.profile?.fname && !user.displayName">
+            {{ user.profile?.fname && user.profile?.lname
+              ? user.profile?.fname + ' ' + user.profile?.lname
+              : user.displayName ? user.displayName : user.email }}
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            [disabled]="isUpdating"
+            (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pt-4 pr-3 pl-3 pb-4">
+          <div class="info">
+            <div class="item">
+              <span class="label">Last Login:</span>
+              <span class="value">{{ user.lastLogin.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
+            </div>
+            <div class="item">
+              <span class="label">Last Active:</span>
+              <span class="value">{{ user.lastActive.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
+            </div>
+            <div class="item">
+              <span class="label">Created:</span>
+              <span class="value">{{ user.created.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
+            </div>
+            <div class="item">
+              <span class="label">Account Status:</span>
+              <span class="value">{{ user.active ? user.isAdmin ? 'Admin' : 'Active User' : 'Deactivated' }}</span>
+            </div>
+            <div
+              class="item"
+              *ngIf="user.profile?.fname && user.profile?.lname">
+              <span class="label">Full Name:</span>
+              <span class="value">{{ user.profile?.fname + ' ' + user.profile?.lname }}</span>
+            </div>
+            <div
+              class="item"
+              *ngIf="user.displayName">
+              <span class="label">OAuth Name:</span>
+              <span class="value">{{ user.displayName }}</span>
+            </div>
+            <div class="item">
+              <span class="label">Email:</span>
+              <span class="value">{{ user.email }}</span>
+            </div>
+            <div
+              class="item"
+              *ngIf="user.profile?.company">
+              <span class="label">Company:</span>
+              <span class="value">{{ user.profile?.company }}</span>
+            </div>
+            <div
+              class="item"
+              *ngIf="user.profile?.website">
+              <span class="label">Website:</span>
+              <span class="value">{{ user.profile?.website }}</span>
+            </div>
+            <div class="item">
+              <span class="label">UID:</span>
+              <span class="value uid">{{ user.uid }}</span>
+            </div>
+          </div>
+          <div
+            class="loading"
+            [class.disabled]="!isUpdating">
+            <app-loading-spinner></app-loading-spinner>
+          </div>
+        </div>
+        <div class="modal-footer p-2">
+          <div class="btn-group dropup ml-2 mr-auto">
+            <button
+              class="btn btn-sm btn-danger dropdown-toggle"
+              [class.active]="isMenuVisible"
+              [disabled]="isDisabled"
+              type="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              (click)="showActionMenu($event)">Actions</button>
+            <div
+              class="dropdown-menu"
+              [class.show]="isMenuVisible"
+              (click)="$event.stopPropagation()">
+              <a
+                class="dropdown-item"
+                [class.disabled]="!user.active"
+                (click)="confirmAction($event, 'admin')">
+                <i
+                  class="fa fa-lock mr-2"
+                  [class.fa-lock-open]="!user.isAdmin"></i>
+                {{ user.isAdmin ? 'Revoke' : 'Grant' }} Admin Access
+              </a>
+              <a
+                class="dropdown-item"
+                (click)="confirmAction($event, 'active')">
+                <i
+                  class="fa fa-check-circle mr-2"
+                  [class.fa-times-circle]="user.active"></i>
+                {{ user.active ? 'Deactivate' : 'Activate' }} User Account
+              </a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-sm btn-grey mr-2"
+            data-dismiss="modal"
+            [disabled]="isUpdating"
+            (click)="close()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Action Modal -->
+<div
+  class="confrim-modal"
+  [class.modal-open]="isConfirmActive">
+  <div
+    class="modal fade"
+    [class.show]="isConfirmActive"
+    id="confirmActionModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="confirmActionModal"
+    aria-hidden="true">
+    <div
+      class="modal-dialog modal-sm modal-notify modal-danger"
+      role="document">
+      <div class="modal-content text-center">
+        <div class="modal-header d-flex justify-content-center">
+          <p class="heading">Are you sure?</p>
+        </div>
+        <div class="modal-body">
+          <i class="fas fa-times fa-4x animated rotateIn text-danger"></i>
+        </div>
+        <div class="modal-footer flex-center">
+          <button
+            class="btn btn-outline-danger"
+            (click)="commitAction()">Yes</button>
+          <button
+            class="btn btn-danger waves-effect"
+            data-dismiss="modal"
+            (click)="cancelAction()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -108,9 +108,9 @@ export class AuthService {
             displayName: user.displayName || '',
             photoURL: user.photoURL || ''
           };
-          this.userDoc.set(data);
+          userRef.ref.set(data);
         } else {
-          this.userDoc.update({ lastLogin: date });
+          userRef.ref.update({ lastLogin: date });
         }
       })
       .catch(error => this.notify.error('Error saving user account', error));

@@ -11,7 +11,7 @@
           [class.inactive]="!user.active"
           [class.text-capitalize]="user.profile?.fname && user.profile?.lname || user.displayName"
           *ngFor="let user of users | sortUsersPipe: 'desc'"
-          (click)="showModal(user.uid)">
+          (click)="showUserDetail(user.uid)">
           <div class="avatar">
             <div class="image"
               [style.backgroundImage]="'url(' + user.photoURL + ')'"
@@ -34,119 +34,12 @@
   </div>
 </div>
 
-<!-- User Modal -->
-<div [class.modal-open]="isModalActive">
-  <div
-    class="modal fade"
-    [class.show]="isModalActive"
-    id="userModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="userModal"
-    aria-hidden="true">
-    <div
-      role="document"
-      class="modal-dialog modal-notify">
-      <div
-        class="modal-content"
-        *ngIf="user">
-        <div class="modal-header modal-header-feature">
-          <div class="avatar">
-            <div class="image"
-              [style.backgroundImage]="'url(' + user.photoURL + ')'"
-              *ngIf="user.photoURL"></div>
-            <i
-              class="fas fa-user"
-              *ngIf="!user.photoURL"></i>
-          </div>
-          <h5
-            class="modal-title"
-            [class.text-lowercase]="!user.profile?.fname && !user.displayName">
-            {{ user.profile?.fname && user.profile?.lname
-              ? user.profile?.fname + ' ' + user.profile?.lname
-              : user.displayName ? user.displayName : user.email }}
-          </h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-            [disabled]="isUpdating"
-            (click)="hideModal($event)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body pt-4 pr-3 pl-3 pb-4">
-          <div class="info">
-            <div class="item">
-              <span class="label">Last Login:</span>
-              <span class="value">{{ user.lastLogin.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
-            </div>
-            <div class="item">
-              <span class="label">Last Active:</span>
-              <span class="value">{{ user.lastActive.toDate() | date: 'MM/dd/yyyy @ h:mm:ss a' }}</span>
-            </div>
-            <div class="item">
-              <span class="label">Account Status:</span>
-              <span class="value">{{ user.active ? user.isAdmin ? 'Admin' : 'Active User' : 'Deactivated' }}</span>
-            </div>
-            <div
-              class="item"
-              *ngIf="user.profile?.fname && user.profile?.lname">
-              <span class="label">Full Name:</span>
-              <span class="value">{{ user.profile?.fname + ' ' + user.profile?.lname }}</span>
-            </div>
-            <div
-              class="item"
-              *ngIf="user.displayName">
-              <span class="label">OAuth Name:</span>
-              <span class="value">{{ user.displayName }}</span>
-            </div>
-            <div class="item">
-              <span class="label">Email:</span>
-              <span class="value">{{ user.email }}</span>
-            </div>
-            <div
-              class="item"
-              *ngIf="user.profile?.company">
-              <span class="label">Company:</span>
-              <span class="value">{{ user.profile?.company }}</span>
-            </div>
-            <div
-              class="item"
-              *ngIf="user.profile?.website">
-              <span class="label">Website:</span>
-              <span class="value">{{ user.profile?.website }}</span>
-            </div>
-            <div class="item">
-              <span class="label">UID:</span>
-              <span class="value uid">{{ user.uid }}</span>
-            </div>
-          </div>
-          <div
-            class="loading"
-            [class.disabled]="!isUpdating">
-            <app-loading-spinner></app-loading-spinner>
-          </div>
-        </div>
-        <div class="modal-footer p-2">
-          <button
-            class="btn btn-sm ml-2 mr-auto"
-            [class.btn-primary]="!user.isAdmin"
-            [class.btn-danger]="user.isAdmin"
-            [disabled]="user.uid === auth.getUserID() || !user.active || isUpdating"
-            (click)="setAdmin(user.uid, user.email, !user.isAdmin)">
-            <span [innerHTML]="user.isAdmin ? 'Revoke' : 'Make'"></span> Admin
-            <i class="fas fa-lock ml-1"></i>
-          </button>
-          <button
-            type="button"
-            class="btn btn-sm btn-grey mr-2"
-            data-dismiss="modal"
-            [disabled]="isUpdating"
-            (click)="hideModal($event)">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-user-detail
+  *ngIf="user"
+  [user]="user"
+  [active]="isModalActive"
+  [isUpdating]="isUpdating"
+  [isDisabled]="user.uid === auth.getUserID() || isUpdating"
+  (hideEvent)="hideUserDetail($event)"
+  (toggleActiveEvent)="setActiveState(user.uid, !user.active)"
+  (toggleAdminEvent)="setAdminState(user.uid, user.email, !user.isAdmin)"></app-user-detail>
