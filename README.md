@@ -61,7 +61,9 @@
 ## Next Steps
 **[1. Advanced Firebase Setup](https://github.com/jrodl3r/ng-fire-universal/blob/master/docs/01-Setup_Firebase.md)**
 
-**2. Setup Environment(s) + e2e Testing**
+**[2. Setup Environment(s)](https://github.com/jrodl3r/ng-fire-universal/blob/master/docs/02-Setup_Environments.md)**
+
+**3. Setup E2E Testing _(TBD)_**
 
 <br>
 
@@ -70,7 +72,7 @@
 - `deploy` » Release App (Google Cloud)
 - `deploy:functions` » Release Cloud Functions (Firebase)
 - **`dev`** » Local Angular + Firebase Development w/ HMR &nbsp;🛠
-- `e2e` » Launch Cypress End-to-End Testing
+- `e2e` » Launch Cypress End-to-End Testing _(TBD)_
 - `init` » Setup Project + Install Dependencies
 - **`preview`** » Build + Start Local Server w/ SSR &nbsp;👁
 - **`ship`** » Build + Deploy App &nbsp;🚀
@@ -79,8 +81,10 @@
 - **`test`** » Start Jest Unit Testing &nbsp;🧪
 - `test:watch` » Start Jest in Watch Mode
 
+>_Typical workflow: **`dev`** » **`preview`** » **`test`** » **`ship`**_
 
-	_(checkout **[package.json](https://github.com/jrodl3r/ng-fire-universal/blob/master/package.json)** for more details)_
+>_Checkout **[package.json](https://github.com/jrodl3r/ng-fire-universal/blob/master/package.json)** for more details_
+
 
 <br>
 
