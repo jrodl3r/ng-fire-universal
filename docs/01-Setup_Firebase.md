@@ -1,5 +1,5 @@
 # Setup Firebase
-To get up and running with role-based authentication and data security we'll add an admin to our Firebase project along with the Cloud Firestore Database and Cloud Storage rules.
+To get up and running with role-based authentication and data security we'll add an admin to our Firebase project along with the Firestore Database and Cloud Storage rules.
 
 > [Complete the Quick Start](https://github.com/jrodl3r/ng-fire-universal/blob/master/dpcs/00-Quick_Start.md) » Then run `gcloud app browse` to verify the release.
 
@@ -35,7 +35,7 @@ Presently, we do not have a GUI method (ex: Firebase Console settings) for manag
 
 **6. Uncomment the lines from _Step 1_ and revert the change from _Step 2_.**
 
-We now have an Admin User with full control over all user accounts (except their own) via the Admin Module and we can securely, and easily control all user priviledges (Custom Claims) moving forward.
+We now have an admin with full control over all user accounts (except their own) and we can securely control their priviledges via Custom Claims through the Admin Module.
 
 <br>
 
@@ -47,7 +47,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-  	// Users
+    // Users
     match /users {
       match /{userId} {
         allow read, write: if isOwner(userId) || isAdmin();
@@ -56,7 +56,7 @@ service cloud.firestore {
 
     // Items
     match /items/{document=**} {
-    	allow read;
+      allow read;
       allow write: if isAdmin();
     }
 
@@ -83,7 +83,7 @@ service cloud.firestore {
 ```javascript
 service firebase.storage {
   match /b/{bucket}/o {
-  	match /images {
+    match /images {
       match /{allImages=**} {
         allow read;
       }

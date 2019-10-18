@@ -1,7 +1,7 @@
 ![repo version](https://img.shields.io/badge/version-0.9.3-blueviolet)
 ![angular version](https://img.shields.io/badge/Angular-8.2.11-red)
 ![node version](https://img.shields.io/badge/node-10.15.3-green)
-[![demo online](https://img.shields.io/badge/demo-online-ed1c46.svg)](https://ng-fire.com)
+[![demo online](https://img.shields.io/badge/demo-online-orange.svg)](https://ng-fire.com)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 
 <br>
