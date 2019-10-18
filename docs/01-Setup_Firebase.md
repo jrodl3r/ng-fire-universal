@@ -1,5 +1,5 @@
 # Setup Firebase
-To get up and running with role-based authentication and data security we'll add an admin to our Firebase project, along with the Cloud Firestore Database and Cloud Storage rules. Finally, we'll setup Firebase Performance Monitoring for insight on load times and other useful application metrics.
+To get up and running with role-based authentication and data security we'll add an admin to our Firebase project along with the Cloud Firestore Database and Cloud Storage rules.
 
 > [Complete the Quick Start](https://github.com/jrodl3r/ng-fire-universal/blob/master/dpcs/00-Quick_Start.md) » Then run `gcloud app browse` to verify the release.
 
@@ -95,20 +95,4 @@ service firebase.storage {
     }
   }
 }
-```
-
-<br>
-
-## Setup Performance Monitoring
-_TBD - Work in progress_
-
-**1. Get `measurementId`:** _Firebase Console » Project Settings » Your Apps_
-
-**2. Add `measurementId` to `/firebase.ts` config:**
-
-```javascript
-export const config = {
-  ...,
-  measurementId: 'MEASUREMENT_ID'
-};
 ```
