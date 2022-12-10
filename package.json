@@ -42,7 +42,7 @@
     "@angular/service-worker": "~8.0.1",
     "@nguniversal/express-engine": "^7.0.2",
     "@nguniversal/module-map-ngfactory-loader": "v7.0.2",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "firebase": "^6.2.2",
     "ngx-toastr": "^10.0.4",
     "rxjs": "~6.5.2",
